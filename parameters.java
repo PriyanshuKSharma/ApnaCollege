@@ -41,6 +41,63 @@ public class parameters
         return binCoeff;
     }
 
+    public static boolean isPrime(int n) {
+        boolean isPrime = true; //initializing isPrime as true
+        //looping from 2 to n-1
+        for(int i=2; i<=n-1; i++) {
+            if(n%i==0) { //if n is divisible by i
+                isPrime=false;
+            }
+        }
+
+        return isPrime;
+    }
+
+    public static boolean isPrime1(int n) {
+        boolean isPrime = true; //initializing isPrime as true
+        //looping from 2 to n-1
+        for(int i=2; i<=Math.sqrt(n); i++) {
+            if(n%i==0) { //if n is divisible by i
+                isPrime=false;
+            }
+        }
+
+        return isPrime;
+    }
+
+    public static void primeInRange(int n) {
+        for(int i=2; i<=n; i++) {
+            if(isPrime1(i)) {
+                System.out.println(i);
+            }
+        }
+        
+    }
+
+    public static void binToDec(int binNum) {
+        int decNum=0;
+        int i=0;
+        while(binNum!=0) {
+            int lastDigit=binNum%10;
+            decNum=decNum+lastDigit*(int)Math.pow(2, i);
+            binNum=binNum/10;
+            i++;
+        }
+        System.out.println("Decimal number is "+decNum);
+    }
+
+    public static void decToBin(int decNum) {
+        int binNum=0;
+        int i=0;
+        while(decNum!=0) {
+            int lastDigit=decNum%2;
+            binNum=binNum+lastDigit*(int)Math.pow(10, i);
+            decNum=decNum/2;
+            i++;
+        }
+        System.out.println("Binary number is "+binNum);
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -69,7 +126,31 @@ public class parameters
         System.out.println("Factorial of a = "+a+" is "+factorialOfn);*/
 
         //Finding binomial coefficient
-        System.err.println(binCoeff(a, b));
+        //System.err.println(binCoeff(a, b));
+
+        //Checking Prime no for a n b
+        /*System.err.println(isPrime(a));
+        System.err.println(isPrime(b));*/
+
+        //Checking Prime no for a n b(Optimised)
+        /*System.err.println(isPrime1(a));
+        System.err.println(isPrime1(b));*/
+
+        
+        //Checking Prime no for a n b
+        /*System.out.println("Prime numbers in range of a = "+a);
+        primeInRange(a);
+        System.out.println("Prime numbers in range of a = "+b);
+        primeInRange(b);*/
+
+        //Converting binary to decimal
+        /*binToDec(a);
+        binToDec(b);*/
+
+        //Converting decimal to binary
+        decToBin(a);
+        decToBin(b);
+        
 
     }
 }

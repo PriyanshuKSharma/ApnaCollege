@@ -20,7 +20,7 @@ public class patterns2 {
         }
     }
     public static void main(String[] args) {
-        hollow_rectangle(5, 6);
+        //hollow_rectangle(5, 6);
     }
     
 }

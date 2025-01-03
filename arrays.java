@@ -69,6 +69,60 @@ public class arrays {
         System.out.println("Smallest element is "+smallest);
         return largest;
     }
+
+    public static int binarySearch(int arr[], int key) {
+        int start = 0, end = arr.length-1;
+        while(start<=end) { //start should be less than or equal to end
+            int mid = (start + end)/2;
+            if(arr[mid]==key) {
+                return mid; //found
+            } 
+            else if(arr[mid]<key) {
+                start = mid+1; //search in right half
+            } 
+            else {
+                end = mid-1; //search in left half
+            }
+        }
+
+        return -1;
+    }
+
+    public static int[] reverseArray(int arr[]) {
+        int start = 0, end = arr.length-1;
+        while(start<end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+        return arr;
+
+    }
+
+    public static void pairsinArray(int arr[]) {
+        for(int i=0; i<arr.length; i++) {
+            int curr = arr[i]; //2, 4, 6, 8, 10
+            for(int j=i+1; j<arr.length; j++) {
+                    System.out.print("("+curr+","+arr[j]+") ");
+            }
+            System.out.println();
+        }
+
+    }
+
+    public static void printSubArray(int arr[]) {
+        for(int i=0; i<arr.length; i++) {
+            for(int j=i; j<arr.length; j++) {
+                for(int k=i; k<=j; k++) {
+                    System.out.print(arr[k]+" ");
+                }
+                System.out.println();
+            }
+        }
+
+    }
     public static void main(String[] args) {
         arrays obj = new arrays();
 
@@ -92,10 +146,35 @@ public class arrays {
         }*/
 
         //Get largest element
-        int numbers[] = {56, 45, 80, 68, 69};
+        /*int numbers[] = {56, 45, 80, 68, 69};
         int largest = getLargest(numbers);
-        System.out.println("Largest element is "+largest);
+        System.out.println("Largest element is "+largest);*/
 
+        //Binary search
+        /*int arr[] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};
+        int key = 12;
+        System.out.println("Element found at index: "+binarySearch(arr, key));*/
+
+        //Reverse an array
+        /*int arr[] = {1, 2, 3, 4, 5};
+        //Print the original array
+        for(int i=0; i<arr.length; i++) {
+            System.out.print(arr[i]);
+        }
+        System.out.println();
+        int reversedArray[] = reverseArray(arr); //reversedArray will have the reversed array
+        //Print the reversed array
+        for(int i=0; i<reversedArray.length; i++) {
+            System.out.print(reversedArray[i]);
+        }*/
+
+        //Pairs in an array
+        /*int arr[] = {2, 4, 6, 8, 10};
+        pairsinArray(arr);*/
+
+        //Print subarray
+        int arr[] = {2, 4, 6, 8, 10};
+        printSubArray(arr);
 
     }
 }

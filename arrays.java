@@ -1,7 +1,7 @@
 
 import java.util.Scanner;
 
-public class arrays {
+class arrays {
     void printArray() {
         int marks[] = new int[5];
         marks[0] = 10;
@@ -123,6 +123,8 @@ public class arrays {
         }
 
     }
+
+
     public static void main(String[] args) {
         arrays obj = new arrays();
 
@@ -173,8 +175,53 @@ public class arrays {
         pairsinArray(arr);*/
 
         //Print subarray
-        int arr[] = {2, 4, 6, 8, 10};
-        printSubArray(arr);
+        /*int arr[] = {2, 4, 6, 8, 10};
+        printSubArray(arr);*/
 
+    }
+}
+
+class arrays2 {
+    
+    //using kandane's algorithm
+    public static void maxSubarraySum(int arr[]) {
+        int maxSum = Integer.MIN_VALUE;
+        int sum = 0;
+        for(int i = 0; i < arr.length; i++) {
+            for(int j = i; j < arr.length; j++) {
+                for(int k = i; k <= j; k++) {
+                    sum += arr[k];
+                }
+                maxSum = Math.max(maxSum, sum);
+            }
+        }
+        System.out.println("Maximum sum of subarray is: "+maxSum);
+    }
+
+    //using Brute force approach
+    public static void maxSubarraySum1(int arr[]) {
+        int maxSum = Integer.MIN_VALUE;
+        for(int i=0; i<arr.length; i++) {
+            for(int j=i; j<arr.length; j++) {
+                int sum = 0;
+                for(int k=i; k<=j; k++) {
+                    sum = sum + arr[k];
+                }
+                maxSum = Math.max(maxSum, sum);
+            }
+        }
+        System.out.println("Maximum sum of subarray is: "+maxSum);
+    }
+
+    public static void main(String[] args) {
+        //Maximum sum of subarray
+        //int numbers[] = {1,-2,6,-1,3};
+
+        //Using kandanes algorithm
+        int numbers[] = {2,4,6,8,10};
+        //maxSubarraySum(numbers);
+
+        //Using Brute Force
+        maxSubarraySum1(numbers);
     }
 }

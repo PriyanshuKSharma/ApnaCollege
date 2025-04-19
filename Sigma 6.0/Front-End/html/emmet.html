@@ -1,0 +1,58 @@
+<!-- Emmet -->
+<!-- 
+Emmet is a powerful toolkit for web developers that helps write HTML and CSS code quickly.
+Key features:
+- Uses abbreviations that expand into full HTML/CSS code
+- Nested elements using > symbol
+- Sibling elements using + symbol
+- Multiplication using * for repeated elements
+- Grouping using ()
+- ID and class shortcuts using # and .
+- Custom attributes using []
+- Numbering using $ 
+- Text content using {}
+
+Common examples:
+div>ul>li = Creates nested div with ul and li
+div+p+bq = Creates sibling div, p and blockquote elements
+ul>li*5 = Creates ul with 5 li elements
+div#header = Creates div with id="header"
+div.item = Creates div with class="item"
+-->
+
+<!-- main>div>ul>li: '>' -> for parent-child relation -->
+<main>
+    <div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</main>
+
+<!-- div+p+bq: '+' -> for sibling class  -->
+<div></div>
+<p></p>
+<blockquote></blockquote>
+
+<!-- climb-up ^ -->
+<!-- div+div>p>span+em^bq: '^' -> climb-up operator moves up one level in hierarchy -->
+<div></div>
+<div>
+    <p>
+        <span></span>
+        <em></em>
+    </p>
+    <blockquote></blockquote>
+</div>
+
+<!-- div+div>p>span+em^^bq: '^^' -> climb-up operator moves up two levels -->
+<div></div>
+<div>
+    <p>
+        <span></span>
+        <em></em>
+    </p>
+</div>
+<blockquote></blockquote>

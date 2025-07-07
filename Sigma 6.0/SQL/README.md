@@ -222,3 +222,226 @@ CREATE TABLE Enrollment (
 * Use **`DEFAULT`** to provide a fallback value if none is specified.
 
 ---
+
+## Inserting values
+
+---
+
+### Example Data for `insta_users`
+
+```sql
+INSERT INTO insta_users (id, name, email, followers, following, age)
+VALUES 
+(1, 'Alice Johnson', 'alice@example.com', 1200, 300, 25),
+(2, 'Bob Smith', 'bob@example.com', 950, 180, 19),
+(3, 'Charlie Kim', 'charlie@example.com', 5600, 500, 32),
+(4, 'Diana Lee', 'diana@example.com', 150, 200, 21),
+(5, 'Evan Thomas', 'evan@example.com', 80, 75, 16);
+```
+
+---
+
+### Explanation
+
+| id | name          | email                                             | followers | following | age |
+| -- | ------------- | ------------------------------------------------- | --------- | --------- | --- |
+| 1  | Alice Johnson | [alice@example.com](mailto:alice@example.com)     | 1200      | 300       | 25  |
+| 2  | Bob Smith     | [bob@example.com](mailto:bob@example.com)         | 950       | 180       | 19  |
+| 3  | Charlie Kim   | [charlie@example.com](mailto:charlie@example.com) | 5600      | 500       | 32  |
+| 4  | Diana Lee     | [diana@example.com](mailto:diana@example.com)     | 150       | 200       | 21  |
+| 5  | Evan Thomas   | [evan@example.com](mailto:evan@example.com)       | 80        | 75        | 16  |
+
+* All users meet the age requirement (`age >= 15`).
+* Each `email` is unique.
+* `followers` and `following` use the default if omitted, but are included here for clarity.
+
+---
+
+## SELECT Command
+
+### 1. **Select All Columns for All Users**
+
+This will retrieve all columns for all users in the `insta_users` table:
+
+```sql
+SELECT * FROM insta_users;
+```
+
+---
+
+### 2. **Select Specific Columns**
+
+If you only need specific columns (like `name` and `email`):
+
+```sql
+SELECT name, email FROM insta_users;
+```
+
+---
+
+### 3. **Select with a Condition (Where Clause)**
+
+To find users who are **older than 20**:
+
+```sql
+SELECT * FROM insta_users WHERE age > 20;
+```
+
+To find users with **more than 1000 followers**:
+
+```sql
+SELECT * FROM insta_users WHERE followers > 1000;
+```
+
+---
+
+### 4. **Select with Multiple Conditions**
+
+To find users who are **older than 18** and have **more than 500 followers**:
+
+```sql
+SELECT * FROM insta_users WHERE age > 18 AND followers > 500;
+```
+
+To find users with age **between 15 and 30**:
+
+```sql
+SELECT * FROM insta_users WHERE age BETWEEN 15 AND 30;
+```
+
+---
+
+### 5. **Select with Sorting (ORDER BY)**
+
+To sort users by **name** in ascending order:
+
+```sql
+SELECT * FROM insta_users ORDER BY name ASC;
+```
+
+To sort users by **followers** in descending order (most popular first):
+
+```sql
+SELECT * FROM insta_users ORDER BY followers DESC;
+```
+
+| id | name          | email                                             | followers | following | age |
+| -- | ------------- | ------------------------------------------------- | --------- | --------- | --- |
+| 3  | Charlie Kim   | [charlie@example.com](mailto:charlie@example.com) | 5600      | 500       | 32  |
+| 1  | Alice Johnson | [alice@example.com](mailto:alice@example.com)     | 1200      | 300       | 25  |
+| 2  | Bob Smith     | [bob@example.com](mailto:bob@example.com)         | 950       | 180       | 19  |
+| 4  | Diana Lee     | [diana@example.com](mailto:diana@example.com)     | 150       | 200       | 21  |
+| 5  | Evan Thomas   | [evan@example.com](mailto:evan@example.com)       | 80        | 75        | 16  |
+
+---
+
+This table shows a list of users with their respective **id**, **name**, **email**, **followers**, **following**, and **age**. You can use this format for further SQL queries or other data representations.
+
+---
+
+### 6. **Select with LIMIT (Limiting Results)**
+
+If you only want the **first 3 users**:
+
+```sql
+SELECT * FROM insta_users LIMIT 3;
+```
+
+---
+
+### 7. **Select with DISTINCT (Unique Values)**
+
+To get a list of **unique ages**:
+
+```sql
+SELECT DISTINCT age FROM insta_users;
+```
+
+---
+
+### 8. **Select Users with a Specific Pattern in Email (LIKE)**
+
+To find users with **gmail** in their email:
+
+```sql
+SELECT * FROM insta_users WHERE email LIKE '%@gmail.com';
+```
+
+To find users whose **name starts with "A"**:
+
+```sql
+SELECT * FROM insta_users WHERE name LIKE 'A%';
+```
+
+---
+
+### 9. **Select with Aggregation (COUNT, AVG, SUM, etc.)**
+
+To find the **total number of users**:
+
+```sql
+SELECT COUNT(*) AS total_users FROM insta_users;
+```
+
+To find the **average number of followers**:
+
+```sql
+SELECT AVG(followers) AS average_followers FROM insta_users;
+```
+
+---
+
+### 10. **Select Users Grouped by Age (GROUP BY)**
+
+To see how many users are in each **age group**:
+
+```sql
+SELECT age, COUNT(*) AS users_count FROM insta_users GROUP BY age;
+```
+
+| age | users\_count |
+| --- | ------------ |
+| 25  | 1            |
+| 19  | 1            |
+| 32  | 1            |
+| 21  | 1            |
+| 16  | 1            |
+
+* Explanation:
+
+    * This query groups all users by their `age` and counts how many users fall into each age group.
+    * Each age has exactly **1 user** in this dataset.
+
+
+---
+
+### 11. **Select Users with Sorting and Limiting Results (Most Popular Users)**
+
+To get the **top 3 users by followers**:
+
+```sql
+SELECT * FROM insta_users ORDER BY followers DESC LIMIT 3;
+```
+
+---
+
+### Example Output from `SELECT * FROM insta_users`
+
+| id | name          | email                                             | followers | following | age |
+| -- | ------------- | ------------------------------------------------- | --------- | --------- | --- |
+| 1  | Alice Johnson | [alice@example.com](mailto:alice@example.com)     | 1200      | 300       | 25  |
+| 2  | Bob Smith     | [bob@example.com](mailto:bob@example.com)         | 950       | 180       | 19  |
+| 3  | Charlie Kim   | [charlie@example.com](mailto:charlie@example.com) | 5600      | 500       | 32  |
+| 4  | Diana Lee     | [diana@example.com](mailto:diana@example.com)     | 150       | 200       | 21  |
+| 5  | Evan Thomas   | [evan@example.com](mailto:evan@example.com)       | 80        | 75        | 16  |
+
+---
+
+### **Tips for SQL SELECT Queries**:
+
+* **Use `WHERE`** to filter rows based on conditions.
+* **Use `ORDER BY`** to sort your result.
+* **Use `LIMIT`** to restrict the number of rows.
+* **Combine `WHERE` and `ORDER BY`** to fine-tune your queries (like sorting filtered data).
+
+---

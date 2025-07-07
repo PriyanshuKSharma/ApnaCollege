@@ -99,7 +99,7 @@ SHOW TABLES;
 
 ---
 
-## 🔐 Best Practices
+## Best Practices
 
 * Avoid using spaces or special characters in database names.
 * Use lowercase with underscores for naming consistency (e.g., `student_portal`).
@@ -107,10 +107,118 @@ SHOW TABLES;
 
 ---
 
-## 🔁 Practice Tips
+## Practice Tips
 
 * Use **phpMyAdmin**, **MySQL CLI**, or **PostgreSQL shell** to practice.
 * Try creating databases for common domains like `ECommerce`, `HRSystem`, `Hospital`, etc.
 * Delete and recreate databases to reinforce understanding.
+
+---
+
+## Constraints
+
+* **NOT NULL**: Columns cannot have a null value  
+    **Example:**  
+    ```sql
+    CREATE TABLE Employees (
+        EmployeeID INT NOT NULL,
+        Name VARCHAR(100) NOT NULL
+    );
+    ```
+
+* **UNIQUE**: All values in the column must be different  
+    **Example:**  
+    ```sql
+    CREATE TABLE Users (
+        UserID INT PRIMARY KEY,
+        Email VARCHAR(255) UNIQUE
+    );
+    ```
+
+* **DEFAULT**: Sets a default value for a column  
+    **Example:**  
+    ```sql
+    CREATE TABLE Orders (
+        OrderID INT PRIMARY KEY,
+        Status VARCHAR(20) DEFAULT 'Pending'
+    );
+    ```
+
+* **CHECK**: Limits the values allowed in a column  
+    **Example:**  
+    ```sql
+    CREATE TABLE Products (
+        ProductID INT PRIMARY KEY,
+        Price DECIMAL(10,2) CHECK (Price > 0)
+    );
+    ```
+
+---
+
+## Key Constraints
+
+Key constraints are used to enforce uniqueness and relationships between tables.
+
+### 1. **PRIMARY KEY**
+
+* Uniquely identifies each row in a table.
+* Cannot be `NULL`.
+* Automatically enforces `UNIQUE` and `NOT NULL`.
+
+**Example:**
+
+```sql
+CREATE TABLE IF NOT EXISTS insta_users (
+     id INT,
+     name VARCHAR(30) NOT NULL,
+     email VARCHAR(50) UNIQUE,
+     followers INT DEFAULT 0,
+     following INT DEFAULT 0,
+     age INT,
+     CONSTRAINT age_check CHECK (age >= 15),
+     PRIMARY KEY (id)
+);
+```
+
+### 2. **FOREIGN KEY**
+
+* Creates a relationship between two tables.
+* The value in the child table must exist in the parent table.
+
+**Example:**
+
+```sql
+CREATE TABLE post (
+   id INT PRIMARY KEY,
+   content VARCHAR(100),
+   user_id INT,
+   FOREIGN KEY (user_id) REFERENCES insta_users(id)
+);
+```
+
+### 4. **COMPOSITE KEY**
+
+* A primary key made from two or more columns.
+* Used when a single column cannot uniquely identify a record.
+
+**Example:**
+
+```sql
+CREATE TABLE Enrollment (
+    StudentID INT,
+    CourseID INT,
+    PRIMARY KEY (StudentID, CourseID)
+);
+```
+
+---
+
+## Tips for Constraints
+
+* Use **`PRIMARY KEY`** when you want a unique identifier for a record.
+* Use **`FOREIGN KEY`** to model relationships between tables.
+* Use **`UNIQUE`** to avoid duplicate values.
+* Use **`CHECK`** to enforce domain-specific rules (e.g., price > 0).
+* Use **`DEFAULT`** to provide a fallback value if none is specified.
 
 ---

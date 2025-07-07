@@ -680,3 +680,130 @@ WHERE followers IS NULL;
 The `WHERE` clause is a powerful tool in SQL that allows you to filter records based on various conditions. By combining operators like **`AND`**, **`OR`**, **`BETWEEN`**, **`IN`**, and **`LIKE`**, you can build complex queries that match exactly the data you need.
 
 ---
+
+# SQL Aggregate Functions
+
+Aggregate functions in SQL are used to **perform calculations** on a set of rows and return a **single value**. They are often used with the `GROUP BY` clause, but they can also be used independently in queries.
+
+---
+
+## **What are Aggregate Functions?**
+
+An **aggregate function** performs a **calculation** on a set of values and returns a **single result**. These functions are useful for summarizing or analyzing data, such as **counting**, **averaging**, or finding the **maximum** or **minimum** value.
+
+### **Syntax:**
+
+```sql
+SELECT AGGREGATE_FUNCTION(column_name)
+FROM table_name
+WHERE condition;
+```
+
+---
+
+## **Common Aggregate Functions**
+
+### 1. **COUNT()**
+
+* **Purpose**: Returns the number of rows that match a specified condition.
+* **Usage**: `COUNT(*)` counts all rows, and `COUNT(column_name)` counts non-NULL values in a specific column.
+
+**Example:**
+
+```sql
+SELECT COUNT(*) AS total_users
+FROM insta_users;
+```
+
+This will return the total number of rows in the `insta_users` table.
+
+To count non-NULL values in a specific column:
+
+```sql
+SELECT COUNT(email) AS total_users_with_email
+FROM insta_users;
+```
+
+This will return the number of rows where `email` is not NULL.
+
+---
+
+### 2. **SUM()**
+
+* **Purpose**: Returns the sum of the values in a numeric column.
+* **Usage**: Used to calculate the total sum of a numeric column, such as the total sales or total followers.
+
+**Example:**
+
+```sql
+SELECT SUM(followers) AS total_followers
+FROM insta_users;
+```
+
+This will return the total number of followers across all users.
+
+---
+
+### 3. **AVG()**
+
+* **Purpose**: Returns the average value of a numeric column.
+* **Usage**: It calculates the mean of a specified numeric column, such as the average age of users.
+
+**Example:**
+
+```sql
+SELECT AVG(age) AS average_age
+FROM insta_users;
+```
+
+This will return the average `age` of all users in the `insta_users` table.
+
+---
+
+### 4. **MIN()**
+
+* **Purpose**: Returns the smallest (minimum) value in a specified column.
+* **Usage**: Often used to find the minimum value, like the youngest age in the database.
+
+**Example:**
+
+```sql
+SELECT MIN(age) AS youngest_user
+FROM insta_users;
+```
+
+This will return the smallest (minimum) `age` value.
+
+---
+
+### 5. **MAX()**
+
+* **Purpose**: Returns the largest (maximum) value in a specified column.
+* **Usage**: Commonly used to find the maximum value, such as the oldest user or the user with the highest number of followers.
+
+**Example:**
+
+```sql
+SELECT MAX(followers) AS most_popular_user
+FROM insta_users;
+```
+
+This will return the maximum number of followers across all users.
+
+---
+
+### 6. **GROUP_CONCAT()** (MySQL-specific)
+
+* **Purpose**: Concatenates values from multiple rows into a single string.
+* **Usage**: Useful when you want to list all values from a column for each group, such as collecting all users' names in a comma-separated list.
+
+**Example:**
+
+```sql
+SELECT GROUP_CONCAT(name) AS user_names
+FROM insta_users;
+```
+
+This will return a single string of all user names, separated by commas.
+
+---

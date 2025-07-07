@@ -807,3 +807,110 @@ FROM insta_users;
 This will return a single string of all user names, separated by commas.
 
 ---
+
+## **Using Aggregate Functions with GROUP BY**
+
+Aggregate functions are frequently used with the **`GROUP BY`** clause to calculate values for different groups or categories. For example, to find the average age of users in each `age` group:
+
+### **Syntax:**
+
+```sql
+SELECT column_name, AGGREGATE_FUNCTION(column_name)
+FROM table_name
+GROUP BY column_name;
+```
+
+---
+
+### **Example 1: Count users by age group**
+
+```sql
+SELECT age, COUNT(*) AS user_count
+FROM insta_users
+GROUP BY age;
+```
+
+This will return the count of users in each age group.
+
+| age | user_count |
+| --- | ----------- |
+| 16  | 1           |
+| 19  | 1           |
+| 25  | 1           |
+| 30  | 2           |
+
+---
+
+### **Example 2: Get total followers per user**
+
+```sql
+SELECT id, SUM(followers) AS total_followers
+FROM insta_users
+GROUP BY id;
+```
+
+This will return the total followers for each user.
+
+| id | total_followers |
+| -- | ---------------- |
+| 1  | 1200             |
+| 2  | 950              |
+| 3  | 5600             |
+| 4  | 150              |
+| 5  | 80               |
+
+---
+
+### **Example 3: Get average followers per user**
+
+```sql
+SELECT AVG(followers) AS average_followers
+FROM insta_users;
+```
+
+This will return the average followers across all users.
+
+---
+
+## **Using Aggregate Functions with HAVING**
+
+The **`HAVING`** clause is used to filter results after the `GROUP BY` operation. It works like the `WHERE` clause but is used for aggregated data.
+
+### **Syntax:**
+
+```sql
+SELECT column_name, AGGREGATE_FUNCTION(column_name)
+FROM table_name
+GROUP BY column_name
+HAVING condition;
+```
+
+### **Example:**
+
+```sql
+SELECT age, AVG(followers) AS average_followers
+FROM insta_users
+GROUP BY age
+HAVING AVG(followers) > 500;
+```
+
+This will return the average followers for each age group, but only for groups where the average followers are greater than 500.
+
+---
+
+## **Use Cases for Aggregate Functions**
+
+* **Data Analysis**: Quickly calculate the **total**, **average**, **max**, and **min** values of columns.
+* **Reporting**: Generate reports that summarize key data, such as total sales, average age, or total revenue.
+* **Performance Optimization**: Use **COUNT()** and **SUM()** to quickly check if your data meets specific conditions (e.g., how many users meet a certain age or purchase threshold).
+* **Data Grouping**: With **`GROUP BY`**, aggregate functions help you break down your data by categories, such as calculating total sales by region or users by age group.
+
+---
+
+## **Conclusion**
+
+SQL **aggregate functions** provide powerful tools to summarize, analyze, and group data in meaningful ways. Whether you're counting rows, calculating sums or averages, or finding the highest or lowest values, these functions help you make sense of large datasets.
+
+By combining aggregate functions with clauses like **`GROUP BY`** and **`HAVING`**, you can extract insights and create reports that highlight the key metrics you care about.
+
+---

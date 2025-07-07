@@ -914,3 +914,122 @@ SQL **aggregate functions** provide powerful tools to summarize, analyze, and gr
 By combining aggregate functions with clauses like **`GROUP BY`** and **`HAVING`**, you can extract insights and create reports that highlight the key metrics you care about.
 
 ---
+
+
+
+---
+
+# Difference Between `GROUP BY` and `HAVING` in SQL
+
+In SQL, both `GROUP BY` and `HAVING` are used with **aggregate functions** (like `COUNT()`, `SUM()`, `AVG()`, `MAX()`, and `MIN()`) to summarize and filter data. However, they serve **different purposes** and operate at **different stages** of query execution.
+
+---
+
+## What is `GROUP BY`?
+
+The `GROUP BY` clause is used to **organize similar data into groups**. It is typically used with aggregate functions to calculate values for each group.
+
+### Example:
+
+```sql
+SELECT age, COUNT(*) AS users_count
+FROM insta_users
+GROUP BY age;
+```
+
+### Explanation:
+
+This groups all rows in the `insta_users` table **by `age`** and returns the **count of users** for each unique age value.
+
+---
+
+## What is `HAVING`?
+
+The `HAVING` clause is used to **filter the results** **after** grouping has occurred. It's like a `WHERE` clause, but specifically for use with **aggregated/grouped data**.
+
+### Example:
+
+```sql
+SELECT age, AVG(followers) AS average_followers
+FROM insta_users
+GROUP BY age
+HAVING AVG(followers) > 500;
+```
+
+### Explanation:
+
+* First, the query **groups users by age**.
+* Then, it **calculates the average followers** per age group.
+* Finally, it **filters** those groups to only show those where the average is greater than 500.
+
+---
+
+## Key Differences
+
+| Feature                | `GROUP BY`                                         | `HAVING`                                          |
+| ---------------------- | -------------------------------------------------- | ------------------------------------------------- |
+| **Purpose**            | Groups rows with the same values into summary rows | Filters grouped results based on conditions       |
+| **Clause Type**        | Grouping clause                                    | Filtering clause (used after grouping)            |
+| **Execution Order**    | Executed **before** `HAVING`                       | Executed **after** `GROUP BY`                     |
+| **Works On**           | Raw rows (before aggregation)                      | Aggregated/grouped data                           |
+| **Can Use Aggregates** | No (just defines groups)                           | Yes (designed for use with aggregate functions)   |
+| **Similar To**         | `DISTINCT` + aggregation                           | `WHERE`, but for groups                           |
+| **Required With**      | Aggregate functions like `COUNT`, `AVG`, etc.      | Usually used along with `GROUP BY`                |
+
+---
+
+## Analogy
+
+Imagine a spreadsheet of users:
+
+* `GROUP BY` is like **sorting and grouping rows** by the "age" column, and then calculating summary stats (like the average followers).
+* `HAVING` is like saying: **"Only show me age groups where the average followers are more than 500."**
+
+---
+
+## Example in Practice
+
+Let’s say you have the following table `insta_users`:
+
+| id | name          | age | followers |
+| -- | ------------- | --- | --------- |
+| 1  | Alice Johnson | 25  | 1200      |
+| 2  | Bob Smith     | 19  | 950       |
+| 3  | Charlie Kim   | 32  | 5600      |
+| 4  | Diana Lee     | 21  | 150       |
+| 5  | Evan Thomas   | 16  | 80        |
+
+### Query using `GROUP BY` only:
+
+```sql
+SELECT age, COUNT(*) AS users_count
+FROM insta_users
+GROUP BY age;
+```
+
+This tells you how many users are in each **age group**.
+
+### Query using `GROUP BY` + `HAVING`:
+
+```sql
+SELECT age, AVG(followers) AS average_followers
+FROM insta_users
+GROUP BY age
+HAVING AVG(followers) > 500;
+```
+
+This gives you only the **age groups** where the **average followers** are **greater than 500**.
+
+---
+
+## Conclusion
+
+* **`GROUP BY`** is used to **group data**.
+* **`HAVING`** is used to **filter grouped data** based on aggregated conditions.
+
+You often use them **together**:
+1. First use `GROUP BY` to **summarize**,
+2. Then use `HAVING` to **filter** the summarized results.
+
+---
+---

@@ -1032,4 +1032,77 @@ You often use them **together**:
 2. Then use `HAVING` to **filter** the summarized results.
 
 ---
+Here's a breakdown of the **general order to write SQL queries**, along with the **logical execution order** (how SQL actually processes the query) — formatted in **Markdown** for learning or reference.
+
 ---
+
+# General Order to Write SQL Queries
+
+In practice, you typically **write** SQL queries in the following order:
+
+```sql
+SELECT column1, column2, AGG_FUNC(column3)
+FROM table_name
+WHERE condition
+GROUP BY column1
+HAVING aggregate_condition
+ORDER BY column1 [ASC|DESC]
+LIMIT number;
+```
+
+---
+
+## Logical Execution Order (How SQL Executes It)
+
+Although we **write** SQL queries in the order above, SQL **executes** the clauses in a different logical sequence:
+
+| Step | Clause     | What It Does                                                   |
+| ---- | ---------- | -------------------------------------------------------------- |
+| 1    | `FROM`     | Identifies the table(s) from which to retrieve data            |
+| 2    | `WHERE`    | Filters rows **before grouping** (on raw data)                 |
+| 3    | `GROUP BY` | Groups filtered data into buckets                              |
+| 4    | `HAVING`   | Filters groups based on aggregate conditions                   |
+| 5    | `SELECT`   | Chooses which columns and expressions to include in the output |
+| 6    | `ORDER BY` | Sorts the result set                                           |
+| 7    | `LIMIT`    | Limits the number of rows returned                             |
+
+---
+
+## Example Query
+
+```sql
+SELECT age, COUNT(*) AS user_count
+FROM insta_users
+WHERE followers > 100
+GROUP BY age
+HAVING COUNT(*) >= 2
+ORDER BY user_count DESC
+LIMIT 5;
+```
+
+### What it does:
+
+1. **FROM**: Looks in `insta_users`
+2. **WHERE**: Keeps only users with more than 100 followers
+3. **GROUP BY**: Groups remaining users by `age`
+4. **HAVING**: Keeps only age groups that have 2 or more users
+5. **SELECT**: Returns `age` and the number of users
+6. **ORDER BY**: Sorts the result by `user_count` in descending order
+7. **LIMIT**: Returns only the top 5 rows
+
+---
+
+## Summary
+
+| Clause     | Mandatory | Used For                       |
+| ---------- | --------- | ------------------------------ |
+| `SELECT`   | Yes       | Choosing output columns        |
+| `FROM`     | Yes       | Defining the data source       |
+| `WHERE`    | No        | Filtering rows before grouping |
+| `GROUP BY` | No        | Grouping rows                  |
+| `HAVING`   | No        | Filtering after grouping       |
+| `ORDER BY` | No        | Sorting the results            |
+| `LIMIT`    | No        | Limiting number of rows        |
+
+---
+

@@ -209,8 +209,6 @@ console.log(utils.sub(4, 2)); // 2
 | `exports`        | Export multiple named functions |
 | `require`        | a built-in function to include external modules that exist in separate files.       |
 
----
-Here's a neat and clear Markdown note for **Exporting from a Directory** in Node.js:
 
 ---
 
@@ -363,5 +361,278 @@ node_modules/
 ```
 
 ---
+
+# package.json vs package-lock.json
+
+### 📦 package.json
+
+#### Purpose:
+- Holds metadata about the project
+- Lists dependencies and versions
+- Required to install packages and run your project
+
+#### Created By:
+```bash
+npm init
+```
+
+#### Key Fields:
+
+```json
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+```
+
+#### Notes:
+
+* `"^4.18.2"` means: install **compatible versions** (e.g., `4.x.x`)
+* You can manually edit this file
+
+---
+
+### 🔒 package-lock.json
+
+#### Purpose:
+
+* Automatically generated when you install packages
+* Locks **exact versions** of installed dependencies (and sub-dependencies)
+* Ensures **consistent installs** across all environments
+
+#### Key Features:
+
+* Cannot be manually edited
+* Tracks the **full dependency tree**
+* Helps in debugging version issues
+
+#### Example Entry:
+
+```json
+"express": {
+  "version": "4.18.2",
+  "resolved": "https://registry.npmjs.org/express/-/express-4.18.2.tgz",
+  "integrity": "sha512-..."
+}
+```
+
+---
+
+### Summary
+
+| Feature              | `package.json`      | `package-lock.json`        |
+| -------------------- | ------------------- | -------------------------- |
+| Editable by dev?     | ✅ Yes               | ❌ No                       |
+| Stores versions?     | ✅ Yes (flexible)    | ✅ Yes (exact)              |
+| Purpose              | Project info + deps | Lock exact dependency tree |
+| Auto-generated?      | ❌ No                | ✅ Yes                      |
+| Should be committed? | ✅ Yes               | ✅ Yes                      |
+
+
+---
+
+## Local vs Global Packages in NPM
+
+### 📦 What are NPM Packages?
+NPM packages can be installed either:
+- **Locally** (project-specific)
+- **Globally** (system-wide)
+
+---
+
+### 📍 Local Installation
+
+#### Command:
+```bash
+npm install <package-name>
+````
+
+### Features:
+
+* Installed in `node_modules/` of the current project
+* Added to `dependencies` in `package.json`
+* Used only within that specific project
+
+### Example:
+
+```bash
+npm install express
+```
+
+> Useful for application libraries like `express`, `mongoose`, `dotenv`, etc.
+
+---
+
+### 🌐 Global Installation
+
+#### Command:
+
+```bash
+npm install -g <package-name>
+```
+
+#### Features:
+
+* Installed system-wide
+* Can be run from **anywhere** in terminal
+* Not listed in `package.json` of any project
+
+#### Example:
+
+```bash
+npm install -g nodemon
+```
+
+> Useful for command-line tools like `nodemon`, `eslint`, `npm`, `create-react-app`, etc.
+
+---
+
+### 🧪 Check Installation Type
+
+#### Local:
+
+```bash
+npm list <package-name>
+```
+
+#### Global:
+
+```bash
+npm list -g <package-name>
+```
+
+---
+
+### 📁 Where Are They Stored?
+
+| Type   | Location                                                       |
+| ------ | -------------------------------------------------------------- |
+| Local  | `./node_modules/`                                              |
+| Global | OS-specific global folder (e.g. `/usr/local/lib/node_modules`) |
+
+---
+
+### Summary
+
+| Feature                   | Local                | Global            |
+| ------------------------- | -------------------- | ----------------- |
+| Scope                     | Project only         | Entire system     |
+| Stored In                 | `node_modules/`      | Global npm folder |
+| Used For                  | Libraries/frameworks | CLI tools         |
+| Appears in `package.json` | ✅ Yes                | ❌ No              |
+| Install With              | `npm install`        | `npm install -g`  |
+
+---
+
+
+
+## require vs import in Node.js (CommonJS vs ES6 Modules)
+
+Node.js supports two module systems:
+
+- **CommonJS** (CJS) → uses `require`
+- **ES Modules** (ESM) → uses `import`
+
+---
+
+### 🔄 require (CommonJS)
+
+#### Syntax:
+```js
+const fs = require('fs');
+```
+
+#### Characteristics:
+
+* Used in CommonJS (default in older Node.js)
+* Loads modules **synchronously**
+* Can be used **anywhere** in the code
+* Works with `.js` extensions without config
+
+---
+
+### 📦 import (ES6 / ES Modules)
+
+#### Syntax:
+
+```js
+import fs from 'fs';
+```
+
+#### Characteristics:
+
+* Introduced in **ES6**
+* Must be **at the top level** (not inside functions)
+* Loads modules **asynchronously**
+* Requires `.mjs` extension or `type: "module"` in `package.json`
+
+```json
+// package.json
+{
+  "type": "module"
+}
+```
+
+---
+
+### 📋 Comparison Table
+
+| Feature           | `require` (CommonJS)       | `import` (ES Module)           |
+| ----------------- | -------------------------- | ------------------------------ |
+| Syntax            | `const fs = require('fs')` | `import fs from 'fs'`          |
+| Module system     | CommonJS                   | ES6 Module                     |
+| Synchronous/Async | Synchronous                | Asynchronous                   |
+| File extension    | `.js`                      | `.mjs` or `type: "module"`     |
+| Top-level only    | ❌ No                       | ✅ Yes                          |
+| Can be dynamic    | ✅ Yes                      | ❌ No (without top-level await) |
+| Node.js default   | ✅ Yes                      | ❌ No (need config)             |
+
+---
+
+### ✅ When to Use What?
+
+| Scenario                         | Recommended |
+| -------------------------------- | ----------- |
+| Quick scripts / legacy projects  | `require`   |
+| Modern apps / ES6 support needed | `import`    |
+| Using TypeScript or Babel        | `import`    |
+| Need dynamic import              | `require`   |
+
+---
+
+### 🧪 Example: Importing a Function
+
+#### Using `require`
+
+```js
+// utils.js
+module.exports = () => 'Hello from CommonJS';
+
+// app.js
+const greet = require('./utils');
+console.log(greet());
+```
+
+#### Using `import`
+
+```js
+// utils.js
+export default () => 'Hello from ES Modules';
+
+// app.mjs or with type: module
+import greet from './utils.js';
+console.log(greet());
+```
+
+---
+
+
+
 
 

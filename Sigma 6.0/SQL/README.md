@@ -1106,3 +1106,90 @@ LIMIT 5;
 
 ---
 
+## Operations on Tables
+
+### 1. `ALTER` – Modify Table Structure
+
+Used to **change the structure of a table**.
+
+#### Common Uses:
+
+* Add, delete, or modify columns
+* Rename a column or table
+* Add or remove constraints (e.g., primary key)
+
+#### Syntax:
+
+```sql
+-- Add a column
+ALTER TABLE table_name ADD column_name datatype;
+
+-- Modify a column
+ALTER TABLE table_name MODIFY column_name new_datatype;
+
+-- Drop a column
+ALTER TABLE table_name DROP COLUMN column_name;
+
+-- Rename a column (MySQL)
+ALTER TABLE table_name CHANGE old_column_name new_column_name datatype;
+
+-- Rename table
+ALTER TABLE old_table_name RENAME TO new_table_name;
+```
+
+---
+
+### 2. `UPDATE` – Modify Existing Data
+
+Used to **change data inside rows** of a table.
+
+#### Common Uses:
+
+* Change specific column values
+* Conditional updates
+
+#### Syntax:
+
+```sql
+-- Update all rows
+UPDATE table_name SET column_name = new_value;
+
+-- Update with condition
+UPDATE table_name
+SET column_name = new_value
+WHERE condition;
+```
+
+#### Warning:
+
+Always use `WHERE` to avoid updating **every row** unintentionally.
+
+---
+
+### 3. `TRUNCATE` – Delete All Data (Fast)
+
+Used to **remove all rows** from a table **without logging individual row deletions** (faster than `DELETE`).
+
+#### Key Points:
+
+* Cannot use `WHERE`
+* Resets auto-increment values
+* Cannot be rolled back (in most DBMS)
+
+#### Syntax:
+
+```sql
+TRUNCATE TABLE table_name;
+```
+
+#### Difference from `DELETE`:
+
+| Feature      | DELETE                  | TRUNCATE    |
+| ------------ | ----------------------- | ----------- |
+| Row by row   | Yes                     | No          |
+| WHERE clause | Yes                     | No          |
+| Rollback     | Yes (If in transaction) | Usually not |
+| Resets ID    | No                      | Yes         |
+| Faster       | No                      | Yes         |
+
+---

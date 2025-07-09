@@ -274,3 +274,4 @@ LIMIT 5;
 -- 8. Find age groups that have more than 1 user
 -- 9. Get users with followers between 100 and 1000
 -- 10. Find users who are either very young (< 18) or very popular (> 1000 followers)
+

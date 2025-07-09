@@ -141,6 +141,7 @@ Used to check the logic of the expression: true or false
 || -> Logical OR
 ! -> NOT
 ```
+
 ----
 
 ### 5. Ternary Operator
@@ -1118,7 +1119,7 @@ Useful for closing resources (files, network connections, loaders) even if an er
   console.log("four");
 ```
 
-### Callbacks
+### `Callbacks`
 * A callback is a function passed as an argument to another function.
 
 

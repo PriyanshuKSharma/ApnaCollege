@@ -309,3 +309,386 @@ res.sendFile(__dirname + '/index.html');
 | `res.sendFile()` | Sends a file as response  |
 
 ---
+
+## Routing in Express.js
+
+### 🧭 What is Routing?
+
+* It is the process of selecting a path for traffic in a network or between or across multiple networks.
+* Refers to **how your application responds** to client requests at specific URLs using **HTTP methods** like:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+
+---
+
+### 🛣️ Basic Route Syntax
+
+```js
+app.METHOD(PATH, HANDLER)
+```
+
+* `METHOD` → HTTP method (`get`, `post`, etc.)
+* `PATH` → Route path (`/`, `/users`, etc.)
+* `HANDLER` → Callback function `(req, res) => {}`
+
+---
+
+### 📦 Example Routes
+
+#### GET Request
+
+```js
+app.get('/', (req, res) => {
+  res.send('Home Page');
+});
+```
+
+#### POST Request
+
+```js
+app.post('/submit', (req, res) => {
+  res.send('Form Submitted');
+});
+```
+
+#### PUT Request
+
+```js
+app.put('/update/:id', (req, res) => {
+  res.send(`Updated item with ID: ${req.params.id}`);
+});
+```
+
+#### DELETE Request
+
+```js
+app.delete('/delete/:id', (req, res) => {
+  res.send(`Deleted item with ID: ${req.params.id}`);
+});
+```
+
+---
+
+### 🧩 Route Parameters
+
+#### Example: `/user/:username`
+
+```js
+app.get('/user/:username', (req, res) => {
+  res.send(`Hello, ${req.params.username}`);
+});
+```
+
+---
+
+### 🧪 Handling Query Parameters
+
+```js
+app.get('/search', (req, res) => {
+  const { q } = req.query;
+  res.send(`Search result for: ${q}`);
+});
+```
+
+URL: `/search?q=express`
+
+---
+
+### 🔗 Chaining Route Methods
+
+```js
+app.route('/item')
+  .get((req, res) => res.send('Get item'))
+  .post((req, res) => res.send('Create item'))
+  .put((req, res) => res.send('Update item'));
+```
+
+---
+
+### 🚦 Order Matters!
+
+Routes are matched in the **order they are defined**.
+
+* Place general routes (like `*`) at the bottom.
+
+---
+
+### 🛑 404 Handling (Fallback Route)
+
+```js
+app.use((req, res) => {
+  res.status(404).send('Page Not Found');
+});
+```
+
+---
+
+### 🧠 Summary
+
+| HTTP Method | Use For                  |
+| ----------- | ------------------------ |
+| GET         | Read/Fetch data          |
+| POST        | Create new resource      |
+| PUT         | Update existing resource |
+| DELETE      | Delete a resource        |
+
+---
+
+## 🔁 Nodemon – Auto-Restarting Node.js Server
+
+### 📘 What is Nodemon?
+
+- **Nodemon** is a development tool that **automatically restarts your Node.js app** whenever file changes are detected.
+- Saves time by avoiding manual `Ctrl+C` and `node index.js`.
+
+---
+
+### ⚙️ Installation
+
+#### 1. Local (recommended for projects)
+```bash
+npm install nodemon --save-dev
+```
+
+#### 2. Global (available in any project)
+
+```bash
+npm install -g nodemon
+```
+
+---
+
+### 🚀 Usage
+
+#### Run your app with nodemon:
+
+```bash
+nodemon index.js
+```
+
+> Replaces `node index.js`
+
+---
+
+### 🛠 Add Script in `package.json`
+
+```json
+"scripts": {
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+}
+```
+
+#### Then run:
+
+```bash
+npm run dev
+```
+
+---
+
+### ✅ Benefits
+
+* Automatically watches `.js`, `.json`, `.mjs`, etc.
+* Detects changes and restarts the server
+* Supports custom extensions & ignore patterns
+
+---
+
+### 📦 Ignore Files (optional)
+
+You can add a `.nodemonignore` file:
+
+```
+node_modules
+README.md
+logs/
+```
+
+---
+
+### 🧪 Check Version
+
+```bash
+nodemon -v
+```
+
+---
+
+### 📌 Summary
+
+| Feature          | Description                         |
+| ---------------- | ----------------------------------- |
+| Auto-reload      | ✅ Yes, on file changes              |
+| Install globally | `npm install -g nodemon`            |
+| Run command      | `nodemon index.js` or `npm run dev` |
+
+---
+
+## 🛣️ Path Parameters in Express.js
+
+### 📘 What are Path Parameters?
+
+- Path parameters are **dynamic values** in a route's URL.
+- Denoted by a **colon (`:`)** in the route definition.
+- Accessed using `req.params` in the route handler.
+
+---
+
+### 🔧 Syntax
+
+```js
+app.get('/user/:username', (req, res) => {
+  res.send(`Welcome, ${req.params.username}`);
+});
+```
+
+* URL: `/user/priyanshu`
+* Response: `Welcome, priyanshu`
+
+---
+
+### 🔢 Multiple Parameters
+
+```js
+app.get('/post/:category/:id', (req, res) => {
+  const { category, id } = req.params;
+  res.send(`Post ID: ${id} in category: ${category}`);
+});
+```
+
+* URL: `/post/tech/42`
+* Output: `Post ID: 42 in category: tech`
+
+---
+
+### 🧪 Accessing Params
+
+```js
+console.log(req.params);
+// Example Output:
+// { username: 'priyanshu' }
+```
+
+---
+
+### ❌ Invalid Example
+
+```js
+app.get('/:', ...) // ❌ This will throw an error (missing parameter name)
+```
+
+You must **name** every parameter after the colon:
+
+```js
+app.get('/:id', ...) // ✅ Valid
+```
+
+---
+
+### ✅ Use Cases
+
+| Use Case         | Example Route             | Description                        |
+| ---------------- | ------------------------- | ---------------------------------- |
+| User Profile     | `/user/:username`         | View a user by username            |
+| Blog Post        | `/post/:postId`           | Fetch post by ID                   |
+| Product Category | `/shop/:category/:itemId` | Dynamic route with multiple params |
+
+---
+
+### 📦 Summary
+
+* Defined using `:paramName` in route
+* Accessed via `req.params.paramName`
+* Useful for dynamic content like user IDs, blog slugs, etc.
+
+---
+
+## 🔍 Query Strings in Express.js
+
+### 📘 What are Query Strings?
+
+- Query strings are **key-value pairs** sent in the URL **after a `?`**
+- Used to send **non-sensitive data** like filters, search terms, page numbers, etc.
+- Accessed via `req.query` in Express
+
+---
+
+### 🔧 Syntax
+
+```js
+app.get('/search', (req, res) => {
+  console.log(req.query);
+  res.send(`You searched for: ${req.query.q}`);
+});
+```
+
+#### URL Example:
+
+```
+http://localhost:3000/search?q=express
+```
+
+#### Output:
+
+```
+You searched for: express
+```
+
+---
+
+### 🧪 Multiple Query Parameters
+
+```js
+app.get('/products', (req, res) => {
+  const { category, sort } = req.query;
+  res.send(`Category: ${category}, Sort by: ${sort}`);
+});
+```
+
+#### URL Example:
+
+```
+/products?category=shoes&sort=price
+```
+
+#### Output:
+
+```
+Category: shoes, Sort by: price
+```
+
+---
+
+### 🔍 Accessing Query Object
+
+```js
+console.log(req.query);
+// Output:
+// { q: 'express' }
+// or { category: 'shoes', sort: 'price' }
+```
+
+---
+
+### 🔗 Difference: Path Param vs Query String
+
+| Feature      | Path Parameter  | Query String               |
+| ------------ | --------------- | -------------------------- |
+| Location     | `/user/:id`     | `/user?id=123`             |
+| Accessed via | `req.params.id` | `req.query.id`             |
+| Usage        | Resource ID     | Filters, searches, options |
+
+---
+
+### ✅ Summary
+
+* Query strings = optional URL parameters after `?`
+* Access with `req.query`
+* Multiple query params are separated by `&`
+* Common for **search**, **filters**, **pagination**
+
+---
+

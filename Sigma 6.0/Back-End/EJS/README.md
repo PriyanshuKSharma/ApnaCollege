@@ -293,11 +293,6 @@ res.render('page', { htmlContent: "<h1>Welcome</h1>" });
 
 ---
 
-Perfect! You've listed the **EJS tag syntax** — this is a great reference to include in your notes.
-
-Here's a well-formatted and documented Markdown section for **EJS tag types**, suitable for GitHub or any study repo:
-
----
 
 ## 🧩 EJS Tag Reference
 

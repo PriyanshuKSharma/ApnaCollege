@@ -1,0 +1,44 @@
+#heading {
+  color: blue;
+  background-color : yellow;
+}
+
+body {
+  background-color: pink;
+}
+
+button {
+  background-color: blue;
+  color: white;
+}
+
+.header{
+  color: black;
+  background-color : green;
+}
+
+/*.box {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  margin: 5px;
+  text-align: center;
+  background-color: aquamarine;
+}*/
+
+#box {
+  height: 250px;
+  width: 100px;
+  border: 1px solid black;
+  margin: 5px;
+  text-align: center;
+  background-color: aquamarine;
+}
+
+.content {
+  color: red;
+}
+
+.newClass {
+  background-color: green;
+}

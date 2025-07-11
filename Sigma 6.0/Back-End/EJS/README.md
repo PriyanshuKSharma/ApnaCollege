@@ -346,6 +346,291 @@ EJS provides various tags to control how JavaScript is rendered within templates
 
 ---
 
+# 🎲 Passing Data to EJS from Express
+
+## 📘 Concept
+
+You can send data from Express to an EJS view using `res.render(viewName, dataObject)`.  
+This allows dynamic content (like a dice roll) to appear inside your HTML.
+
+---
+
+## 📂 File Structure
+
+```
+
+project/
+├── views/
+│   └── rolldice.ejs
+├── index.js
+└── package.json
+
+```
+
+---
+
+### 📄 `views/rolldice.ejs`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Roll Dice</title>
+</head>
+<body>
+  <h1>Roll the Dice</h1>
+  <h1>
+    Dice gave value: <%= diceV %>
+  </h1>
+</body>
+</html>
+```
+
+> `diceV` is a variable passed from Express using `res.render(...)`.
+
+---
+
+### 📦 `index.js`
+
+```js
+const express = require('express');
+const app = express();
+app.set('view engine', 'ejs');
+
+app.get("/rolldice", (req, res) => {
+  let diceValue = Math.floor(Math.random() * 6) + 1;
+  res.render("rolldice", { diceV: diceValue });
+});
+
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
+```
+
+---
+
+### 📌 Explanation
+
+* `Math.floor(Math.random() * 6) + 1` simulates a 6-sided dice roll.
+* `res.render('rolldice', { diceV: value })` passes the dice value to EJS.
+* Inside EJS, `<%= diceV %>` dynamically displays the value.
+
+---
+
+### ✅ Output Example
+
+Visiting `http://localhost:3000/rolldice` might show:
+
+```
+Roll the Dice
+Dice gave value: 4
+```
+
+Every refresh gives a new random dice number from **1 to 6**.
+
+---
+
+### 🧠 Summary
+
+| Feature               | Code                                 |
+| --------------------- | ------------------------------------ |
+| EJS template file     | `views/rolldice.ejs`                 |
+| Pass variable to view | `res.render("view", { key: value })` |
+| Access in EJS         | `<%= key %>`                         |
+
+---
+Perfect! Let's extend your **Roll Dice** project by adding **conditional statements in EJS** — great for learning how logic works inside EJS templates.
+
+---
+
+## 🤔 Conditional Statements in EJS (Using Roll Dice Example)
+
+### 📘 Why Use Conditionals?
+
+EJS lets you use JavaScript logic inside HTML using `<% %>` tags.  
+This is useful for displaying different content based on conditions like:
+- if-else blocks
+- switch cases
+- comparisons
+
+---
+
+### 🎲 Roll Dice with Conditional Messages
+
+#### 🧩 `rolldice.ejs`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Roll Dice</title>
+</head>
+<body>
+  <h1>🎲 You rolled: <%= diceV %></h1>
+
+  <% if (diceV === 6) { %>
+    <h2>🎉 Congrats! You hit the jackpot!</h2>
+  <% } else if (diceV >= 4) { %>
+    <h2>👍 Nice roll!</h2>
+  <% } else { %>
+    <h2>😢 Better luck next time!</h2>
+  <% } %>
+</body>
+</html>
+```
+
+---
+
+#### ⚙️ `index.js`
+
+```js
+const express = require('express');
+const app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/rolldice', (req, res) => {
+  const diceValue = Math.floor(Math.random() * 6) + 1;
+  res.render('rolldice', { diceV: diceValue });
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});
+```
+
+---
+
+### 💡 Output Examples
+
+| Dice Value | Message                  |
+| ---------- | ------------------------ |
+| 6          | 🎉 Congrats!             |
+| 4–5        | 👍 Nice roll!            |
+| 1–3        | 😢 Better luck next time |
+
+---
+
+### 🔧 Summary
+
+| Tag                | Use Case                     |
+| ------------------ | ---------------------------- |
+| `<% if (...) { %>` | Start of a conditional block |
+| `<% } else { %>`   | Else block                   |
+| `<% } %>`          | End of condition             |
+| `<%= var %>`       | Output a value               |
+
+---
+
+### 🧠 Tip
+
+Always remember:
+
+* Use `<% %>` for logic (no output)
+* Use `<%= %>` to print a value
+---
+
+## 🔁 Loops in EJS
+
+### 📘 What Are Loops in EJS?
+
+You can use regular JavaScript loops inside EJS with `<% %>` scriptlet tags.  
+Most commonly used: `for`, `forEach`, and `while`.
+
+---
+
+### 🧪 Example: Displaying a List of Dice Rolls
+
+#### 🧩 `views/rolls.ejs`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Dice Rolls</title>
+</head>
+<body>
+  <h1>🎲 Dice Rolls</h1>
+
+  <ul>
+    <% rolls.forEach((val, i) => { %>
+      <li>Roll <%= i + 1 %>: <strong><%= val %></strong></li>
+    <% }); %>
+  </ul>
+</body>
+</html>
+```
+
+---
+
+### ⚙️ `index.js`
+
+```js
+const express = require('express');
+const app = express();
+
+app.set('view engine', 'ejs');
+
+app.get('/rolls', (req, res) => {
+  let rolls = [];
+  for (let i = 0; i < 5; i++) {
+    rolls.push(Math.floor(Math.random() * 6) + 1);
+  }
+  res.render('rolls', { rolls });
+});
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
+```
+
+---
+
+### 🔁 Loop Syntax in EJS
+
+| Loop Type  | Syntax Example                                    |
+| ---------- | ------------------------------------------------- |
+| `for` loop | `<% for (let i = 0; i < 5; i++) { %> ... <% } %>` |
+| `forEach`  | `<% items.forEach(item => { %> ... <% }); %>`     |
+| `while`    | `<% while (condition) { %> ... <% } %>`           |
+
+---
+
+### 💡 Output Example
+
+```
+🎲 Dice Rolls
+• Roll 1: 4
+• Roll 2: 6
+• Roll 3: 2
+• Roll 4: 5
+• Roll 5: 3
+```
+
+---
+
+### 🧠 Tips
+
+* Use `<%= %>` inside loops to output values
+* Always close loops with `<% } %>`
+* Works for arrays, numbers, objects, etc.
+
+---
+
+### 🧩 Bonus: Loop with Index
+
+```ejs
+<% items.forEach((item, index) => { %>
+  <p><%= index + 1 %>. <%= item %></p>
+<% }); %>
+```
+
+---
+
 
 
 ---

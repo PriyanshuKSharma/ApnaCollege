@@ -1032,9 +1032,7 @@ You often use them **together**:
 2. Then use `HAVING` to **filter** the summarized results.
 
 ---
-Here's a breakdown of the **general order to write SQL queries**, along with the **logical execution order** (how SQL actually processes the query) — formatted in **Markdown** for learning or reference.
 
----
 
 # General Order to Write SQL Queries
 

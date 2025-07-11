@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roll dice</title>
+</head>
+
+<body>
+    <h1>Roll the Dice</h1>
+    <h1>
+        <!-- Dice gave value: <%= Math.floor(Math.random() * 6) + 1 %>
+         -->
+        Dice gave value: <%= diceV %>
+    </h1>
+
+    <% if (diceV===6) { %>
+        <h2>🎉 Congrats! You hit the jackpot!</h2>
+        <% } else if (diceV>= 4) { %>
+            <h2>👍 Nice roll!</h2>
+            <% } else { %>
+                <h2>😢 Better luck next time!</h2>
+                <% } %>
+                    </form>
+</body>
+
+</html>

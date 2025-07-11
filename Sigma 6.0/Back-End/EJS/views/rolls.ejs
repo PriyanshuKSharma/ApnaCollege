@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiple Dice Rolls</title>
+</head>
+<body>
+  <h1>🎲 Dice Rolls</h1>
+
+  <ul>
+    <% rolls.forEach((val, i) => { %>
+      <li>Roll <%= i + 1 %>: <strong><%= val %></strong></li>
+    <% }); %>
+  </ul>
+</body>
+</html>

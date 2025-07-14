@@ -1,0 +1,97 @@
+
+/* Styles for all view files */
+
+/* Common styles shared across views */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Form styles - for input views */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Result display styles */
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e9f7ef;
+  border-radius: 4px;
+}
+
+/* Error message styles */
+.error {
+  color: #d32f2f;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+/* Styles specific to index.ejs */
+.index-content {
+  text-align: center;
+}
+
+/* Styles specific to calculator.ejs */
+.calculator-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Styles specific to result.ejs */
+.result-container {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Styles specific to error.ejs */
+.error-page {
+  text-align: center;
+  color: #d32f2f;
+}

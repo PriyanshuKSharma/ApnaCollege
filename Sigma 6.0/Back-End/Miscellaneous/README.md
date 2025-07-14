@@ -1,3 +1,4 @@
+```markdown
 # Miscellaneous
 ### 📘 Concept: GET and POST Requests in Express.js
 
@@ -11,11 +12,13 @@ In Express, **GET** and **POST** requests are the two most common HTTP methods u
 * Used to GET some response
 * Data sent in query strings (limited, string data & viisible in URL)
 
+* Data sent in query strings (limited, string data & visible in URL)
 ### Example:
 
 ```js
 app.get('/home', (req, res) => {
   res.send('Welcome to the Home Page');
+### Example:
 });
 ```
 
@@ -211,4 +214,220 @@ fetch('/submit', {
 | Wrong content type        | Match `Content-Type` in the request header                      |
 
 ---
+
+
+## 🧠 What is Object-Oriented Programming (OOP)?
+
+**OOP** is a programming paradigm based on the concept of **objects** — which bundle **data (properties)** and **functions (methods)** together.
+
+Think of an object like a real-world item: a car, a person, or a book. Each has **attributes (color, name, title)** and **actions (drive, speak, open)**.
+
+---
+
+## ✅ Key Concepts of OOP in JavaScript
+
+| Concept           | Meaning (Simplified)                                        |
+| ----------------- | ----------------------------------------------------------- |
+| **Class**         | A blueprint or template for creating objects                |
+| **Object**        | A real instance created from a class                        |
+| **Constructor**   | A function that runs when the object is created             |
+| **this**          | Refers to the current object’s instance                     |
+| **Method**        | A function inside an object                                 |
+| **Inheritance**   | One class can reuse (inherit) properties/methods of another |
+| **Encapsulation** | Keeping data safe inside objects                            |
+| **Polymorphism**  | Same method name behaving differently in different classes  |
+
+---
+
+## 🧱 1. Creating Objects Without Classes (Basic)
+
+```js
+const person = {
+  name: 'Alice',
+  age: 25,
+  greet: function () {
+    console.log(`Hello, I'm ${this.name}`);
+  }
+};
+
+person.greet(); // Output: Hello, I'm Alice
+```
+
+### ✅ Explanation:
+
+* `person` is an object.
+* `name` and `age` are properties.
+* `greet` is a method (function inside the object).
+* `this.name` refers to the object's `name` property.
+
+---
+
+## 🧱 2. Creating Objects Using Constructor Functions (Before ES6)
+
+```js
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.greet = function () {
+    console.log(`Hi, I'm ${this.name}`);
+  };
+}
+
+const p1 = new Person('Bob', 30);
+p1.greet(); // Hi, I'm Bob
+```
+
+### ✅ Explanation:
+
+* `Person` is a constructor function.
+* `this.name` creates a property on the object.
+* `new Person()` creates a new object from the blueprint.
+
+---
+
+## 🆕 3. Using ES6 Classes (Modern & Recommended)
+
+```js
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log(`Hello, I'm ${this.name}`);
+  }
+}
+
+const person1 = new Person('Charlie', 28);
+person1.greet(); // Hello, I'm Charlie
+```
+
+### ✅ Explanation:
+
+* `class Person` defines a class.
+* `constructor()` is a special method that runs when an object is created.
+* `greet()` is a method.
+* `new Person(...)` creates an object.
+
+---
+
+## 🧬 4. Inheritance – Extending Another Class
+
+```js
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a sound.`);
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+}
+
+const dog = new Dog('Rex');
+dog.speak(); // Rex barks.
+```
+
+### ✅ Explanation:
+
+* `Dog` **extends** `Animal` → it inherits `Animal`’s properties and methods.
+* We override `speak()` to customize behavior (polymorphism).
+* `super()` can be used to call the parent class’s constructor.
+
+---
+
+## 🔐 5. Encapsulation – Using Private Fields (ES2022+)
+
+```js
+class BankAccount {
+  #balance = 0;
+
+  deposit(amount) {
+    this.#balance += amount;
+  }
+
+  getBalance() {
+    return this.#balance;
+  }
+}
+
+const account = new BankAccount();
+account.deposit(1000);
+console.log(account.getBalance()); // 1000
+// console.log(account.#balance); ❌ Error: private field
+```
+
+### ✅ Explanation:
+
+* `#balance` is a **private field**.
+* It cannot be accessed directly outside the class.
+* Only methods inside the class can access it — this is **encapsulation**.
+
+---
+
+## 🌀 6. Polymorphism – Different Behavior for the Same Method
+
+```js
+class Shape {
+  area() {
+    return 0;
+  }
+}
+
+class Circle extends Shape {
+  constructor(radius) {
+    super();
+    this.radius = radius;
+  }
+
+  area() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+class Square extends Shape {
+  constructor(side) {
+    super();
+    this.side = side;
+  }
+
+  area() {
+    return this.side * this.side;
+  }
+}
+
+const circle = new Circle(3);
+const square = new Square(4);
+
+console.log(circle.area()); // 28.27...
+console.log(square.area()); // 16
+```
+
+### ✅ Explanation:
+
+* `Circle` and `Square` override the `area()` method.
+* Same method name → different behaviors = **polymorphism**.
+
+---
+
+## 📝 Summary
+
+| Concept       | Example Code / Purpose                     |
+| ------------- | ------------------------------------------ |
+| Class         | `class Person { ... }`                     |
+| Object        | `const p = new Person()`                   |
+| Method        | `greet() { ... }`                          |
+| Inheritance   | `class Dog extends Animal`                 |
+| Encapsulation | `#balance` as a private field              |
+| Polymorphism  | Overriding `area()` in multiple subclasses |
+
+---
+
 

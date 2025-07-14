@@ -182,9 +182,6 @@ seedUsers();
 
 ---
 
-Perfect! Here’s a GitHub-friendly **Markdown note** on how to use **MySQL from the CLI (Command-Line Interface)** — useful for practice, debugging, and testing manually before integrating with Node.js.
-
----
 
 ## MySQL2 Package
 ### 🧩 1. Log In to MySQL
@@ -300,12 +297,6 @@ DESCRIBE users;
 
 ---
 
-Great! Let’s cover **placeholders in SQL** — a key concept when using SQL queries safely in **Node.js (especially with `mysql2`)**.
-
-Here’s a clean, GitHub-ready Markdown note you can add:
-
----
-
 ## 🛡️ SQL Placeholders (Prepared Statements)
 
 ### 📘 What Are Placeholders?
@@ -325,7 +316,7 @@ const sql = 'INSERT INTO users (username, email) VALUES (?, ?)';
 const values = ['priyanshu', 'priyan@example.com'];
 
 await db.execute(sql, values);
-````
+```
 
 * `?` is a **placeholder**
 * `values` is an **array of actual data** sent securely

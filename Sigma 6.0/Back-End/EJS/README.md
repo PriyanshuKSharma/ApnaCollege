@@ -631,9 +631,226 @@ app.listen(3000, () => {
 
 ---
 
+## 📘 Serving Static Files
 
+### 🧱 1. What Are Static Files?
+
+Static files are resources like:
+
+* CSS files
+* JavaScript files (client-side)
+* Images, fonts, videos, PDFs, etc.
+
+These files don't change dynamically and are directly served to the client as-is.
 
 ---
+
+### 🚀 2. Serving Static Files in Express
+
+#### ✅ Basic Static Middleware
+
+```js
+app.use(express.static('public'));
+```
+
+* This tells Express to serve files from the `public/` directory.
+* Example: `public/css/style.css` → accessible via `http://localhost:3000/css/style.css`
+
+#### ✅ Absolute Path (Best Practice)
+
+```js
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+```
+
+* This avoids relative path issues, especially in different environments (Windows, Linux, etc.).
+
+---
+
+### 📁 3. Folder Structure
+
+Your typical Express project structure:
+
+```
+project/
+├── public/         <-- Static files
+├── views/          <-- EJS templates
+└── index.js        <-- Main server file
+```
+
+---
+
+### 🧠 4. Using Static Files in EJS
+
+You reference static assets in your EJS views like this:
+
+```html
+<link rel="stylesheet" href="/css/style.css">
+<script src="/js/script.js"></script>
+<img src="/images/logo.png" alt="Logo">
+```
+
+The leading `/` matches the root route configured by `express.static`.
+
+---
+
+### 🗂 5. Multiple Static Directories
+
+```js
+app.use(express.static('public'));
+app.use(express.static('files'));
+```
+
+* Express will check `public/` first, then `files/` if the file isn't found.
+* Useful for serving from multiple asset sources.
+
+---
+
+### 🔀 6. Virtual Path Prefix
+
+```js
+app.use('/static', express.static('public'));
+```
+
+* Files are accessed with a prefix.
+* Example: `public/css/style.css` becomes `/static/css/style.css`
+
+This is useful for **namespace organization**, especially if you want to distinguish static assets from API routes.
+
+---
+
+### ⚙️ 7. Options for express.static()
+
+```js
+app.use(express.static('public', {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false
+}));
+```
+
+These control behavior:
+
+* `dotfiles: 'ignore'` – skip hidden files (like `.env`)
+* `etag: false` – disables HTTP ETag headers (for caching)
+* `extensions: ['htm', 'html']` – auto-append extensions
+* `index: false` – disables serving `index.html` automatically
+* `maxAge: '1d'` – set cache-control header for 1 day
+* `redirect: false` – prevents redirecting `/file` → `/file/`
+
+---
+
+### ✅ Summary
+
+Serving static files in Express with EJS involves:
+
+* Hosting static assets with `express.static()`
+* Using absolute paths for safety
+* Referencing files correctly in EJS
+* Optionally customizing middleware behavior
+
+---
+
+## 📘 `include`
+In **EJS**, `include` is used to **reuse template parts** across different views — similar to "partials" in other templating systems.
+
+This helps you **avoid repeating common UI elements** like headers, footers, navbars, etc.
+
+---
+
+### 🔧 Syntax
+
+```ejs
+<%- include('filename') %>
+```
+
+* The file is included **as-is**.
+* Use `<%-` instead of `<%=`, because `<%-` will render raw HTML without escaping it.
+
+---
+
+### 📁 Example Folder Structure
+
+```
+views/
+├── partials/
+│   ├── header.ejs
+│   └── footer.ejs
+├── home.ejs
+└── about.ejs
+```
+
+---
+
+### 📄 `partials/header.ejs`
+
+```ejs
+<header>
+  <h1>My Website</h1>
+</header>
+```
+
+### 📄 `partials/footer.ejs`
+
+```ejs
+<footer>
+  <p>© 2025 My Website</p>
+</footer>
+```
+
+---
+
+### 📄 `home.ejs`
+
+```ejs
+<%- include('partials/header') %>
+
+<main>
+  <h2>Home Page</h2>
+  <p>Welcome to the home page.</p>
+</main>
+
+<%- include('partials/footer') %>
+```
+
+---
+
+### ✅ Benefits of `include`
+
+* **DRY** principle (Don’t Repeat Yourself)
+* Easier maintenance
+* Cleaner template files
+* Promotes modular design
+
+---
+
+### ⚠️ Notes
+
+* Relative paths in `include()` are based on the `views` directory.
+* File extension `.ejs` is **optional** in `include()`.
+* Don't use `include` inside `<%= %>` — use `<%- %>` for rendering raw output.
+
+---
+
+### 🧠 Bonus: Passing Data to Partials
+
+EJS `include` does **not** support passing local variables directly (unlike some other template engines like Pug). To work around this, use shared variables available in the parent template or render context:
+
+```js
+res.render('home', { username: 'Alice' });
+```
+
+Then in partial:
+
+```ejs
+<p>Welcome, <%= username %></p>
+```
+
+---
+
 ## 🔗 Official Site
 
 [EJS Docs → https://ejs.co](https://ejs.co)

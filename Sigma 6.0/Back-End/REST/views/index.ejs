@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quora Posts - Share Your Thoughts</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quora Posts</h1>
+        <ul class="posts-container">
+            <% for(post of posts) { %>
+                <div class="post-card">
+                    <h2 class="username"><%= post.username %></h2>
+                    <p class="content"><%= post.content %></p>  
+                </div>
+            <% } %>
+        </ul>
+    </div>
+
+    <div class="create-post">
+        <!-- <a href="http://localhost:8080/posts/new">Create a New Post</a> -->
+         <a href="/posts/new">Create a New Post</a>
+    </div>
+    
+</body>
+</html>
+

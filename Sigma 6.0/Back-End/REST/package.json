@@ -1,0 +1,20 @@
+{
+  "name": "rest",
+  "version": "1.0.0",
+  "description": "Practice directory for REST APIs",
+  "repository": {
+    "type": "git",
+    "url": "github.com:PriyanshuKSharma/ApnaCollege.git"
+  },
+  "license": "ISC",
+  "author": "Priyanshu K Sharma",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}

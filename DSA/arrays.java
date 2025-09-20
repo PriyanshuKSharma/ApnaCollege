@@ -175,8 +175,8 @@ class arrays {
         pairsinArray(arr);*/
 
         //Print subarray
-        /*int arr[] = {2, 4, 6, 8, 10};
-        printSubArray(arr);*/
+        int arr[] = {2, 4, 6, 8, 10};
+        printSubArray(arr);
 
     }
 }

@@ -8,6 +8,282 @@ Creating a database is usually the **first step** in working with SQL.
 
 ---
 
+## 1. Introduction to SQL and RDBMS
+### SQL (Structured Query Language)
+*   **Definition**: SQL, or Structured Query Language, is used to access and manipulate data in a database. It is a query language, not a database itself.
+*   **CRUD Operations**: SQL communicates with a database using CRUD operations:
+    *   **CREATE**: Inserts a new tuple (row) into a relation (table) using `INSERT` statements.
+    *   **READ**: Reads data that is already in the relations.
+    *   **UPDATE**: Modifies existing data in a relation.
+    *   **DELETE**: Deletes one or more data points, tuples, or rows.
+
+### RDBMS (Relational Database Management System)
+*   **Definition**: An RDBMS is software that allows you to implement a designed relational model.
+*   **Examples**: MySQL, MS SQL, Oracle, IBM.
+*   **Data Storage**: In a relational database, the simplest form of data storage is a **Table** or **Relation**. Data is stored in tables.
+
+### MySQL
+*   **MySQL** is an open-source RDBMS that uses SQL for all its CRUD operations.
+*   It operates on a **client-server model**, where a client (like a Command Line Interface or a frontend application) uses services provided by the MySQL server.
+
+### SQL vs. MySQL
+*   **SQL** is the language used to perform CRUD operations in a relational database.
+*   **MySQL** is the RDBMS used to store, manage, and administer databases, using SQL as its language.
+
+---
+## 2. Types of SQL Commands
+
+SQL commands are categorised as follows:
+
+*   **DDL (Data Definition Language)**: Used for defining the relation schema.
+    *   `CREATE`: Creates a new table, database, or view.
+    *   `ALTER TABLE`: Modifies the structure of a table, such as changing a column's data type or adding/removing columns.
+    *   `DROP`: Deletes a table, database, or view.
+    *   `TRUNCATE`: Removes all tuples (rows) from a table.
+    *   `RENAME`: Renames a database, table, or column.
+*   **DRL/DQL (Data Retrieval/Query Language)**: Used to retrieve data from tables.
+    *   `SELECT`.
+*   **DML (Data Manipulation Language)**: Used to perform modifications to the data in the database.
+    *   `INSERT`: Inserts data into a relation.
+    *   `UPDATE`: Updates data in a relation.
+    *   `DELETE`: Deletes rows from a relation.
+*   **DCL (Data Control Language)**: Used to grant or revoke user authority.
+    *   `GRANT`: Provides access privileges to the database.
+    *   `REVOKE`: Takes back user access privileges.
+*   **TCL (Transaction Control Language)**: Used to manage database transactions.
+    *   `START TRANSACTION`: Begins a transaction.
+    *   `COMMIT`: Applies all changes and ends the transaction.
+    *   `ROLLBACK`: Discards changes and ends the transaction.
+    *   `SAVEPOINT`: Creates a point within a group of transactions to which you can later roll back.
+
+### Filtering and Sorting
+*   **`WHERE`**: Filters rows based on specified conditions.
+*   **`BETWEEN`**: Selects values within a given range (inclusive).
+*   **`IN`**: Reduces the need for multiple `OR` conditions by specifying a list of values to match.
+*   **`AND` / `OR` / `NOT`**: Logical operators to combine or negate conditions.
+*   **`IS NULL`**: Used to check for null values.
+*   **Pattern Matching (`LIKE`)**: Searches for a specified pattern in a column, using wildcards:
+    *   `%`: Matches any number of characters (0 to n).
+    *   `_`: Matches a single character.
+*   **`ORDER BY`**: Sorts the result set in ascending (`ASC`) or descending (`DESC`) order.
+
+### Aggregation and Grouping
+*   **`DISTINCT`**: Returns only distinct (different) values from a column.
+*   **`GROUP BY`**: Groups rows that have the same values into summary rows.
+    *   It is generally used with aggregate functions like `COUNT()`, `SUM()`, `AVG()`, `MIN()`, and `MAX()`.
+    *   **Note**: All column names in the `SELECT` statement must also be in the `GROUP BY` clause to execute the query successfully.
+    *   `GROUP BY` can also be used to find distinct values, as SQL is smart enough to infer this if no aggregation function is used.
+*   **`HAVING`**: Filters the results of a `GROUP BY` clause based on a condition. It is similar to `WHERE` but is used *after* `GROUP BY`.
+
+| `WHERE`                                        | `HAVING`                                          |
+| :--------------------------------------------- | :------------------------------------------------ |
+| Filters rows from a table before grouping.     | Filters groups after `GROUP BY` has been applied. |
+| Used before `GROUP BY`.                        | Used after `GROUP BY`.                            |
+| `GROUP BY` is not necessary.                   | `GROUP BY` is necessary.                          |
+| Can be used with `SELECT`, `UPDATE`, `DELETE`. | Used only with `SELECT`.                          |
+
+
+
+---
+
+## 3. SQL Data Types
+
+In an SQL database, data stored in tables can be of different types.
+
+| Data Type           | Description                                                 |
+| :------------------ | :---------------------------------------------------------- |
+| **String Types**    |                                                             |
+| `CHAR(size)`        | A string with a fixed size between 0 and 255.               |
+| `VARCHAR(size)`     | A variable-length string with a size between 0 and 255.     |
+| `TINYTEXT`          | A string with a maximum length of 255 characters.           |
+| `TEXT`              | A string with a maximum length of 65,535 characters.        |
+| `BLOB`              | Binary Large Object, for strings up to 65,535 bytes.        |
+| `MEDIUMTEXT`        | A string with a maximum length of 16,777,215 characters.    |
+| `MEDIUMBLOB`        | For strings up to 16,777,215 bytes.                         |
+| `LONGTEXT`          | A string with a maximum length of 4,294,967,295 characters. |
+| `LONGBLOB`          | For strings up to 4,294,967,295 bytes.                      |
+| **Numeric Types**   |                                                             |
+| `TINYINT`           | Integer from -128 to 127.                                   |
+| `SMALLINT`          | Integer from -32768 to 32767.                               |
+| `MEDIUMINT`         | Integer from -8388608 to 8388607.                           |
+| `INT`               | Integer from -2147483648 to 2147483647.                     |
+| `BIGINT`            | Integer from -9.22 x 10^18 to 9.22 x 10^18.                 |
+| `FLOAT`             | Decimal with precision up to 23 digits.                     |
+| `DOUBLE`            | Decimal with precision from 24 to 53 digits.                |
+| `DECIMAL`           | A double stored as a string.                                |
+| `BIT(n)`            | Stores values in bits, up to n=64.                          |
+| `BOOLEAN`           | Stores 0 or 1.                                              |
+| **Date/Time Types** |                                                             |
+| `DATE`              | Format: YYYY-MM-DD.                                         |
+| `DATETIME`          | Format: YYYY-MM-DD HH\:MM\:SS.                              |
+| `TIMESTAMP`         | Format: YYYYMMDDHHMMSS.                                     |
+| `TIME`              | Format: HH\:MM\:SS.                                         |
+| **Other Types**     |                                                             |
+| `ENUM`              | Can only be one of a set of preset values.                  |
+| `SET`               | Can be one or many of a set of preset values.               |
+
+    Notes:
+
+    Integer Sizing: TINYINT < SMALLINT < MEDIUMINT < INT < BIGINT.
+
+    Variable Length Types: Data types like VARCHAR are often preferred because they only occupy space equal to the actual data size.
+
+    Unsigned Values: Numeric types can be declared as UNSIGNED (e.g., INT UNSIGNED).
+
+
+---
+## 4. DDL: Managing Databases and Tables
+
+### Database Commands
+*   Create a database: `CREATE DATABASE IF NOT EXISTS db_name;`.
+*   Select a database to use: `USE db_name;` (This is necessary to run commands on a specific database).
+*   Delete a database: `DROP DATABASE IF EXISTS db_name;`.
+*   List all databases: `SHOW DATABASES;`.
+*   List tables in the current database: `SHOW TABLES;`.
+
+### Constraints
+Constraints are rules enforced on data columns in a table.
+
+*   **PRIMARY KEY**: A column that is `NOT NULL` and `UNIQUE`. A table can only have one primary key.
+*   **FOREIGN KEY**: A key used to link two tables together. It refers to the `PRIMARY KEY` of another table. A table can have multiple foreign keys.
+*   **UNIQUE**: Ensures all values in a column are different. It can accept `NULL` values, and a table can have multiple unique attributes.
+*   **CHECK**: Ensures that the values in a column satisfy a specific condition. You can name the constraint (e.g., `CONSTRAINT age_check`) or let MySQL name it automatically.
+*   **DEFAULT**: Sets a default value for a column when no value is specified.
+
+### ALTER Operations
+These commands modify the schema of an existing table.
+
+*   **ADD Column**: Adds a new column to a table.
+    ```sql
+    ALTER TABLE customer ADD age INT NOT NULL;
+    ```
+*   **MODIFY Column**: Changes the data type of a column.
+    ```sql
+    ALTER TABLE customer MODIFY name CHAR(1024);
+    ```
+*   **CHANGE COLUMN**: Renames a column and can also change its data type.
+    ```sql
+    ALTER TABLE customer CHANGE COLUMN name customer_name VARCHAR(1024);
+    ```
+*   **DROP COLUMN**: Deletes a column from a table.
+    ```sql
+    ALTER TABLE customer DROP COLUMN middle_name;
+    ```
+*   **RENAME Table**: Renames the table itself.
+    ```sql
+    ALTER TABLE customer RENAME TO customer_details;
+    ```
+
+---
+
+## 5. DML: Data Manipulation Language
+
+### INSERT
+Adds new rows of data into a table.
+```sql
+INSERT INTO table_name(col1, col2) VALUES (v1, v2), (val1, val2);
+```
+
+### UPDATE
+Modifies existing records in a table.
+```sql
+UPDATE table_name SET col1 = 'new_value' WHERE id = 1;
+```
+*   **ON UPDATE CASCADE**: If a primary key in a parent table is updated, this will automatically update the corresponding foreign key in the child table.
+
+### DELETE
+Deletes existing records from a table.
+```sql
+DELETE FROM table_name WHERE id = 1;
+```
+*   **ON DELETE CASCADE**: If a parent table's entry is deleted, the corresponding child entries are also deleted.
+*   **ON DELETE SET NULL**: If a parent entry is deleted, the foreign key in the child entry is set to `NULL`.
+
+### REPLACE
+This command works as follows:
+*   If the record (identified by its primary key) already exists, it acts like an `UPDATE` and replaces the row.
+*   If the record does not exist, it acts like an `INSERT` and adds a new row.
+```sql
+REPLACE INTO student (id, class) VALUES (4, 3);
+```
+
+---
+
+## 6. DRL: Data Retrieval and Queries
+
+The `SELECT` statement is used to query the database and retrieve data.
+
+### Basic `SELECT`
+*   **Syntax**: `SELECT <set_of_column_names> FROM <table_name>;`.
+*   **Execution Order**: Queries are executed from right to left.
+*   **Dual Tables**: `SELECT` can be used without a `FROM` clause for certain actions by using a dummy table created by MySQL called a Dual Table.
+    ```sql
+    SELECT 55 + 11;
+    SELECT now();
+    ```
+
+---
+
+## 7. Joining Tables
+Joins are used to combine rows from two or more tables based on a related column between them.
+
+*   **Alias (`AS`)**: An alias provides a temporary name for a table or column to make a query shorter and neater.
+*   **`INNER JOIN`**: Returns records that have matching values in both tables.
+*   **`OUTER JOIN`**:
+    *   **`LEFT JOIN`**: Returns all records from the left table, and the matched records from the right table.
+    *   **`RIGHT JOIN`**: Returns all records from the right table, and the matched records from the left table.
+    *   **`FULL JOIN`**: Returns all records when there is a match in either the left or the right table. In MySQL, this is emulated using `LEFT JOIN UNION RIGHT JOIN`.
+*   **`CROSS JOIN`**: Returns the Cartesian product of the two tables (all possible combinations of rows).
+*   **`SELF JOIN`**: A table is joined with itself. This is emulated using an `INNER JOIN`.
+*   **Join without keywords**: Joins can also be performed by listing tables in the `FROM` clause and specifying the join condition in the `WHERE` clause.
+
+---
+## 8. Set Operations
+
+Set operations combine the results of two or more `SELECT` statements and always return distinct rows.
+
+| JOIN                                                                              | SET Operations                                                                       |
+| :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------- |
+| Combines multiple tables based on a matching condition (column-wise combination). | Combines the result set from two or more `SELECT` statements (row-wise combination). |
+| Data types of columns can be different.                                           | Data types of corresponding columns must be the same.                                |
+| Can generate both distinct and duplicate rows.                                    | Generates distinct rows.                                                             |
+| The number of selected columns can be different.                                  | The number of selected columns must be the same.                                     |
+| Combines results horizontally.                                                    | Combines results vertically.                                                         |
+
+
+*   **`UNION`**: Combines the result-set of two or more `SELECT` statements. The number and order of columns must be the same. `UNION ALL` can be used to include duplicate values.
+*   **`INTERSECT`**: Returns the common values between two tables. This is emulated in MySQL using an `INNER JOIN`.
+*   **`MINUS`**: Returns distinct rows from the first table that are not in the second. This is emulated in MySQL using a `LEFT JOIN` with a `WHERE ... IS NULL` condition.
+
+---
+
+## 9. Subqueries
+
+A subquery is a nested query where the outer query depends on the result of the inner query. They are an alternative to joins.
+
+*   **Location**: Subqueries can exist in the `WHERE`, `FROM`, or `SELECT` clause.
+*   **Correlated Subqueries**: Unlike a normal subquery where the inner query runs once, a correlated subquery executes once for each candidate row considered by the outer query.
+
+#### `JOIN` vs. `Subqueries`
+| JOINS                                         | SUBQUERIES                                           |
+| :-------------------------------------------- | :--------------------------------------------------- |
+| Faster.                                       | Slower.                                              |
+| Maximises the calculation burden on the DBMS. | Keeps the responsibility of calculation on the user. |
+| Can be complex and difficult to understand.   | Comparatively easy to understand and implement.      |
+
+---
+
+## 10. MySQL Views
+
+*   **Definition**: A view is a virtual table whose contents are based on the result-set of an SQL statement. It contains rows and columns like a real table but does not store any data of its own.
+*   **Dynamic Nature**: If the data in the underlying base table changes, the changes are reflected in the view.
+*   **Commands**:
+    *   `CREATE VIEW view_name AS SELECT ...;`.
+    *   `ALTER VIEW view_name AS SELECT ...;`.
+    *   `DROP VIEW IF EXISTS view_name;`.
+
+---
+
 ##  SQL Syntax to Create a Database
 
 ```sql
@@ -225,7 +501,6 @@ CREATE TABLE Enrollment (
 
 ## Inserting values
 
----
 
 ### Example Data for `insta_users`
 
@@ -912,9 +1187,6 @@ This will return the average followers for each age group, but only for groups w
 SQL **aggregate functions** provide powerful tools to summarize, analyze, and group data in meaningful ways. Whether you're counting rows, calculating sums or averages, or finding the highest or lowest values, these functions help you make sense of large datasets.
 
 By combining aggregate functions with clauses like **`GROUP BY`** and **`HAVING`**, you can extract insights and create reports that highlight the key metrics you care about.
-
----
-
 
 
 ---

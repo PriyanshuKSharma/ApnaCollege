@@ -36,3 +36,37 @@ It stores data in JSON-like documents (BSON) instead of rows and columns.
   }
 }
 ```
+
+## BSON and Difference from JSON
+
+## What is BSON?
+BSON stands for Binary JSON.
+It is a binary-encoded format used by MongoDB to store documents internally.
+
+## Why MongoDB uses BSON
+- Faster parsing in many database operations
+- Supports more data types than plain JSON
+- Efficient for storage and traversal inside MongoDB
+
+## BSON vs JSON
+
+| Feature | BSON | JSON |
+| --- | --- | --- |
+| Full form | Binary JSON | JavaScript Object Notation |
+| Format | Binary | Text |
+| Readability | Not human-readable directly | Human-readable |
+| Data types | More types (`Date`, `ObjectId`, `Binary`, `Decimal128`) | Limited basic types |
+| Size | Can be larger in some cases (metadata/type info) | Usually smaller for simple text data |
+| Use case | Internal DB storage and transfer in MongoDB | APIs, configs, data exchange |
+
+## Example
+JSON:
+```json
+{
+  "name": "Aman",
+  "age": 21
+}
+```
+
+BSON (concept):
+- Same logical data, but stored in binary format with explicit type information.

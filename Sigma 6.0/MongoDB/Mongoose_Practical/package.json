@@ -1,0 +1,16 @@
+{
+  "name": "mongoose_practical",
+  "version": "1.0.0",
+  "description": "This directory is for practicing Mongoose, which is an Object Data Modeling (ODM) library for MongoDB and Node.js. It provides a straightforward, schema-based solution to model your application data and includes built-in type casting, validation, query building, business logic hooks and more.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "mongoose": "^9.2.1"
+  }
+}

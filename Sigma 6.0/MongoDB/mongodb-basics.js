@@ -201,3 +201,66 @@ db.students.aggregate([
   { $match: { profile: { $exists: true } } },
   { $replaceWith: "$profile" }
 ]);
+
+// -----------------------------------
+// 9) Nesting in MongoDB
+// -----------------------------------
+db.students.insertOne({
+  name: "Nested User",
+  age: 24,
+  address: {
+    city: "Mumbai",
+    pin: "400001"
+  },
+  skills: [
+    { name: "Java", level: "Intermediate" },
+    { name: "MongoDB", level: "Beginner" }
+  ]
+});
+
+// Query nested fields (dot notation)
+db.students.find({ "address.city": "Mumbai" });
+db.students.find({ "skills.name": "MongoDB" });
+
+// Update nested field
+db.students.updateOne(
+  { name: "Nested User" },
+  { $set: { "address.city": "Pune" } }
+);
+
+// Push into nested array
+db.students.updateOne(
+  { name: "Nested User" },
+  { $push: { skills: { name: "Node.js", level: "Beginner" } } }
+);
+
+// Real nested-field example (performance.marks)
+db.students.insertOne({
+  name: "Farah",
+  age: 25,
+  course: "B. Tech",
+  performance: { marks: 88, grade: "A" }
+});
+db.students.find({ "performance.marks": 88 });
+
+// -----------------------------------
+// 10) Delete operations
+// -----------------------------------
+
+// deleteOne: removes first matching document
+db.students.deleteOne({ name: "First User" });
+
+// deleteMany: removes all matching documents
+db.students.deleteMany({ city: "Pune" });
+
+// findOneAndDelete: returns deleted doc
+db.students.findOneAndDelete({ name: "Neha" });
+
+// Delete all documents (keeps collection)
+// db.students.deleteMany({});
+
+// Drop collection (removes collection + data)
+// db.students.drop();
+
+// Drop database (removes current DB)
+// db.dropDatabase();

@@ -1,6 +1,6 @@
 # ✨ ApnaCollege - Sigma 6.0 Web Development Course ✨
 
-Welcome to the official repository for the **Sigma 6.0 Web Development Course** by ApnaCollege. This is your one-stop shop for everything related to the course, from lecture notes to project code.
+Welcome to my practice repository for the **Sigma 6.0 Web Development Course** by ApnaCollege. This is your one-stop shop for everything related to the course, from lecture notes to project code.
 
 ---
 
@@ -117,8 +117,9 @@ Welcome to the official repository for the **Sigma 6.0 Web Development Course** 
     ```
 
 4.  **Database Setup**:
-    - Install MySQL
+    - Install MySQL and MongoDB
     - Run SQL scripts from the SQL directory
+    - See `Sigma 6.0/MongoDB/mongodb-basics.js` for basic MongoDB commands.
 
 ---
 <details>

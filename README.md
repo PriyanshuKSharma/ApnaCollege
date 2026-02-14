@@ -1,96 +1,91 @@
-# ApnaCollege - Sigma 6.0 Web Development Course
+# ✨ ApnaCollege - Sigma 6.0 Web Development Course ✨
 
-## 📚 Course Overview
+Welcome to the official repository for the **Sigma 6.0 Web Development Course** by ApnaCollege. This is your one-stop shop for everything related to the course, from lecture notes to project code.
 
-This repository contains comprehensive materials for the **Sigma 6.0 Web Development Course** by ApnaCollege. It covers full-stack web development from fundamentals to advanced concepts, designed for placement preparation and industry readiness.
-
-## 🎯 Target Audience
-- Students preparing for campus placements
-- Aspiring web developers (beginner to advanced)
-- Interview candidates seeking comprehensive review
-- Developers transitioning to full-stack development
-
-## 📁 Repository Structure
-
-```
-ApnaCollege/
-├── Sigma 6.0/
-│   ├── Front-End/
-│   │   ├── html/           # HTML fundamentals and advanced concepts
-│   │   ├── css/            # CSS styling, layouts, and responsive design
-│   │   └── js/             # JavaScript programming and DOM manipulation
-│   ├── Back-End/
-│   │   ├── NodeJS/         # Node.js server-side development
-│   │   ├── ExpressJS/      # Express.js web framework
-│   │   ├── EJS/            # EJS templating engine
-│   │   ├── REST/           # RESTful API development
-│   │   ├── Node_SQL/       # Database integration with Node.js
-│   │   └── Miscellaneous/  # Additional backend concepts
-│   ├── SQL/                # Database design and SQL queries
-│   └── DSA/                # Data Structures and Algorithms
-│       ├── Arrays/         # Array operations and algorithms
-│       ├── LinkedLists/    # Singly, doubly, circular linked lists
-│       ├── Stacks/         # Stack implementation and applications
-│       ├── Queues/         # Queue, deque, priority queue
-│       ├── Trees/          # Binary trees, BST, AVL, heap
-│       ├── Graphs/         # Graph algorithms and traversals
-│       ├── Sorting/        # Sorting algorithms and analysis
-│       ├── Searching/      # Binary search and variations
-│       ├── Hashing/        # Hash tables and collision handling
-│       ├── DynamicProgramming/ # DP patterns and optimization
-│       ├── Recursion/      # Recursive algorithms and backtracking
-│       └── Greedy/         # Greedy algorithms and optimization
-├── Assignments/            # Practice assignments and problem sets
-└── README.md              # This file
-```
+---
 
 ## 🚀 Technologies Covered
 
-### Frontend Technologies
-- **HTML5**: Semantic markup, forms, multimedia, accessibility
-- **CSS3**: Styling, layouts, animations, responsive design
-- **JavaScript**: ES6+, DOM manipulation, async programming
-- **Responsive Design**: Mobile-first approach, media queries
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+![EJS](https://img.shields.io/badge/EJS-a91e50?style=for-the-badge&logo=ejs&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![SQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 
-### Backend Technologies
-- **Node.js**: Server-side JavaScript runtime
-- **Express.js**: Web application framework
-- **EJS**: Embedded JavaScript templating
-- **RESTful APIs**: API design and implementation
-- **Database Integration**: SQL with Node.js
+---
 
-### Database
-- **SQL**: Database design, queries, relationships
-- **MySQL**: Relational database management
+## 📁 Repository Structure
 
-### Data Structures & Algorithms
-- **Linear Data Structures**: Arrays, Linked Lists, Stacks, Queues
-- **Non-Linear Data Structures**: Trees, Graphs, Heaps
-- **Algorithms**: Sorting, Searching, Graph Traversals
-- **Advanced Topics**: Dynamic Programming, Greedy Algorithms, Backtracking
-- **Complexity Analysis**: Time and Space Complexity, Big O Notation
+<details>
+<summary><strong>Click to expand and see the detailed file structure</strong></summary>
+
+```
+.
+├── DSA
+│   ├── 2Darray.java
+│   ├── basicSorting.java
+│   ├── bits.java
+│   ├── recursion.java
+│   ├── sorting.java
+│   └── ... and more
+└── Sigma 6.0
+    ├── Front-End
+    │   ├── html
+    │   ├── css
+    │   └── js
+    ├── Back-End
+    │   ├── NodeJS
+    │   ├── ExpressJS
+    │   ├── EJS
+    │   ├── REST
+    │   └── Node_SQL
+    ├── MongoDB
+    └── SQL
+```
+
+</details>
+
+---
 
 ## 📖 Learning Path
 
-### Phase 1: Frontend Fundamentals (Weeks 1-4)
-1. **HTML Basics** → **Advanced HTML** → **Forms & Validation**
-2. **CSS Fundamentals** → **Layouts (Flexbox/Grid)** → **Responsive Design**
-3. **JavaScript Basics** → **DOM Manipulation** → **ES6+ Features**
+<details>
+<summary><strong>Phase 1: Frontend Fundamentals (Weeks 1-4)</strong></summary>
 
-### Phase 2: Backend Development (Weeks 5-8)
-1. **Node.js Fundamentals** → **File System & Modules**
-2. **Express.js** → **Routing & Middleware** → **Template Engines**
-3. **Database Design** → **SQL Queries** → **Database Integration**
+1.  **HTML Basics** → **Advanced HTML** → **Forms & Validation**
+2.  **CSS Fundamentals** → **Layouts (Flexbox/Grid)** → **Responsive Design**
+3.  **JavaScript Basics** → **DOM Manipulation** → **ES6+ Features**
+</details>
 
-### Phase 3: Backend Development & DSA (Weeks 9-12)
-1. **RESTful API Development** → **CRUD Operations**
-2. **Authentication & Authorization** → **Session Management**
-3. **Data Structures** → **Algorithm Analysis** → **Problem Solving**
+<details>
+<summary><strong>Phase 2: Backend Development (Weeks 5-8)</strong></summary>
 
-### Phase 4: Advanced Concepts & Placement Prep (Weeks 13-16)
-1. **Advanced DSA** → **Dynamic Programming** → **Graph Algorithms**
-2. **System Design Basics** → **Scalability Concepts**
-3. **Project Development** → **Deployment** → **Interview Preparation**
+1.  **Node.js Fundamentals** → **File System & Modules**
+2.  **Express.js** → **Routing & Middleware** → **Template Engines**
+3.  **Database Design** → **SQL Queries** → **Database Integration**
+</details>
+
+<details>
+<summary><strong>Phase 3: Backend Development & DSA (Weeks 9-12)</strong></summary>
+
+1.  **RESTful API Development** → **CRUD Operations**
+2.  **Authentication & Authorization** → **Session Management**
+3.  **Data Structures** → **Algorithm Analysis** → **Problem Solving**
+</details>
+
+<details>
+<summary><strong>Phase 4: Advanced Concepts & Placement Prep (Weeks 13-16)</strong></summary>
+
+1.  **Advanced DSA** → **Dynamic Programming** → **Graph Algorithms**
+2.  **System Design Basics** → **Scalability Concepts**
+3.  **Project Development** → **Deployment** → **Interview Preparation**
+</details>
+
+---
 
 ## 🛠️ Getting Started
 
@@ -100,99 +95,115 @@ ApnaCollege/
 - Web browser (Chrome/Firefox)
 - Node.js (for backend development)
 - MySQL (for database work)
+- MongoDB (for NoSQL database)
+- Git (for version control)
 
 ### Setup Instructions
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/PriyanshuKSharma/ApnaCollege.git
-   cd ApnaCollege
-   ```
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/PriyanshuKSharma/ApnaCollege.git
+    cd ApnaCollege
+    ```
 
-2. **Frontend Setup**:
-   - Open HTML files directly in browser
-   - Use Live Server extension for development
+2.  **Frontend Setup**:
+    - Open HTML files directly in browser
+    - Use Live Server extension for development
 
-3. **Backend Setup**:
-   ```bash
-   cd "Sigma 6.0/Back-End/NodeJS"
-   npm install
-   node script.js
-   ```
+3.  **Backend Setup**:
+    ```bash
+    cd "Sigma 6.0/Back-End/NodeJS"
+    npm install
+    node script.js
+    ```
 
-4. **Database Setup**:
-   - Install MySQL
-   - Run SQL scripts from the SQL directory
+4.  **Database Setup**:
+    - Install MySQL
+    - Run SQL scripts from the SQL directory
 
-## 📚 Detailed Module Information
+---
+<details>
+<summary>📚 <strong>Detailed Module Information</strong></summary>
+
+### 🧠 Data Structures & Algorithms (DSA)
+- **Location**: `DSA/`
+- **Topics**: Fundamental data structures, algorithm design, complexity analysis
+- **Key Files**:
+    - `arrays.java`: Implementation of array operations.
+    - `basicSorting.java`: Code for basic sorting algorithms like bubble sort.
+    - `recursion.java`: Examples of recursive functions.
+    - `sorting.java`: Advanced sorting algorithms.
+    - `stringBuilder.java`: Examples of using the StringBuilder class.
 
 ### 🌐 Frontend Development
 
 #### HTML Module
 - **Location**: `Sigma 6.0/Front-End/html/`
 - **Topics**: Document structure, semantic elements, forms, accessibility
-- **Files**: Practice exercises, portfolio examples, question sets
-- **Key Concepts**: HTML5 features, validation, SEO optimization
+- **Key Files**:
+    - `Portfolio.html`: A personal portfolio website.
+    - `lists.html`, `div.html`, `span.html`: Examples of different HTML tags.
 
-#### CSS Module  
+#### CSS Module
 - **Location**: `Sigma 6.0/Front-End/css/`
 - **Topics**: Styling, layouts, animations, responsive design
-- **Key Concepts**: Flexbox, Grid, media queries, CSS variables
-- **Advanced**: Animations, transforms, performance optimization
 
 #### JavaScript Module
 - **Location**: `Sigma 6.0/Front-End/js/`
 - **Topics**: Programming fundamentals, DOM manipulation, async programming
-- **Key Concepts**: ES6+ features, event handling, API integration
-- **Advanced**: Promises, async/await, modern JavaScript patterns
+- **Key Files**:
+    - `first.js`: Basic JavaScript concepts.
+    - `practice.js`: Practice problems and solutions.
 
 ### ⚙️ Backend Development
 
 #### Node.js Module
 - **Location**: `Sigma 6.0/Back-End/NodeJS/`
 - **Topics**: Server-side JavaScript, file system, modules
-- **Key Concepts**: Event loop, streams, package management
-- **Projects**: CLI tools, file operations, server basics
+- **Key Files**:
+    - `script.js`: Main Node.js script.
+    - `Fruits/`: Example of a module with multiple files.
+    - `Maths/`: Another example of a module.
 
 #### Express.js Module
 - **Location**: `Sigma 6.0/Back-End/ExpressJS/`
 - **Topics**: Web framework, routing, middleware
-- **Key Concepts**: Request/response handling, template engines
-- **Projects**: Web applications, API development
+- **Key Files**:
+    - `index.js`: Main Express.js server file.
 
-#### Database Integration
-- **Location**: `Sigma 6.0/Back-End/Node_SQL/`
-- **Topics**: Database connectivity, ORM concepts, query optimization
-- **Key Concepts**: Connection pooling, prepared statements, transactions
+#### EJS Module
+- **Location**: `Sigma 6.0/Back-End/EJS/`
+- **Topics**: EJS templating engine
+- **Key Files**:
+    - `index.js`: Server file for the EJS project.
+    - `views/`: Directory containing the EJS templates.
+        - `home.ejs`, `instagram.ejs`, `rolldice.ejs`: Example EJS templates.
 
-### 🗄️ Database (SQL)
+#### REST Module
+- **Location**: `Sigma 6.0/Back-End/REST/`
+- **Topics**: RESTful API development
+- **Key Files**:
+    - `index.js`: Main server file for the REST API.
+    - `views/index.ejs`: EJS file for displaying the REST API data.
+
+### 🗄️ Database
+
+#### SQL
 - **Location**: `Sigma 6.0/SQL/`
 - **Topics**: Database design, SQL queries, relationships
-- **Key Concepts**: CRUD operations, joins, indexing, normalization
-- **Advanced**: Stored procedures, triggers, performance tuning
+- **Key Files**:
+    - `prac1.sql`: Practice SQL queries.
+    - `sql_commands_practice.sql`: More practice SQL queries.
 
-### 🧠 Data Structures & Algorithms (DSA)
-- **Location**: `Sigma 6.0/DSA/`
-- **Topics**: Fundamental data structures, algorithm design, complexity analysis
-- **Key Concepts**: Arrays, linked lists, trees, graphs, sorting, searching
-- **Advanced**: Dynamic programming, greedy algorithms, graph algorithms, system design
+#### MongoDB
+- **Location**: `Sigma 6.0/MongoDB/`
+- **Topics**: NoSQL database concepts
+- **Key Files**:
+    - `mongodb-basics.js`: Basic MongoDB commands.
 
-#### Core Data Structures
-- **Arrays & Strings**: Linear data structures, string manipulation, two-pointer techniques
-- **Linked Lists**: Singly, doubly, circular linked lists, list operations
-- **Stacks & Queues**: LIFO/FIFO operations, applications, implementation variations
-- **Trees**: Binary trees, BST, AVL trees, heap, tree traversals
-- **Graphs**: Representation, BFS/DFS, shortest path, minimum spanning tree
-- **Hashing**: Hash tables, collision resolution, applications
+</details>
 
-#### Algorithm Categories
-- **Sorting**: Bubble, selection, insertion, merge, quick, heap, counting sort
-- **Searching**: Linear, binary search, search in rotated arrays
-- **Recursion**: Base cases, recursive relations, backtracking
-- **Dynamic Programming**: Memoization, tabulation, optimization problems
-- **Greedy**: Activity selection, fractional knapsack, Huffman coding
-- **Graph Algorithms**: Dijkstra, Bellman-Ford, Floyd-Warshall, Kruskal, Prim
-
-## 🎯 Interview Preparation
+<details>
+<summary>🎯 <strong>Interview Preparation</strong></summary>
 
 ### Technical Skills Assessment
 - **HTML/CSS**: Semantic markup, responsive layouts, accessibility
@@ -225,25 +236,10 @@ ApnaCollege/
 - **Coding Challenges**: Implementation exercises in each module
 - **Project-Based Learning**: Portfolio projects demonstrating full-stack skills
 - **Interview Questions**: Module-specific Q&A sections
+</details>
 
-## 📋 Assignments and Practice
-
-### Assignment Categories
-- **Level 1**: Basic concept implementation
-- **Level 2**: Intermediate projects with multiple technologies
-- **Level 3**: Advanced full-stack applications
-
-### Project Ideas
-1. **Personal Portfolio Website** (HTML/CSS/JS)
-2. **Task Management App** (Full-Stack with optimized algorithms)
-3. **E-commerce Platform** (Advanced Full-Stack with search algorithms)
-4. **Blog Application** (CRUD with Authentication and caching)
-5. **Algorithm Visualizer** (Interactive DSA learning tool)
-6. **Coding Practice Platform** (Problem solving with automated testing)
-7. **Social Media Dashboard** (Real-time data processing)
-8. **Recommendation System** (Machine learning algorithms integration)
-
-## 🏆 Certification Path
+<details>
+<summary>🏆 <strong>Certification Path & Progress Tracking</strong></summary>
 
 ### Skill Milestones
 - [ ] **Frontend Fundamentals**: HTML, CSS, JavaScript basics
@@ -255,36 +251,6 @@ ApnaCollege/
 - [ ] **Full-Stack Integration**: Complete application development with optimized algorithms
 - [ ] **System Design**: Scalability concepts, architectural patterns
 - [ ] **Industry Readiness**: Best practices, deployment, optimization, interview skills
-
-## 🔗 Additional Resources
-
-### Documentation Links
-- [MDN Web Docs](https://developer.mozilla.org/) - Comprehensive web development reference
-- [Node.js Documentation](https://nodejs.org/docs/) - Official Node.js guides
-- [Express.js Guide](https://expressjs.com/) - Express framework documentation
-- [MySQL Documentation](https://dev.mysql.com/doc/) - Database reference
-
-### DSA Resources
-- [GeeksforGeeks](https://www.geeksforgeeks.org/) - Comprehensive DSA tutorials and problems
-- [LeetCode](https://leetcode.com/) - Coding interview preparation platform
-- [HackerRank](https://www.hackerrank.com/) - Programming challenges and competitions
-- [Codeforces](https://codeforces.com/) - Competitive programming platform
-- [InterviewBit](https://www.interviewbit.com/) - Technical interview preparation
-- [Pramp](https://www.pramp.com/) - Mock technical interviews
-- [AlgoExpert](https://www.algoexpert.io/) - Curated coding interview questions
-
-### Tools and Extensions
-- **VS Code Extensions**: Live Server, Prettier, ESLint
-- **Browser DevTools**: Chrome/Firefox developer tools
-- **Database Tools**: MySQL Workbench, phpMyAdmin
-- **Version Control**: Git, GitHub
-
-### Community and Support
-- **Stack Overflow**: Programming Q&A community
-- **GitHub**: Code repositories and collaboration
-- **Developer Communities**: Reddit, Discord, Slack channels
-
-## 📊 Progress Tracking
 
 ### Learning Checklist
 - [ ] Complete HTML fundamentals and advanced concepts
@@ -302,32 +268,21 @@ ApnaCollege/
 - [ ] Create full-stack applications with optimized algorithms
 - [ ] Deploy applications and understand DevOps basics
 - [ ] Practice mock technical interviews
-
-### Assessment Criteria
-- **Code Quality**: Clean, readable, maintainable code
-- **Functionality**: Working features meeting requirements
-- **Algorithm Efficiency**: Optimal time and space complexity
-- **Problem Solving**: Debugging, optimization, and analytical thinking
-- **Data Structure Usage**: Appropriate choice and implementation
-- **Best Practices**: Industry standards and conventions
-- **Interview Performance**: Communication, coding under pressure, explanation skills
+</details>
 
 ---
 
-## 📞 Contact and Support
+## 🔗 Additional Resources
 
-For questions, clarifications, or additional support:
-- **Course Platform**: ApnaCollege official website
-- **Community Forums**: Student discussion boards
-- **Instructor Support**: Office hours and Q&A sessions
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [Node.js Documentation](https://nodejs.org/docs/)
+- [Express.js Guide](https://expressjs.com/)
+- [MySQL Documentation](https://dev.mysql.com/doc/)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/)
+- [LeetCode](https://leetcode.com/)
 
 ---
 
-**Last Updated**: 2024  
-**Course Version**: Sigma 6.0  
-**Difficulty Level**: Beginner to Advanced  
-**Estimated Duration**: 16-20 weeks (including DSA mastery)
-
-> 💡 **Success Tip**: Consistent practice and project-based learning are key to mastering web development. Focus on building real applications to reinforce theoretical concepts. For DSA mastery, solve at least 2-3 problems daily and participate in coding contests to improve problem-solving speed and accuracy.
-
-> 🎯 **Placement Strategy**: Combine strong DSA skills with practical web development projects. Most tech companies evaluate both algorithmic thinking and system design capabilities alongside technical implementation skills.
+> 💡 **Success Tip**: Consistent practice and project-based learning are key to mastering web development. Focus on building real applications to reinforce theoretical concepts.
+>
+> 🎯 **Placement Strategy**: Combine strong DSA skills with practical web development projects. Most tech companies evaluate both algorithmic thinking and system design capabilities.

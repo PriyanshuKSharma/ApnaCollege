@@ -660,3 +660,238 @@ db.students.aggregate([
 Note:
 - `$set` = `$addFields`
 - `$replaceWith` = `$replaceRoot` with `newRoot`
+
+## Nesting in MongoDB
+
+Nesting means storing objects or arrays inside a document.
+MongoDB supports nested documents naturally.
+
+## Example Nested Document
+```json
+{
+  "_id": 1,
+  "name": "Aman",
+  "address": {
+    "city": "Mumbai",
+    "pin": "400001"
+  },
+  "skills": [
+    { "name": "Java", "level": "Intermediate" },
+    { "name": "MongoDB", "level": "Beginner" }
+  ]
+}
+```
+
+## Query Nested Fields (Dot Notation)
+
+```javascript
+db.students.find({ "address.city": "Mumbai" })
+db.students.find({ "skills.name": "MongoDB" })
+```
+
+## Update Nested Fields
+
+```javascript
+db.students.updateOne(
+  { name: "Aman" },
+  { $set: { "address.city": "Pune" } }
+)
+```
+
+## Add Data to Nested Array
+
+```javascript
+db.students.updateOne(
+  { name: "Aman" },
+  { $push: { skills: { name: "Node.js", level: "Beginner" } } }
+)
+```
+
+Note:
+- Use dot notation (`parent.child`) for nested field access.
+- Nesting reduces joins and keeps related data together.
+
+## Real Example: Query Nested Marks
+
+Suppose your `students` collection contains this nested document:
+
+```json
+{
+  "name": "Farah",
+  "age": 25,
+  "course": "B. Tech",
+  "performance": {
+    "marks": 88,
+    "grade": "A"
+  }
+}
+```
+
+Query:
+```javascript
+db.students.find({ "performance.marks": 88 })
+```
+
+Result (matching document):
+```javascript
+[
+  {
+    _id: ObjectId("6990021209b917fb5f8563b5"),
+    name: "Farah",
+    age: 25,
+    course: "B. Tech",
+    performance: { marks: 88, grade: "A" }
+  }
+]
+```
+
+This works because MongoDB lets you access nested fields using dot notation.
+
+## Delete in MongoDB
+
+MongoDB provides multiple delete operations depending on whether you want to remove one document, many documents, or an entire collection/database.
+
+## 1) `deleteOne()`
+Deletes the first document that matches the filter.
+
+```javascript
+db.students.deleteOne({ name: "First User" })
+```
+
+Result:
+- `acknowledged: true`
+- `deletedCount: 1` (if one document matched)
+
+## 2) `deleteMany()`
+Deletes all documents that match the filter.
+
+```javascript
+db.students.deleteMany({ city: "Pune" })
+```
+
+Result:
+- `acknowledged: true`
+- `deletedCount: <number of matched docs>`
+
+## 3) Delete all documents from a collection
+
+```javascript
+db.students.deleteMany({})
+```
+
+This removes all documents but keeps the `students` collection.
+
+## 4) `findOneAndDelete()`
+Finds one matching document and deletes it.
+
+```javascript
+db.students.findOneAndDelete({ name: "Neha" })
+```
+
+Useful when you want the deleted document returned.
+
+## 5) Drop collection
+
+```javascript
+db.students.drop()
+```
+
+This deletes the entire collection (structure + data).
+
+## 6) Drop database
+
+```javascript
+db.dropDatabase()
+```
+
+This deletes the current database completely.
+
+## Important Notes
+- Always use a filter in delete operations to avoid accidental data loss.
+- Run a `find()` with the same filter before delete in real projects.
+
+## Mongoose
+
+Mongoose is an ODM (Object Data Modeling) library for MongoDB and Node.js.
+It provides schemas, models, validation, middleware, and easier query handling.
+
+## Why use Mongoose?
+- Schema-based structure for MongoDB documents
+- Built-in validation
+- Cleaner CRUD APIs
+- Middleware/hooks support (`pre`, `post`)
+- Better code organization in Node.js projects
+
+## Install
+
+```bash
+npm install mongoose
+```
+
+## Connect to MongoDB
+
+```javascript
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/collegeDB")
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.log(err));
+```
+
+## Create Schema and Model
+
+```javascript
+const studentSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  age: { type: Number, min: 0 },
+  course: String,
+  isActive: { type: Boolean, default: true }
+});
+
+const Student = mongoose.model("Student", studentSchema);
+```
+
+## CRUD with Mongoose
+
+### Create
+```javascript
+await Student.create({ name: "Aman", age: 20, course: "B.Tech" });
+```
+
+### Read
+```javascript
+const allStudents = await Student.find();
+const oneStudent = await Student.findOne({ name: "Aman" });
+```
+
+### Update
+```javascript
+await Student.updateOne({ name: "Aman" }, { $set: { age: 21 } });
+await Student.findOneAndUpdate(
+  { name: "Aman" },
+  { course: "B.Tech CSE" },
+  { new: true }
+);
+```
+
+### Delete
+```javascript
+await Student.deleteOne({ name: "Aman" });
+await Student.findOneAndDelete({ name: "Aman" });
+```
+
+## Validation Example
+
+```javascript
+const studentSchema = new mongoose.Schema({
+  name: { type: String, required: true, minlength: 2 },
+  age: { type: Number, min: 0, max: 120 },
+  email: { type: String, lowercase: true, trim: true }
+});
+```
+
+## Notes
+- MongoDB is schemaless, but Mongoose enforces schema at application level.
+- Use `new: true` in `findOneAndUpdate` to get updated document.
+- Use `runValidators: true` in update operations when needed.

@@ -202,8 +202,8 @@ In Kubernetes, a cluster is generally organized as:
                                           | Cluster Control
                 ---------------------------------------------------------
                 |                                                       |
-   +------------v------------+                            +-------------v-----------+
-   |      WORKER NODE 1      |                            |      WORKER NODE 2      |
+   +-------------v------------+                            +-------------v------------+
+   |      WORKER NODE 1       |                            |      WORKER NODE 2       |
    |--------------------------|                            |--------------------------|
    | Kubelet                  |                            | Kubelet                  |
    | Kube Proxy               |                            | Kube Proxy               |

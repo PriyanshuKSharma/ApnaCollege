@@ -256,4 +256,98 @@ Flow:
 | Kubelet  | Kube Proxy | Container Runtime | Pods             |  | Kubelet | Kube Proxy | Container Runtime | Pods              |
 +--------------------------------------------------------------+  +--------------------------------------------------------------+
 ```
+
+## Pods
+
+## What is a Pod?
+A Pod is the smallest deployable unit in Kubernetes.
+It can contain one or more containers that share:
+- Network (same IP and ports)
+- Storage volumes
+- Lifecycle (created/terminated together)
+
+## Important Points
+- Usually one main container per Pod (best common pattern)
+- Pods are ephemeral (if a Pod dies, Kubernetes creates a replacement)
+- Pods are generally managed by `Deployment`, `StatefulSet`, etc.
+- Multi-container Pod is used for sidecar/helper patterns
+
+## Pod Lifecycle (Basic)
+`Pending -> Running -> Succeeded / Failed`
+
+## Pod Internal View
+```mermaid
+flowchart LR
+  subgraph P[Pod]
+    C1[Main App Container]
+    C2[Sidecar Container]
+    V[(Shared Volume)]
+  end
+  C1 --- V
+  C2 --- V
+```
+
+## Basic Pod YAML
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+```
+
+## Useful Commands
+```bash
+kubectl get pods
+kubectl describe pod nginx-pod
+kubectl logs nginx-pod
+kubectl delete pod nginx-pod
+```
+
+## Node and Pod
+
+## What is a Node?
+A Node is a machine (VM or physical server) in a Kubernetes cluster.
+It provides CPU, memory, and storage to run Pods.
+
+## What is a Pod?
+A Pod is the smallest deployable unit in Kubernetes.
+It contains one or more containers that run your application.
+
+## Relation Between Node and Pod
+- Node = infrastructure (where app runs)
+- Pod = workload unit (what runs)
+- A Node can run multiple Pods
+- Kubernetes Scheduler decides on which Node a Pod should run
+
+## Node and Pod Diagram
+```mermaid
+flowchart TB
+  subgraph Cluster[Kubernetes Cluster]
+    subgraph N1[Node 1]
+      P1[Pod A]
+      P2[Pod B]
+    end
+    subgraph N2[Node 2]
+      P3[Pod C]
+    end
+  end
+  S[Scheduler] --> P1
+  S --> P2
+  S --> P3
+```
+
+## Quick Comparison
+| Node | Pod |
+| --- | --- |
+| Machine/VM in cluster | Smallest deployable app unit |
+| Runs kubelet, kube-proxy, runtime | Runs app containers |
+| Provides resources | Consumes node resources |
     

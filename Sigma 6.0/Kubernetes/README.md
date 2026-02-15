@@ -217,4 +217,43 @@ Flow:
 2. Scheduler selects a worker node for Pod.
 3. Kubelet on that node starts containers via container runtime.
 4. Kube Proxy manages network/service routing.
+
+## Components of Master and Worker Node
+
+## Master Node (Control Plane) Components
+- `kube-apiserver`: Entry point of cluster (all commands/requests go here)
+- `etcd`: Key-value store (cluster state source of truth)
+- `kube-scheduler`: Decides on which worker node a Pod should run
+- `kube-controller-manager`: Runs controllers to maintain desired state
+- `cloud-controller-manager` (optional): Integrates with cloud provider APIs
+
+## Worker Node Components
+- `kubelet`: Node agent; ensures Pods are running
+- `kube-proxy`: Handles service networking and traffic routing
+- `container runtime` (`containerd`/`CRI-O`): Pulls images and runs containers
+- `Pods`: Actual application workloads running on the node
+
+## Master vs Worker (Quick Table)
+
+| Master (Control Plane) | Worker Node |
+| --- | --- |
+| Manages cluster state | Runs app workloads |
+| Schedules Pods | Executes Pods |
+| Stores cluster data in ETCD | Runs kubelet + runtime |
+| Exposes API server | Handles service networking via kube-proxy |
+
+## Visual (ASCII)
+
+```text
++----------------------------- MASTER / CONTROL PLANE -----------------------------+
+| API Server | ETCD | Scheduler | Controller Manager | Cloud Controller (optional) |
++----------------------------------------------------------------------------------+
+                                      |
+                                      | Controls / Schedules
+          -----------------------------------------------------------------
+          |                                                               |
++------------------------- WORKER NODE 1 ----------------------+  +------------------------- WORKER NODE 2 ----------------------+
+| Kubelet  | Kube Proxy | Container Runtime | Pods             |  | Kubelet | Kube Proxy | Container Runtime | Pods              |
++--------------------------------------------------------------+  +--------------------------------------------------------------+
+```
     

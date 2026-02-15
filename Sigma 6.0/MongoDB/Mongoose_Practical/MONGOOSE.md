@@ -505,7 +505,6 @@ try {
   console.log(err.message);
 }
 ```
-
 ## Practice File
 
 Use `Sigma 6.0/MongoDB/Mongoose_Practical/index.js` to run Mongoose commands.

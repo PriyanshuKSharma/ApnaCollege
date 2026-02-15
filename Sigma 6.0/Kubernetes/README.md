@@ -74,3 +74,147 @@ flowchart TB
   UserPods --> Node2[Worker Node 2]
   OrderPods --> Node3[Worker Node 3]
 ```
+
+## Container Orchestration
+
+Container orchestration means managing many containers automatically in production.
+Instead of manually starting/stopping containers, an orchestrator handles deployment, scaling, networking, and recovery.
+
+## Why it is needed
+- Applications run in multiple containers
+- Manual management becomes hard at scale
+- Need high availability and auto-recovery
+- Need rolling updates with minimal downtime
+
+## Common Orchestration Tasks
+- Scheduling containers on available servers
+- Auto-scaling up/down based on load
+- Service discovery and load balancing
+- Self-healing (restart failed containers)
+- Rolling updates and rollbacks
+- Secret/config management
+
+## Container Orchestration Diagram
+```mermaid
+flowchart TD
+  Dev[Developer Deploys App] --> Orchestrator[Container Orchestrator]
+  Orchestrator --> Scheduler[Scheduler]
+  Scheduler --> N1[Node 1]
+  Scheduler --> N2[Node 2]
+  Scheduler --> N3[Node 3]
+  N1 --> P1[App Container]
+  N2 --> P2[App Container]
+  N3 --> P3[App Container]
+  P2 -->|Crash| Health[Health Check]
+  Health --> Orchestrator
+  Orchestrator -->|Restart/Reschedule| P2R[New Container]
+```
+
+## Kubernetes as an Orchestrator
+Kubernetes is the most popular container orchestrator.
+It ensures your desired state is maintained automatically.
+
+## Components of Kubernetes (K8s)
+
+## 1) API Server
+- Entry point of Kubernetes control plane.
+- Receives all requests from `kubectl`, UI, and internal components.
+- Validates and processes cluster operations.
+
+## 2) ETCD
+- Distributed key-value store used by Kubernetes.
+- Stores cluster state, configurations, and metadata.
+- Source of truth for Kubernetes data.
+
+## 3) Scheduler
+- Decides which worker node should run a new Pod.
+- Selects node based on resources, policies, and constraints.
+
+## 4) Kube Controller Manager (Kube Controller)
+- Runs controllers that continuously check desired state vs actual state.
+- Examples: Node Controller, Replication Controller, Endpoint Controller.
+- Ensures cluster self-healing and reconciliation.
+
+## 5) Kubelet
+- Agent running on every worker node.
+- Communicates with API Server.
+- Ensures Pod containers are running as defined.
+
+## 6) Kube Proxy
+- Network component on each node.
+- Handles service networking and load balancing inside cluster.
+- Maintains networking rules for Pod-to-Pod and Service traffic.
+
+## 7) Container Runtime
+- Software that actually runs containers.
+- Examples: `containerd`, `CRI-O`.
+- Kubelet uses runtime to pull images and start/stop containers.
+
+## K8s Components Diagram
+```mermaid
+flowchart TB
+  subgraph CP[Control Plane]
+    APIS[API Server]
+    ETCD[ETCD]
+    SCH[Scheduler]
+    KCM[Kube Controller Manager]
+  end
+
+  subgraph W1[Worker Node]
+    KL1[Kubelet]
+    KP1[Kube Proxy]
+    CR1[Container Runtime]
+  end
+
+  subgraph W2[Worker Node]
+    KL2[Kubelet]
+    KP2[Kube Proxy]
+    CR2[Container Runtime]
+  end
+
+  User[kubectl / User] --> APIS
+  APIS <--> ETCD
+  SCH --> APIS
+  KCM --> APIS
+  APIS --> KL1
+  APIS --> KL2
+  KL1 --> CR1
+  KL2 --> CR2
+```
+
+## Cluster: Master-Worker Architecture (ASCII)
+
+In Kubernetes, a cluster is generally organized as:
+- **Master (Control Plane):** Manages the cluster
+- **Worker Nodes:** Run application Pods/containers
+
+```text
+                         +----------------------------------+
+                         |          MASTER NODE             |
+                         |         (Control Plane)          |
+                         |----------------------------------|
+                         | API Server                       |
+                         | Scheduler                        |
+                         | Controller Manager               |
+                         | ETCD                             |
+                         +----------------+-----------------+
+                                          |
+                                          | Cluster Control
+                ---------------------------------------------------------
+                |                                                       |
+   +------------v------------+                            +-------------v-----------+
+   |      WORKER NODE 1      |                            |      WORKER NODE 2      |
+   |--------------------------|                            |--------------------------|
+   | Kubelet                  |                            | Kubelet                  |
+   | Kube Proxy               |                            | Kube Proxy               |
+   | Container Runtime        |                            | Container Runtime        |
+   | Pods (App Containers)    |                            | Pods (App Containers)    |
+   +--------------------------+                            +--------------------------+
+```
+
+Flow:
+1. User sends command through `kubectl` to API Server.
+2. Scheduler selects a worker node for Pod.
+3. Kubelet on that node starts containers via container runtime.
+4. Kube Proxy manages network/service routing.
+    

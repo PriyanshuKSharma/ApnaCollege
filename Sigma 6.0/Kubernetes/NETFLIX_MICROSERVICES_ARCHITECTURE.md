@@ -173,7 +173,7 @@ Commonly known tech in Netflix ecosystem context:
 ## Deployment and Reliability Mindset
 
 ```mermaid
-flowchart TD
+flowchart LR
   C[Code Commit] --> CI[CI Pipeline]
   CI --> T[Test + Quality Gates]
   T --> D[Deploy Stages]
@@ -226,3 +226,77 @@ Microservices powerful hain, but complexity badh jati hai: network calls, debugg
 3. CDN/Open Connect is key for streaming performance.
 4. Recommendation and data platform drive personalization.
 5. Reliability depends on observability + canary + rollback.
+
+---
+
+## Why Netflix Video Quality is Usually So Good
+
+**English:**
+Netflix quality is strong mainly because of three things:
+1. **Encoding efficiency** (better quality at lower bitrate),
+2. **Global delivery network** close to users,
+3. **Adaptive playback intelligence** based on network + device.
+
+**Hinglish:**
+Netflix ki quality mostly isliye achhi lagti hai kyunki:
+1. **Smart encoding** use hota hai (kam data mein better picture),
+2. **Global CDN/Open Connect** se content user ke paas se deliver hota hai,
+3. **Adaptive streaming logic** network aur device ke hisaab se quality adjust karta hai.
+
+## How Netflix Maintains Quality at Scale
+
+**English:**
+- Uses advanced codec strategy (AV1/HEVC/AVC depending on device support).
+- Uses per-title/per-scene optimization ideas to avoid wasting bitrate.
+- Pre-positions content in Open Connect servers near ISPs.
+- Continuously monitors QoE signals (startup time, buffering, bitrate switches, errors).
+- Uses controlled rollouts + rollback when playback quality degrades.
+
+**Hinglish:**
+- Codec strategy smart hoti hai (device ke hisaab se AV1/HEVC/AVC).
+- Har title/scene ke liye bitrate optimize kiya jata hai.
+- Content pehle se local edge servers pe rakh diya jata hai (Open Connect).
+- Playback metrics continuously monitor hote hain (buffering, startup delay, errors).
+- Agar quality issue aaye to rollout control/rollback se quickly fix karte hain.
+
+## Is Netflix Always Better than Prime, JioHotstar, SonyLIV, ZEE5?
+
+**English (Honest answer):**
+Not always for every title and every device.  
+But Netflix is often perceived better in **consistency** across devices/networks because of mature encoding + distribution + playback engineering.
+
+**Hinglish (Seedha answer):**
+Har case mein Netflix best nahi hota.  
+Lekin **consistency** ke matter mein kaafi users ko Netflix better lagta hai, especially different devices aur variable internet conditions mein.
+
+## Practical Comparison View
+
+| Platform | Typical Strength | Practical Limitation |
+| --- | --- | --- |
+| Netflix | Very strong consistency, adaptive playback, mature CDN model | Premium quality often tied to plan + device support |
+| Prime Video | Strong catalog and good UHD/HDR support on many devices | Experience can vary by title/region/plan tier |
+| JioHotstar | Excellent for India live sports scale and local content demand | Peak live events can stress quality for some users/networks |
+| SonyLIV | Good sports + entertainment mix | Device/network quality consistency can vary |
+| ZEE5 | Strong regional content reach | Quality consistency may vary more on lower-end devices/networks |
+
+## Important Reality Check
+
+**English:**  
+Streaming quality depends on platform engineering **and** your personal setup:
+- plan tier,
+- title availability in 4K/HDR,
+- TV/device codec support,
+- ISP routing and local network quality.
+
+**Hinglish:**  
+Final video quality sirf platform pe depend nahi karti; aapke setup pe bhi depend karti hai:
+- kaunsa plan hai,
+- jo title dekh rahe ho uska format kya hai,
+- TV/device support,
+- internet + ISP path quality.
+
+## References (for your notes)
+- Netflix Open Connect overview: https://about.netflix.com/news/open-connect-celebrating-a-decade-of-smooth-and-efficient-streaming
+- Netflix recommended internet speeds: https://help.netflix.com/en/node/306
+- Netflix video quality troubleshooting: https://help.netflix.com/en/node/13444
+- Netflix AV1 milestone (archived snapshot of TechBlog page): https://archive.ph/2025.12.05-025440/https%3A/netflixtechblog.com/av1-now-powering-30-of-netflix-streaming-02f592242d80

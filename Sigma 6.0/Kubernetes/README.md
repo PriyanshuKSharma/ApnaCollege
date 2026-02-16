@@ -458,4 +458,79 @@ In Kubernetes, many resources are ephemeral by design.
 ## Quick Example
 If your app writes uploaded files to `/tmp` inside a Pod, those files may disappear after Pod restart.
 Use persistent storage or external storage (S3, database, etc.) for long-term data.
+
+## K8s Components: ConfigMap and Secrets
+
+## ConfigMap
+ConfigMap is used to store non-sensitive configuration data as key-value pairs.
+Examples:
+- App environment (`NODE_ENV=production`)
+- Feature flags
+- Config files
+
+### ConfigMap Example
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  NODE_ENV: "production"
+  APP_NAME: "k8s-demo"
+```
+
+## Secret
+Secret is used to store sensitive data (like passwords, API keys, tokens).
+Secret values are base64-encoded in YAML.
+
+### Secret Example
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  DB_PASSWORD: cGFzc3dvcmQxMjM=   # password123 (base64)
+  API_KEY: bXktYXBpLWtleQ==      # my-api-key (base64)
+```
+
+## Use ConfigMap/Secret in Pod
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-demo
+spec:
+  containers:
+    - name: app
+      image: nginx
+      env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: NODE_ENV
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_PASSWORD
+```
+![ConfigMap, Secrets](images/configmap-secret.png)
+
+## ConfigMap vs Secret
+| ConfigMap | Secret |
+| --- | --- |
+| Non-sensitive data | Sensitive data |
+| Plain text in YAML | Base64-encoded in YAML |
+| Used for configs | Used for credentials/tokens |
+
+## Useful Commands
+```bash
+kubectl get configmap
+kubectl get secrets
+kubectl describe configmap app-config
+kubectl describe secret app-secret
+```
     

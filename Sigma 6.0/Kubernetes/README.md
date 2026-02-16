@@ -350,4 +350,113 @@ flowchart TB
 | Machine/VM in cluster | Smallest deployable app unit |
 | Runs kubelet, kube-proxy, runtime | Runs app containers |
 | Provides resources | Consumes node resources |
+
+## Service and Ingress
+
+## What is a Service?
+A Service is a stable network endpoint in Kubernetes used to expose Pods.
+Since Pod IPs are temporary, Service gives a fixed way to access Pods.
+
+## Why Service is needed
+- Pod IP changes when Pods restart
+- Service provides stable DNS + virtual IP
+- Load balances traffic to multiple Pod replicas
+
+## Service Types
+- `ClusterIP` (default): Internal access only inside cluster
+- `NodePort`: Exposes service on each node IP at a static port
+- `LoadBalancer`: Uses cloud load balancer for external access
+- `ExternalName`: Maps service to an external DNS name
+
+
+![Service](images/service.png)
+
+## Service YAML Example (ClusterIP)
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP
+```
+
+## What is Ingress?
+Ingress is an API object that manages external HTTP/HTTPS routing to Services.
+It routes traffic based on domain/path rules.
+
+## Ingress Features
+- Host-based routing (`api.example.com`, `shop.example.com`)
+- Path-based routing (`/api`, `/users`)
+- TLS/SSL termination (HTTPS)
+- Central entry point for multiple services
+
+
+![Ingress](images/ingress.png)
+
+
+## Ingress YAML Example
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+spec:
+  rules:
+    - host: myapp.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: app-service
+                port:
+                  number: 80
+```
+
+## Service vs Ingress
+| Service | Ingress |
+| --- | --- |
+| Exposes Pods | Exposes Services |
+| L4 (TCP/UDP) networking concept | L7 (HTTP/HTTPS) routing concept |
+| Stable internal endpoint | External routing + domain/path rules |
+
+## Request Flow (Ingress + Service + Pods)
+```mermaid
+flowchart LR
+  U[User] --> I[Ingress]
+  I --> S[Service]
+  S --> P1[Pod 1]
+  S --> P2[Pod 2]
+```
+
+## Ephemeral in Kubernetes
+
+`Ephemeral` means temporary (short-lived).
+In Kubernetes, many resources are ephemeral by design.
+
+## Ephemeral Pod
+- A Pod can be created, replaced, or deleted at any time.
+- If a node fails, Kubernetes recreates Pods on another node.
+- Pod IP can change after restart/recreation.
+
+## Ephemeral Storage
+- Data stored inside container filesystem is temporary.
+- If Pod is recreated, that local data is lost.
+- For permanent data, use `PersistentVolume (PV)` and `PersistentVolumeClaim (PVC)`.
+
+## Why this matters
+- Never store critical data only inside container local storage.
+- Design apps to be stateless when possible.
+- Use external DB/object storage for durable state.
+
+## Quick Example
+If your app writes uploaded files to `/tmp` inside a Pod, those files may disappear after Pod restart.
+Use persistent storage or external storage (S3, database, etc.) for long-term data.
     

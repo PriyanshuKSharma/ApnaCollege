@@ -22,6 +22,7 @@ flowchart TD
   SCH --> P3
 ```
 
+
 ## Why use Kubernetes?
 - Automates deployment and scaling
 - Self-healing (restarts failed containers)
@@ -673,4 +674,162 @@ kubectl describe deployment nginx-deployment
 kubectl rollout status deployment/nginx-deployment
 kubectl scale deployment nginx-deployment --replicas=5
 ```
-    
+
+## Service as LoadBalancer
+
+## What is `type: LoadBalancer`?
+`LoadBalancer` Service exposes your app externally by creating a cloud load balancer (on AWS/GCP/Azure).
+It routes external traffic to your Kubernetes Service, then to Pods.
+
+## Traffic Flow
+`User -> External Load Balancer -> Kubernetes Service -> Pods`
+
+## Diagram
+```mermaid
+flowchart LR
+  U[User / Internet] --> ELB[External Load Balancer]
+  ELB --> SVC[K8s Service type LoadBalancer]
+  SVC --> P1[Pod 1]
+  SVC --> P2[Pod 2]
+  SVC --> P3[Pod 3]
+```
+
+## LoadBalancer Service YAML
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-lb-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+```
+
+## Important Notes
+- Works directly in managed cloud Kubernetes environments.
+- In local clusters (like Minikube/Kind), external LB may not be auto-provisioned.
+- You can combine LoadBalancer with Ingress depending on architecture.
+
+## Useful Commands
+```bash
+kubectl get svc
+kubectl describe svc myapp-lb-service
+```
+
+## K8s Component: StatefulSet
+
+## What is a StatefulSet?
+StatefulSet is a Kubernetes workload object used for stateful applications.
+It gives Pods:
+- Stable identity (fixed Pod names like `db-0`, `db-1`)
+- Stable network identity
+- Stable persistent storage per Pod
+- Ordered deployment, scaling, and termination
+
+## When to use StatefulSet
+- Databases (MySQL, PostgreSQL, MongoDB)
+- Message brokers (Kafka, RabbitMQ clusters)
+- Applications that need stable Pod identity/storage
+
+## StatefulSet YAML Example
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  serviceName: "web"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: web-data
+              mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+    - metadata:
+        name: web-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
+```
+
+## Deployment vs StatefulSet
+
+| Deployment | StatefulSet |
+| --- | --- |
+| Best for stateless apps | Best for stateful apps |
+| Pod names are random/replaceable | Pod names are fixed and ordered (`app-0`, `app-1`) |
+| No stable per-pod storage by default | Stable per-pod storage with `volumeClaimTemplates` |
+| Pods created/updated in parallel (generally) | Ordered create/update/delete |
+| Easy for web/API services | Used for DB/clustered stateful systems |
+
+## Quick Rule
+- Use `Deployment` for stateless apps (API, frontend, microservices).
+- Use `StatefulSet` for stateful apps (DB, queues, clustered storage).
+
+## Kubernetes Architecture: Master and Worker Node
+
+Kubernetes cluster is split into:
+- **Master (Control Plane):** Makes decisions and manages cluster state.
+- **Worker Nodes:** Run application Pods.
+
+### Master (Control Plane) does
+- API handling (`kube-apiserver`)
+- Scheduling (`kube-scheduler`)
+- State reconciliation (`kube-controller-manager`)
+- Cluster data storage (`etcd`)
+
+### Worker Node does
+- Runs Pods/containers
+- Uses `kubelet` to communicate with control plane
+- Uses `kube-proxy` for service networking
+- Uses container runtime (`containerd`/`CRI-O`)
+
+### Architecture Diagram
+```mermaid
+flowchart TB
+  subgraph Master[Master / Control Plane]
+    APIS[API Server]
+    SCH[Scheduler]
+    CTRL[Controller Manager]
+    ETCD[ETCD]
+  end
+
+  subgraph Worker1[Worker Node 1]
+    KL1[Kubelet]
+    KP1[Kube Proxy]
+    RT1[Container Runtime]
+    POD1[Pods]
+  end
+
+  subgraph Worker2[Worker Node 2]
+    KL2[Kubelet]
+    KP2[Kube Proxy]
+    RT2[Container Runtime]
+    POD2[Pods]
+  end
+
+  APIS --> KL1
+  APIS --> KL2
+  SCH --> POD1
+  SCH --> POD2
+```
+![Kubernetes](images/kubernetes.png)

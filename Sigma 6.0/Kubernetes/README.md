@@ -836,3 +836,120 @@ flowchart TB
   SCH --> POD2
 ```
 ![Kubernetes](images/kubernetes.png)
+
+## Minikube and kubectl
+
+## What is Minikube?
+Minikube is a tool to run a local Kubernetes cluster (usually single-node) on your laptop/PC for learning and development.
+
+## What is kubectl?
+`kubectl` is the command-line tool used to interact with Kubernetes clusters.
+It sends commands to the Kubernetes API server.
+
+## Minikube vs kubectl
+| Minikube | kubectl |
+| --- | --- |
+| Creates local Kubernetes cluster | Controls Kubernetes cluster |
+| Local setup tool | Kubernetes CLI client |
+| Used mostly for dev/practice | Used in dev + production |
+
+## Basic Commands
+```bash
+# Start minikube cluster
+minikube start
+
+# Check cluster status
+minikube status
+
+# Check Kubernetes cluster info
+kubectl cluster-info
+kubectl get nodes
+```
+
+## Common kubectl Commands
+```bash
+kubectl get pods
+kubectl get deployments
+kubectl get services
+kubectl describe pod <pod-name>
+kubectl logs <pod-name>
+kubectl apply -f <file.yaml>
+kubectl delete -f <file.yaml>
+```
+
+## Useful Minikube Commands
+```bash
+minikube dashboard
+minikube ip
+minikube stop
+minikube delete
+```
+
+## Quick Local Workflow
+1. `minikube start`
+2. `kubectl apply -f deployment.yaml`
+3. `kubectl apply -f service.yaml`
+4. `kubectl get pods,svc`
+5. Access app and test
+
+## Minikube Commands (Important)
+
+## 1) Cluster Lifecycle
+```bash
+minikube start                  # Start local cluster
+minikube stop                   # Stop cluster
+minikube delete                 # Delete cluster
+minikube status                 # Show cluster status
+minikube pause                  # Pause Kubernetes
+minikube unpause                # Resume Kubernetes
+```
+
+## 2) Cluster Info and Access
+```bash
+minikube ip                     # Get Minikube node IP
+minikube ssh                    # SSH into minikube node
+minikube dashboard              # Open Kubernetes dashboard
+minikube kubectl -- get pods -A # Use built-in kubectl
+```
+
+## 3) Service and URL Access
+```bash
+minikube service <service-name>         # Open service in browser
+minikube service <service-name> --url   # Print service URL
+minikube tunnel                         # Enable LoadBalancer support locally
+```
+
+## 4) Addons
+```bash
+minikube addons list                    # List addons
+minikube addons enable ingress          # Enable ingress addon
+minikube addons disable ingress         # Disable ingress addon
+```
+
+## 5) Image and Cache
+```bash
+minikube image ls                       # List images in minikube
+minikube image load myapp:latest        # Load local image into minikube
+minikube cache add nginx:latest         # Cache image for faster startup
+```
+
+## 6) Config and Profiles
+```bash
+minikube profile list                   # Show profiles
+minikube start -p demo                  # Start cluster with profile name 'demo'
+minikube config set memory 4096         # Set default memory
+minikube config set cpus 2              # Set default CPUs
+```
+
+## 7) Logs and Troubleshooting
+```bash
+minikube logs                           # Show minikube logs
+minikube update-check                   # Check for updates
+minikube doctor                         # Diagnose common problems
+```
+
+## Quick Tip
+- For LoadBalancer services in Minikube, run `minikube tunnel` in a separate terminal.
+
+## Commands Reference
+- Detailed command cheat sheet: `Sigma 6.0/Kubernetes/COMMANDS.md`

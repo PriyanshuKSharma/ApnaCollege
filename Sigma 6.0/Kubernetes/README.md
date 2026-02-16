@@ -396,7 +396,6 @@ It routes traffic based on domain/path rules.
 - TLS/SSL termination (HTTPS)
 - Central entry point for multiple services
 
-
 ![Ingress](images/ingress.png)
 
 

@@ -804,6 +804,9 @@ Kubernetes cluster is split into:
 - Uses container runtime (`containerd`/`CRI-O`)
 
 ### Architecture Diagram
+
+![K8s Architecture](images/k8s_arch.png)
+
 ```mermaid
 flowchart TB
   subgraph Master[Master / Control Plane]

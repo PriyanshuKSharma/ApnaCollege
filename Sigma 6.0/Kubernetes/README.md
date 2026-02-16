@@ -533,4 +533,144 @@ kubectl get secrets
 kubectl describe configmap app-config
 kubectl describe secret app-secret
 ```
+
+## K8s Component: Volumes
+
+## What is a Volume?
+A Volume in Kubernetes provides storage to containers in a Pod.
+Unlike container filesystem, volume data can survive container restart (within Pod lifecycle).
+
+## Why Volumes are needed
+- Share files between containers in same Pod
+- Keep data outside container writable layer
+- Persist important data using persistent storage
+
+## Common Volume Types
+- `emptyDir`: Temporary storage, created when Pod starts, removed when Pod is deleted
+- `hostPath`: Mounts a path from node filesystem (mostly for testing/special cases)
+- `configMap`: Mount ConfigMap data as files
+- `secret`: Mount Secret data as files
+- `persistentVolumeClaim (PVC)`: Attach persistent storage to Pod
+
+![Volumes](images/volumes.png)
+
+## Example 1: `emptyDir` Volume
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-demo
+spec:
+  containers:
+    - name: app
+      image: nginx
+      volumeMounts:
+        - name: cache-vol
+          mountPath: /cache
+  volumes:
+    - name: cache-vol
+      emptyDir: {}
+```
+
+## Example 2: Persistent Volume Claim (PVC) in Pod
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-demo
+spec:
+  containers:
+    - name: app
+      image: nginx
+      volumeMounts:
+        - name: app-storage
+          mountPath: /data
+  volumes:
+    - name: app-storage
+      persistentVolumeClaim:
+        claimName: app-pvc
+```
+
+## PVC Example
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+```
+
+## Useful Commands
+```bash
+kubectl get pv
+kubectl get pvc
+kubectl describe pvc app-pvc
+```
+
+## K8s Component: Deployment
+
+## What is a Deployment?
+Deployment is a Kubernetes object used to manage stateless application Pods.
+It ensures the desired number of Pod replicas are running.
+
+## Why use Deployment?
+- Creates and manages ReplicaSets automatically
+- Supports rolling updates with zero/minimal downtime
+- Supports rollback to previous version
+- Self-healing (recreates failed Pods)
+- Easy scaling up/down
+
+## How Deployment works
+1. You define desired state (image, replicas, labels).
+2. Deployment creates/updates a ReplicaSet.
+3. ReplicaSet maintains required Pod count.
+4. During update, Kubernetes performs rolling replacement.
+
+
+![Deployment](images/deployment.png)
+## Deployment YAML Example
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+```
+
+## Update Image (Rolling Update)
+```bash
+kubectl set image deployment/nginx-deployment nginx=nginx:1.26
+```
+
+## Rollback
+```bash
+kubectl rollout undo deployment/nginx-deployment
+```
+
+## Useful Commands
+```bash
+kubectl get deployments
+kubectl describe deployment nginx-deployment
+kubectl rollout status deployment/nginx-deployment
+kubectl scale deployment nginx-deployment --replicas=5
+```
     

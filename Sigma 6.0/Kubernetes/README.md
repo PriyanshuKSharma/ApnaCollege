@@ -877,6 +877,24 @@ kubectl apply -f <file.yaml>
 kubectl delete -f <file.yaml>
 ```
 
+What these commands do and why they are used:
+- `kubectl get pods`: Running Pods and their state check karne ke liye.
+- `kubectl get deployments`: Desired vs available replicas verify karne ke liye.
+- `kubectl get services`: App exposure/ports and service endpoints dekhne ke liye.
+- `kubectl describe pod <pod-name>`: Pod events, restart reason, image/network issues debug karne ke liye.
+- `kubectl logs <pod-name>`: Runtime logs dekhkar errors/behavior understand karne ke liye.
+- `kubectl apply -f <file.yaml>`: YAML resources create/update declarative way se karne ke liye.
+- `kubectl delete -f <file.yaml>`: Same YAML se resources safely remove karne ke liye.
+
+What these commands do and why they are used:
+- `kubectl get pods`: Running Pods dekhne ke liye (health/status check).
+- `kubectl get deployments`: Deployment state and replica count check karne ke liye.
+- `kubectl get services`: App exposure and service endpoints verify karne ke liye.
+- `kubectl describe pod <pod-name>`: Detailed debugging (events, errors, restart reason).
+- `kubectl logs <pod-name>`: App logs dekhne ke liye (runtime errors/debugging).
+- `kubectl apply -f <file.yaml>`: YAML se resource create/update karne ke liye.
+- `kubectl delete -f <file.yaml>`: YAML-defined resources remove karne ke liye.
+
 ## Useful Minikube Commands
 ```bash
 minikube dashboard

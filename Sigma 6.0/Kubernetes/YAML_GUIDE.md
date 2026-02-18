@@ -196,6 +196,98 @@ status:
 - `spec` = desired state (user-defined)
 - `status` = actual state (system-generated)
 
+## Labels and Selectors
+
+## What are Labels?
+Labels are key-value pairs attached to Kubernetes objects.
+They are used to identify, organize, and group resources.
+
+- Notes: It is always defined under metadata.
+
+Example labels:
+```yaml
+metadata:
+  labels:
+    app: my-app
+    env: prod
+    tier: backend
+```
+
+## What are Selectors?
+Selectors are query conditions used to find matching resources by labels.
+Controllers and Services use selectors to connect resources.
+
+
+- Notes: It is always defined under specifications.
+
+## Why Labels and Selectors are important
+- Service finds target Pods using selectors
+- Deployment/ReplicaSet manages matching Pods
+- Easy filtering and grouping of resources
+- Environment-based management (`dev`, `staging`, `prod`)
+
+## Selector Types
+
+## 1) Equality-based selector
+Matches exact label value.
+
+```yaml
+selector:
+  matchLabels:
+    app: my-app
+```
+
+## 2) Set-based selector
+Matches values using `in`, `notin`, `exists`.
+
+```yaml
+selector:
+  matchExpressions:
+    - key: env
+      operator: In
+      values: ["prod", "staging"]
+```
+
+## Service and Pod Matching Example
+
+Pod:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+    - name: app
+      image: nginx
+```
+
+Service:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - port: 80
+      targetPort: 80
+```
+
+Meaning:
+- Service will send traffic only to Pods where label `app: my-app` exists.
+
+## Useful Commands
+```bash
+kubectl get pods --show-labels
+kubectl get pods -l app=my-app
+kubectl get all -l env=prod
+```
+
 ## How YAML is used
 
 Create/update resource:

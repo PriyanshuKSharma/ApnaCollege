@@ -130,6 +130,72 @@ Field meaning:
 - `metadata`: Name, labels, namespace info
 - `spec`: Desired configuration
 
+## Deployment Hierarchy Diagram
+
+Kubernetes workload flow is usually:
+`Deployment -> ReplicaSet -> Pods -> Containers`
+
+```mermaid
+flowchart LR
+  D[Deployment] --> RS[ReplicaSet]
+  RS --> P1[Pod 1]
+  RS --> P2[Pod 2]
+  P1 --> C1[Container]
+  P2 --> C2[Container]
+```
+
+## metadata vs spec vs status
+
+In Kubernetes objects, these three sections have different roles:
+
+## 1) `metadata`
+`metadata` identifies and organizes the object.
+It usually contains:
+- `name`
+- `namespace`
+- `labels`
+- `annotations`
+
+Example:
+```yaml
+metadata:
+  name: my-app
+  namespace: default
+  labels:
+    app: my-app
+```
+
+## 2) `spec`
+`spec` describes the **desired state** (what you want Kubernetes to run).
+
+Example:
+```yaml
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: app
+          image: nginx:latest
+```
+
+## 3) `status`
+`status` describes the **current/actual state** (what is happening right now in cluster).
+This field is set by Kubernetes controllers, not usually written by you.
+
+Example (runtime-generated):
+```yaml
+status:
+  readyReplicas: 2
+  availableReplicas: 2
+  observedGeneration: 1
+```
+
+## Quick Difference
+- `metadata` = object identity/info
+- `spec` = desired state (user-defined)
+- `status` = actual state (system-generated)
+
 ## How YAML is used
 
 Create/update resource:

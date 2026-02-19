@@ -27,6 +27,34 @@ You describe the **desired state**, and Kubernetes tries to maintain that state.
 - Lists use `-`
 - Indentation level matters
 
+## Secret Encoding Note (`echo -n ... | base64`)
+
+When creating Kubernetes Secrets using `data:`, values must be base64-encoded.
+
+Example:
+```bash
+echo -n "root" | base64
+```
+
+Why this command is important:
+- Converts plain text to base64 for `Secret.data`.
+- `-n` removes trailing newline (important for correct value).
+- Helps avoid wrong credentials due to hidden newline characters.
+
+Example in YAML:
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  username: cm9vdA==   # root
+```
+
+Alternative:
+- Use `stringData:` to provide plain text; Kubernetes will encode automatically.
+
 Example:
 ```yaml
 app:

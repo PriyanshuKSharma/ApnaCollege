@@ -61,6 +61,10 @@ minikube service <service-name> --url
 ```
 Prints service URL only.
 
+Why important:
+- Useful for getting external access URL in local Minikube setup.
+- Acts like a local external endpoint when cloud LoadBalancer IP is not available.
+
 ```bash
 minikube tunnel
 ```

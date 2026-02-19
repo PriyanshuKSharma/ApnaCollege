@@ -6,7 +6,7 @@ You will run the commands yourself in order.
 ## Flow
 1. Create Secret  
 2. Create Deployment for MongoDB  
-3. Create Internal Service for MongoDB  
+3. Create Internal Service for MongoDB    
 4. Create ConfigMap  
 5. Create Deployment for Mongo Express  
 6. Create External Service for Mongo Express  

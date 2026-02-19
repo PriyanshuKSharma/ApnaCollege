@@ -1,0 +1,121 @@
+[
+  {
+    "_id": { "$oid": "6997508b8b5616daa41360e3" },
+    "name": "Arjun",
+    "age": 20,
+    "course": "B.Tech",
+    "skills": ["C", "C++"],
+    "marks": [78, 85, 92],
+    "profile": {
+      "city": "Mumbai",
+      "state": "MH"
+    }
+  },
+  {
+    "_id": { "$oid": "699750bf8b5616daa41360e4" },
+    "name": "Sana",
+    "age": 21,
+    "course": "BCA",
+    "skills": ["Java", "MongoDB"],
+    "marks": [88, 81, 79],
+    "profile": {
+      "city": "Delhi",
+      "state": "DL"
+    }
+  },
+  {
+    "_id": { "$oid": "699750f18b5616daa41360e5" },
+    "name": "Karan",
+    "age": 22,
+    "course": "B.Sc",
+    "skills": ["Python"],
+    "marks": [69, 74, 80],
+    "profile": {
+      "city": "Pune",
+      "state": "MH"
+    }
+  },
+  {
+    "_id": { "$oid": "6997511d8b5616daa41360e6" },
+    "name": "Neha",
+    "age": 20,
+    "course": "B.Com",
+    "skills": ["Excel"],
+    "marks": [91, 89, 93],
+    "profile": {
+      "city": "Jaipur",
+      "state": "RJ"
+    }
+  },
+  {
+    "_id": { "$oid": "6997514a8b5616daa41360e7" },
+    "name": "Nested User",
+    "age": 24,
+    "address": {
+      "city": "Mumbai",
+      "pin": "400001"
+    },
+    "skills": [
+      { "name": "Java", "level": "Intermediate" },
+      { "name": "MongoDB", "level": "Beginner" }
+    ]
+  },
+  {
+    "_id": { "$oid": "699751768b5616daa41360e8" },
+    "name": "Farah",
+    "age": 25,
+    "course": "B. Tech",
+    "performance": {
+      "marks": 88,
+      "grade": "A"
+    }
+  },
+  {
+    "_id": { "$oid": "699751a28b5616daa41360e9" },
+    "name": "Kabir",
+    "age": 22,
+    "course": "B.Tech",
+    "skills": ["Node.js", "Express"],
+    "marks": [84, 77, 90],
+    "profile": {
+      "city": "Noida",
+      "state": "UP"
+    }
+  },
+  {
+    "_id": { "$oid": "699751cf8b5616daa41360ea" },
+    "name": "Meera",
+    "age": 21,
+    "course": "BBA",
+    "skills": ["Excel", "PowerBI"],
+    "marks": [79, 86, 88],
+    "profile": {
+      "city": "Indore",
+      "state": "MP"
+    }
+  },
+  {
+    "_id": { "$oid": "699751fc8b5616daa41360eb" },
+    "name": "Dev",
+    "age": 23,
+    "course": "B.Sc",
+    "skills": ["Python", "Pandas"],
+    "marks": [73, 81, 85],
+    "profile": {
+      "city": "Lucknow",
+      "state": "UP"
+    }
+  },
+  {
+    "_id": { "$oid": "699752288b5616daa41360ec" },
+    "name": "Isha",
+    "age": 20,
+    "course": "B.Com",
+    "skills": ["Accounting", "Tally"],
+    "marks": [92, 88, 90],
+    "profile": {
+      "city": "Chandigarh",
+      "state": "CH"
+    }
+  }
+]

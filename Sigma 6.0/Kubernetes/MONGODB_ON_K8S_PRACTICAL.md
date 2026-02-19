@@ -233,9 +233,17 @@ kubectl get svc
 
 For Minikube:
 ```bash
-minikube service mongo-express --url
+minikube service mongo-express-service --url
 ```
 
+Why this command is important:
+- In Minikube, cloud-style external IP is usually not auto-provided like managed cloud clusters.
+- `minikube service ... --url` gives a reachable external URL from your local machine.
+- It is the easiest way to open Mongo Express in browser for local testing.
+
+![External IP](images/external-ip.png)
+
+![MongoDB Dashboard](images/mongodb-dashboard.png)
 ---
 
 ## Verification Commands

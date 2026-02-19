@@ -208,7 +208,7 @@ kubectl get pods
 
 Expose Mongo Express in browser.
 
-Example `mongo-express-service.yaml`:
+Example `mongo-express.yaml`:
 ```yaml
 apiVersion: v1
 kind: Service
@@ -227,13 +227,13 @@ spec:
 
 Apply:
 ```bash
-kubectl apply -f mongo-express-service.yaml
+kubectl apply -f mongo-express.yaml
 kubectl get svc
 ```
 
 For Minikube:
 ```bash
-minikube service mongo-express-service --url
+minikube service mongo-express --url
 ```
 
 ---
@@ -250,7 +250,7 @@ kubectl logs deployment/mongodb-deployment
 
 ## Cleanup (optional)
 ```bash
-kubectl delete -f mongo-express-service.yaml
+kubectl delete -f mongo-express.yaml
 kubectl delete -f mongo-express-deployment.yaml
 kubectl delete -f mongodb-configmap.yaml
 kubectl delete -f mongodb-service.yaml

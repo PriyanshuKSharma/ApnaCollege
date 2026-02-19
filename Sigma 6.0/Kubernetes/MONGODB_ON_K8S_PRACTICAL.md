@@ -18,6 +18,14 @@ You will run the commands yourself in order.
 
 Store MongoDB username/password securely.
 
+Why base64 command is used:
+```bash
+echo -n "root" | base64
+```
+- Kubernetes `Secret` values under `data:` must be base64-encoded.
+- `-n` avoids adding a newline character in the encoded value.
+- This helps create correct secret values for deployment environment variables.
+
 Example `mongodb-secret.yaml`:
 ```yaml
 apiVersion: v1
@@ -29,6 +37,10 @@ data:
   mongo-root-username: bW9uZ29hZG1pbg==   # mongoadmin
   mongo-root-password: cGFzc3dvcmQ=       # password
 ```
+
+Note:
+- Base64 is encoding, not encryption.
+- You can use `stringData:` to write plain text and let Kubernetes encode it automatically.
 
 Apply:
 ```bash

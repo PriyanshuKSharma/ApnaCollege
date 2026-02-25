@@ -329,6 +329,50 @@ kubectl delete all --all -n <namespace>
 ```
 Delete all resources in a namespace (but keep the namespace).
 
+### Understanding Namespace Scope
+
+#### Namespaced Resources (Require -n flag)
+```bash
+# These resources belong to specific namespaces
+kubectl get pods -n dev                    # Pods in 'dev' namespace
+kubectl get services -n production         # Services in 'production' namespace
+kubectl get deployments -n staging         # Deployments in 'staging' namespace
+kubectl get configmaps -n dev              # ConfigMaps in 'dev' namespace
+kubectl get secrets -n prod                # Secrets in 'prod' namespace
+kubectl get ingress -n dev                 # Ingress in 'dev' namespace
+kubectl get jobs -n dev                    # Jobs in 'dev' namespace
+kubectl get cronjobs -n prod               # CronJobs in 'prod' namespace
+```
+
+#### Cluster-Scoped Resources (No -n flag needed)
+```bash
+# These resources are cluster-wide, not bound to any namespace
+kubectl get namespaces                     # List all namespaces
+kubectl get nodes                          # Worker nodes (cluster-wide)
+kubectl get persistentvolumes              # Storage volumes (cluster-wide)
+kubectl get storageclasses                 # Storage classes (cluster-wide)
+kubectl get clusterroles                   # RBAC roles (cluster-wide)
+kubectl get clusterrolebindings            # RBAC bindings (cluster-wide)
+```
+
+#### Cross-Namespace Operations
+```bash
+kubectl get pods -A                        # Get pods from ALL namespaces
+kubectl get services -A                    # Get services from ALL namespaces
+kubectl get all -A                         # Get all resources from ALL namespaces
+
+# Switch between namespaces
+kubectl config set-context --current --namespace=dev
+kubectl config set-context --current --namespace=prod
+```
+
+#### Resource Quotas and Limits (Per Namespace)
+```bash
+kubectl get resourcequotas -n dev          # Check resource quotas in namespace
+kubectl get limitranges -n dev             # Check resource limits in namespace
+kubectl describe resourcequota -n dev     # Detailed quota information
+```
+
 ## `kubectl edit` Commands
 
 ```bash

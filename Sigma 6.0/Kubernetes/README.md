@@ -424,6 +424,131 @@ metadata:
 - Avoid using `default` namespace for production workloads
 - Apply resource quotas and network policies per namespace
 
+## Namespace Scope: Namespaced vs Cluster-Scoped Resources
+
+### What is Resource Scope?
+In Kubernetes, resources are either **namespaced** (scoped to a specific namespace) or **cluster-scoped** (available across the entire cluster). Understanding scope is crucial for resource management and access control.
+
+### Namespaced Resources (Scoped to a Namespace)
+These resources belong to a specific namespace and are isolated between namespaces:
+
+| Resource Type | Description | Example |
+|---------------|-------------|---------|
+| **Pods** | Smallest deployable units | `kubectl get pods -n dev` |
+| **Services** | Network abstraction for pods | `kubectl get services -n dev` |
+| **Deployments** | Manages replica sets of pods | `kubectl get deployments -n dev` |
+| **ConfigMaps** | Stores configuration data | `kubectl get configmaps -n dev` |
+| **Secrets** | Stores sensitive data | `kubectl get secrets -n dev` |
+| **Jobs** | Runs tasks to completion | `kubectl get jobs -n dev` |
+| **CronJobs** | Scheduled jobs | `kubectl get cronjobs -n dev` |
+| **Ingress** | Manages external access | `kubectl get ingress -n dev` |
+| **NetworkPolicies** | Controls pod communication | `kubectl get networkpolicies -n dev` |
+| **PersistentVolumeClaims** | Requests storage | `kubectl get pvc -n dev` |
+| **ServiceAccounts** | Provides identity | `kubectl get serviceaccounts -n dev` |
+| **Roles/RoleBindings** | RBAC within namespace | `kubectl get roles -n dev` |
+
+### Cluster-Scoped Resources (Available Cluster-Wide)
+These resources are not bound to any namespace and are shared across the entire cluster:
+
+| Resource Type | Description | Example |
+|---------------|-------------|---------|
+| **Namespaces** | Virtual clusters | `kubectl get namespaces` |
+| **Nodes** | Worker machines | `kubectl get nodes` |
+| **PersistentVolumes** | Storage volumes | `kubectl get pv` |
+| **ClusterRoles** | Cluster-wide RBAC | `kubectl get clusterroles` |
+| **ClusterRoleBindings** | Cluster-wide role bindings | `kubectl get clusterrolebindings` |
+| **StorageClasses** | Storage types | `kubectl get storageclasses` |
+| **CustomResourceDefinitions** | Extends API | `kubectl get crd` |
+
+### Scope Visualization
+
+```mermaid
+flowchart TB
+  subgraph Cluster["Kubernetes Cluster"]
+    subgraph NS1["Namespace: dev"]
+      POD1[Pod A]
+      SVC1[Service X]
+      CM1[ConfigMap]
+    end
+
+    subgraph NS2["Namespace: prod"]
+      POD2[Pod B]
+      SVC2[Service Y]
+      CM2[ConfigMap]
+    end
+
+    subgraph ClusterScope["Cluster-Scoped Resources"]
+      NS[Namespaces]
+      NODES[Nodes]
+      PV[PersistentVolumes]
+      CR[ClusterRoles]
+    end
+  end
+
+  classDef namespaced fill:#e1f5fe,stroke:#01579b
+  classDef clusterscoped fill:#fff3e0,stroke:#e65100
+
+  class NS1,NS2 namespaced
+  class ClusterScope clusterscoped
+```
+
+### Key Scope Concepts
+
+#### 1) **Resource Isolation**
+- Namespaced resources in `dev` namespace cannot directly access namespaced resources in `prod` namespace
+- Cluster-scoped resources are accessible from all namespaces
+
+#### 2) **Access Control**
+- RBAC roles are namespaced (control access within a namespace)
+- ClusterRoles are cluster-scoped (control access across namespaces)
+
+#### 3) **Resource Quotas**
+- Applied per namespace (limit CPU, memory, storage per namespace)
+- Cannot be applied to cluster-scoped resources
+
+#### 4) **Network Policies**
+- Control traffic between pods within the same namespace
+- Can control cross-namespace traffic when configured
+
+#### 5) **DNS Resolution**
+- Services in same namespace: `service-name`
+- Services in different namespace: `service-name.namespace-name.svc.cluster.local`
+
+### Practical Examples
+
+```bash
+# Namespaced resources (require -n flag)
+kubectl get pods -n dev                    # Get pods in 'dev' namespace
+kubectl get services -n production         # Get services in 'production' namespace
+kubectl create deployment nginx --image=nginx -n staging  # Create in 'staging'
+
+# Cluster-scoped resources (no -n flag needed)
+kubectl get nodes                          # Nodes are cluster-wide
+kubectl get namespaces                     # Namespaces list all
+kubectl get persistentvolumes              # PVs are cluster-wide
+
+# Cross-namespace communication
+kubectl get pods -n dev                    # Only sees dev namespace pods
+kubectl get pods -A                        # Sees ALL namespaces (-A = --all-namespaces)
+```
+
+### Scope Best Practices
+
+#### For Application Teams:
+- Use namespaced resources for application components
+- Keep related services, deployments, and configs in the same namespace
+- Use different namespaces for different environments (dev/staging/prod)
+
+#### For Platform Teams:
+- Manage cluster-scoped resources (nodes, storage classes, CRDs)
+- Set up RBAC at both namespace and cluster levels
+- Configure resource quotas per namespace
+
+#### For Multi-Tenant Clusters:
+- Use namespaces to separate different tenants
+- Apply network policies to prevent cross-tenant communication
+- Use resource quotas to ensure fair resource distribution
+
 ## Namespace Architecture Diagram
 
 ```mermaid

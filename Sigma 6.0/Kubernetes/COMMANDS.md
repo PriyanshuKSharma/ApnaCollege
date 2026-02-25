@@ -213,6 +213,30 @@ kubectl create namespace dev
 Create a new namespace.
 
 ```bash
+kubectl create namespace staging
+kubectl create namespace production
+```
+Create multiple namespaces for different environments.
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: development
+    team: backend
+EOF
+```
+Create namespace declaratively with labels using YAML.
+
+```bash
+kubectl create namespace test --dry-run=client -o yaml | kubectl apply -f -
+```
+Create namespace with dry-run to generate YAML first.
+
+```bash
 kubectl create deployment nginx-deploy --image=nginx:latest
 ```
 Create a deployment from command line.
@@ -241,6 +265,69 @@ Create Secret from key-value pair.
 kubectl create -f deployment.yaml
 ```
 Create resources from YAML file.
+
+## Namespace Management Commands
+
+### Creating Namespaces
+```bash
+kubectl create namespace dev
+kubectl create namespace staging
+kubectl create namespace production
+```
+Create namespaces for different environments.
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: development
+    team: backend
+EOF
+```
+Create namespace with labels using YAML.
+
+### Managing Namespace Context
+```bash
+kubectl config set-context --current --namespace=dev
+```
+Set default namespace for kubectl commands.
+
+```bash
+kubectl config view --minify | grep namespace
+```
+Check current default namespace.
+
+### Working with Namespaces
+```bash
+kubectl get pods -n dev
+kubectl get services -n dev
+kubectl get all -n dev
+```
+Get resources in a specific namespace.
+
+```bash
+kubectl logs <pod-name> -n <namespace>
+```
+Show logs from a Pod in a specific namespace.
+
+```bash
+kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
+```
+Execute commands in a Pod in a specific namespace.
+
+### Deleting Namespaces
+```bash
+kubectl delete namespace dev
+```
+Delete a namespace and all resources inside it.
+
+```bash
+kubectl delete all --all -n <namespace>
+```
+Delete all resources in a namespace (but keep the namespace).
 
 ## `kubectl edit` Commands
 

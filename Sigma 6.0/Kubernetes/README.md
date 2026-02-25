@@ -20,7 +20,27 @@ flowchart TD
   SCH --> P1
   SCH --> P2
   SCH --> P3
+
+  subgraph NS1["Namespace: default"]
+    LB
+    SVC
+    P1
+    P2
+    P3
+  end
+
+  subgraph NS2["Namespace: dev"]
+    DEV_SVC[Dev Service]
+    DEV_POD[Dev Pod]
+  end
+
+  subgraph NS3["Namespace: prod"]
+    PROD_SVC[Prod Service]
+    PROD_POD[Prod Pod]
+  end
 ```
+
+**Key Concept:** Namespaces provide logical isolation within the same physical cluster. Each namespace can have its own resources (Pods, Services, etc.) while sharing the same control plane and worker nodes.
 
 
 ## Why use Kubernetes?
@@ -188,6 +208,7 @@ flowchart TB
 In Kubernetes, a cluster is generally organized as:
 - **Master (Control Plane):** Manages the cluster
 - **Worker Nodes:** Run application Pods/containers
+- **Namespaces:** Provide logical isolation within the cluster
 
 ```text
                          +----------------------------------+
@@ -210,8 +231,22 @@ In Kubernetes, a cluster is generally organized as:
    | Kube Proxy               |                            | Kube Proxy               |
    | Container Runtime        |                            | Container Runtime        |
    | Pods (App Containers)    |                            | Pods (App Containers)    |
+   |                          |                            |                          |
+   | ┌─────────────────────┐  |                            | ┌─────────────────────┐  |
+   | │ Namespace: default  │  |                            | │ Namespace: prod     │  |
+   | │ - Pod A             │  |                            | │ - Pod X             │  |
+   | │ - Service X         │  |                            | │ - Service Y         │  |
+   | └─────────────────────┘  |                            | └─────────────────────┘  |
+   |                          |                            |                          |
+   | ┌─────────────────────┐  |                            | ┌─────────────────────┐  |
+   | │ Namespace: dev      │  |                            | │ Namespace: staging  │  |
+   | │ - Pod B             │  |                            | │ - Pod Y             │  |
+   | │ - Service Y         │  |                            | │ - Service Z         │  |
+   | └─────────────────────┘  |                            | └─────────────────────┘  |
    +--------------------------+                            +--------------------------+
 ```
+
+**Namespace Concept:** Namespaces provide logical partitions within the same physical cluster. Resources in different namespaces are isolated but share the same control plane and worker nodes.
 
 Flow:
 1. User sends command through `kubectl` to API Server.
@@ -256,7 +291,205 @@ Flow:
 +------------------------- WORKER NODE 1 ----------------------+  +------------------------- WORKER NODE 2 ----------------------+
 | Kubelet  | Kube Proxy | Container Runtime | Pods             |  | Kubelet | Kube Proxy | Container Runtime | Pods              |
 +--------------------------------------------------------------+  +--------------------------------------------------------------+
+          |                                                               |
+          | Logical Namespaces (Virtual Isolation)                        |
+          |                                                               |
+          ┌─────────────────────────────────────────────────────────────┐
+          │ Namespace: default                                           │
+          │ - Pods, Services, ConfigMaps, Secrets                       │
+          │                                                             │
+          │ Namespace: dev                                               │
+          │ - Development environment resources                         │
+          │                                                             │
+          │ Namespace: prod                                              │
+          │ - Production environment resources                          │
+          └─────────────────────────────────────────────────────────────┘
 ```
+
+**Namespace Architecture:** Namespaces provide logical separation within the same physical infrastructure. All namespaces share the control plane and worker nodes, but resources are isolated through Kubernetes' namespace mechanism.
+
+## Namespaces in Kubernetes
+
+## What is a Namespace?
+A namespace is a virtual cluster within a physical Kubernetes cluster.
+It provides a way to divide cluster resources between multiple users or teams.
+
+## Why use Namespaces?
+- **Resource Isolation:** Separate resources for different teams/projects
+- **Access Control:** Apply different RBAC policies per namespace
+- **Resource Quotas:** Limit CPU/memory usage per namespace
+- **Organization:** Group related resources together
+- **Multi-tenancy:** Support multiple applications/environments
+
+## Default Namespaces
+- `default`: Default namespace for resources without specific namespace
+- `kube-system`: System components (API server, scheduler, etc.)
+- `kube-public`: Public resources accessible by all users
+- `kube-node-lease`: Node lease objects for node heartbeats
+
+## Namespace Commands
+
+### Creating Namespaces
+
+#### 1) Create namespace imperatively (command line)
+```bash
+# Create a simple namespace
+kubectl create namespace dev
+
+# Create multiple namespaces
+kubectl create namespace staging
+kubectl create namespace production
+```
+
+#### 2) Create namespace declaratively (YAML file)
+```bash
+# Create namespace-dev.yaml
+cat <<EOF > namespace-dev.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    environment: development
+    team: backend
+EOF
+
+# Apply the YAML
+kubectl apply -f namespace-dev.yaml
+```
+
+#### 3) Create namespace with labels and annotations
+```bash
+# Create namespace with labels
+kubectl create namespace test --dry-run=client -o yaml | kubectl apply -f -
+
+# Or using YAML directly
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+  labels:
+    environment: testing
+    purpose: qa
+  annotations:
+    description: "Namespace for testing environment"
+EOF
+```
+
+### Managing Namespaces
+
+```bash
+# List all namespaces
+kubectl get namespaces
+
+# List namespaces with more details
+kubectl get namespaces -o wide
+
+# Describe a specific namespace
+kubectl describe namespace dev
+
+# Set default namespace for kubectl commands
+kubectl config set-context --current --namespace=dev
+
+# Get resources in a specific namespace
+kubectl get pods -n dev
+kubectl get services -n dev
+kubectl get all -n dev
+
+# Delete a namespace (deletes all resources inside it)
+kubectl delete namespace dev
+
+# Delete multiple namespaces
+kubectl delete namespace test staging
+```
+
+### Namespace YAML Template
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+  labels:
+    environment: production
+    team: frontend
+  annotations:
+    description: "Production namespace for frontend services"
+    contact: "team@company.com"
+```
+
+## Namespace Best Practices
+- Use namespaces for different environments (dev, staging, prod)
+- Use namespaces for different teams or projects
+- Avoid using `default` namespace for production workloads
+- Apply resource quotas and network policies per namespace
+
+## Namespace Architecture Diagram
+
+```mermaid
+flowchart TB
+  subgraph Cluster["Kubernetes Cluster"]
+    subgraph CP["Control Plane (Shared)"]
+      APIS[API Server]
+      ETCD[(ETCD)]
+      SCH[Scheduler]
+      KCM[Controller Manager]
+    end
+
+    subgraph NS_Default["Namespace: default"]
+      DEF_POD1[Pod A]
+      DEF_POD2[Pod B]
+      DEF_SVC[Service X]
+    end
+
+    subgraph NS_Dev["Namespace: dev"]
+      DEV_POD1[Pod C]
+      DEV_POD2[Pod D]
+      DEV_SVC[Service Y]
+    end
+
+    subgraph NS_Prod["Namespace: prod"]
+      PROD_POD1[Pod E]
+      PROD_POD2[Pod F]
+      PROD_SVC[Service Z]
+    end
+
+    subgraph Worker1["Worker Node 1"]
+      W1_PODS[Running Pods from all Namespaces]
+    end
+
+    subgraph Worker2["Worker Node 2"]
+      W2_PODS[Running Pods from all Namespaces]
+    end
+  end
+
+  User[kubectl] --> APIS
+  APIS --> ETCD
+  SCH --> Worker1
+  SCH --> Worker2
+
+  DEF_POD1 --> Worker1
+  DEV_POD1 --> Worker1
+  PROD_POD1 --> Worker2
+  DEF_POD2 --> Worker2
+  DEV_POD2 --> Worker2
+  PROD_POD2 --> Worker1
+
+  classDef namespace fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+  classDef controlplane fill:#fff3e0,stroke:#e65100,stroke-width:2px
+  classDef worker fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+
+  class NS_Default,NS_Dev,NS_Prod namespace
+  class CP controlplane
+  class Worker1,Worker2 worker
+```
+
+**Namespace Architecture Key Points:**
+- **Logical Isolation:** Namespaces provide logical separation within the same physical cluster
+- **Shared Resources:** Control plane and worker nodes are shared across all namespaces
+- **Resource Management:** Each namespace can have its own RBAC, quotas, and network policies
+- **Cross-Namespace Communication:** Services in different namespaces can communicate (unless restricted by policies)
+- **Default Namespace:** If no namespace is specified, resources go to the `default` namespace
 
 ## Pods
 

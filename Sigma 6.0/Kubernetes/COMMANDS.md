@@ -1,5 +1,8 @@
 # Kubernetes Commands Cheat Sheet (With Information)
 
+## 📋 Prerequisites
+Before using these commands, make sure you have installed the required tools. Check our [Installation Guide](INSTALLATION.md) for step-by-step setup instructions for Linux, macOS, and Windows.
+
 ## Minikube Commands
 
 ### 1) Cluster Lifecycle

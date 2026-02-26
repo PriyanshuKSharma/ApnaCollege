@@ -1,5 +1,8 @@
 # Kubernetes and Microservices
 
+## 🚀 Quick Start
+**New to Kubernetes?** Check out our comprehensive [Installation Guide](INSTALLATION.md) for setting up kubectl, minikube, and kubens on Linux, macOS, and Windows.
+
 ## What is Kubernetes?
 Kubernetes (K8s) is an open-source container orchestration platform.
 It helps manage, deploy, scale, and monitor containerized applications automatically.

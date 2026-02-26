@@ -552,6 +552,27 @@ kubectl describe ingress <ingress-name>
 ```
 Lists/describes ingress rules.
 
+```bash
+kubectl create ingress <name> --rule="<host>/<path>=<service>:<port>"
+```
+Create a basic ingress rule from command line.
+
+```bash
+kubectl apply -f ingress.yaml
+```
+Apply ingress configuration from YAML file.
+
+```bash
+kubectl edit ingress <ingress-name>
+```
+Edit ingress rules directly.
+
+Why important for Ingress:
+- Manages external HTTP/HTTPS access to services
+- Supports path-based and host-based routing
+- Enables SSL termination and load balancing
+- Essential for exposing microservices to the internet
+
 ### 5) ConfigMap, Secret, PV, PVC
 ```bash
 kubectl get configmap

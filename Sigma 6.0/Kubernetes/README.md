@@ -58,6 +58,30 @@ flowchart TD
 
 For installation and more commands, see the [Installation Guide](INSTALLATION.md) and [Commands Cheat Sheet](COMMANDS.md).
 
+## Ingress: Routing External Traffic to Services
+
+Ingress is a Kubernetes resource that manages external access to services within a cluster. It acts as a smart router that can handle HTTP/HTTPS traffic, load balancing, SSL termination, and URL-based routing.
+
+### Key Features
+- **External Access**: Exposes services to the outside world
+- **Load Balancing**: Distributes traffic across multiple pods
+- **SSL/TLS Termination**: Handles HTTPS certificates
+- **Path-based Routing**: Routes traffic based on URL paths (e.g., /api → api-service, /web → web-service)
+- **Host-based Routing**: Routes based on domain names
+
+### How It Works
+1. External traffic hits the Ingress controller (e.g., nginx, traefik)
+2. Ingress rules match the request (host, path)
+3. Traffic is forwarded to the appropriate Service
+4. Service load balances to Pods
+
+### Example Use Cases
+- Routing multiple microservices under one domain
+- Blue-green deployments with path switching
+- SSL termination for secure access
+
+For detailed commands and YAML examples, check the [Commands Cheat Sheet](COMMANDS.md).
+
 
 ## Why use Kubernetes?
 - Automates deployment and scaling

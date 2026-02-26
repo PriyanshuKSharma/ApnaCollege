@@ -303,6 +303,24 @@ kubectl config view --minify | grep namespace
 ```
 Check current default namespace.
 
+### Using kubens (kubectl plugin for easy namespace switching)
+**Note:** kubens is a kubectl plugin that simplifies namespace management. Install it from [kubectx releases](https://github.com/ahmetb/kubectx/releases).
+
+```bash
+kubens
+```
+List all namespaces and highlight the current one.
+
+```bash
+kubens <namespace>
+```
+Switch to the specified namespace (e.g., `kubens dev`).
+
+```bash
+kubens -
+```
+Switch back to the previous namespace.
+
 ### Working with Namespaces
 ```bash
 kubectl get pods -n dev

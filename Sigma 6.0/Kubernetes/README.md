@@ -45,6 +45,19 @@ flowchart TD
 
 **Key Concept:** Namespaces provide logical isolation within the same physical cluster. Each namespace can have its own resources (Pods, Services, etc.) while sharing the same control plane and worker nodes.
 
+**Tip:** To easily switch between namespaces, use the `kubens` kubectl plugin. Check out the [Commands Cheat Sheet](COMMANDS.md) for detailed usage examples.
+
+## kubens: Easy Namespace Switching
+
+`kubens` is a kubectl plugin that simplifies namespace management in Kubernetes. Instead of using long `kubectl config set-context` commands, you can quickly list and switch namespaces.
+
+### Basic Usage
+- `kubens`: List all namespaces
+- `kubens <namespace>`: Switch to a namespace
+- `kubens -`: Switch back to previous namespace
+
+For installation and more commands, see the [Installation Guide](INSTALLATION.md) and [Commands Cheat Sheet](COMMANDS.md).
+
 
 ## Why use Kubernetes?
 - Automates deployment and scaling

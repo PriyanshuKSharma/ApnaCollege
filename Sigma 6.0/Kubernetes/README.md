@@ -10,8 +10,8 @@ It helps manage, deploy, scale, and monitor containerized applications automatic
 ## Kubernetes at a Glance (Diagram)
 ```mermaid
 flowchart TD
-  U[Users] --> LB[Load Balancer / Ingress]
-  LB --> SVC[Service]
+  U[Users] --> I[Ingress]
+  I --> SVC[Service]
   SVC --> P1[Pod 1]
   SVC --> P2[Pod 2]
   SVC --> P3[Pod 3]
@@ -25,7 +25,7 @@ flowchart TD
   SCH --> P3
 
   subgraph NS1["Namespace: default"]
-    LB
+    I
     SVC
     P1
     P2
@@ -43,7 +43,7 @@ flowchart TD
   end
 ```
 
-**Key Concept:** Namespaces provide logical isolation within the same physical cluster. Each namespace can have its own resources (Pods, Services, etc.) while sharing the same control plane and worker nodes.
+**Key Concept:** Ingress manages external HTTP/HTTPS access to services, providing routing, load balancing, and SSL termination. Services expose pods internally, while Ingress exposes services externally.
 
 **Tip:** To easily switch between namespaces, use the `kubens` kubectl plugin. Check out the [Commands Cheat Sheet](COMMANDS.md) for detailed usage examples.
 

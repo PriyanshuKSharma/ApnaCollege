@@ -1250,3 +1250,230 @@ body {
     padding: 28px;
   }
 }
+
+/* ─── FLOATING OUTLINE DRAWER ─────────────────────────────── */
+
+/* Fixed toggle button — bottom-right corner */
+.drawer-toggle-btn {
+  position: fixed;
+  bottom: 36px;
+  right: 36px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px 10px 14px;
+  background: rgba(14, 16, 28, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 50px;
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(139, 92, 246, 0.1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.drawer-toggle-btn svg {
+  width: 17px;
+  height: 17px;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.drawer-toggle-btn:hover {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.2);
+  transform: translateY(-2px);
+}
+.drawer-toggle-btn[aria-expanded="true"] {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.drawer-toggle-btn[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+/* Floating outline popup panel */
+.outline-drawer {
+  position: fixed;
+  bottom: 90px;
+  right: 36px;
+  z-index: 300;
+  width: 300px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 11, 20, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 20px;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 40px rgba(139, 92, 246, 0.1);
+  overflow: hidden;
+  /* Hidden state for spring animation */
+  transform-origin: bottom right;
+  transform: scale(0.88) translateY(16px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.25s ease,
+    visibility 0s linear 0.32s;
+}
+.outline-drawer.is-open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transition:
+    transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.25s ease,
+    visibility 0s linear 0s;
+}
+
+/* Drawer header bar */
+.outline-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+.outline-drawer-title {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--accent);
+}
+.outline-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.outline-close-btn svg {
+  width: 13px;
+  height: 13px;
+}
+.outline-close-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Scrollable outline nav */
+.outline-drawer-nav {
+  overflow-y: auto;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.outline-drawer-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.outline-drawer-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+.outline-drawer-nav::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 4px;
+}
+
+/* Outline heading links */
+.outline-link {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.outline-link:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.04);
+}
+.outline-link.is-active {
+  color: #fff;
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+/* Indent levels */
+.outline-link[data-level="2"] {
+  padding-left: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.outline-link[data-level="3"] {
+  padding-left: 22px;
+  font-size: 12px;
+}
+.outline-link[data-level="4"] {
+  padding-left: 34px;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+
+/* Dim backdrop overlay */
+.outline-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.outline-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  transition: opacity 0.25s ease, visibility 0s linear 0s;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .drawer-toggle-btn {
+    bottom: 20px;
+    right: 16px;
+    padding: 9px 14px 9px 12px;
+    font-size: 12px;
+  }
+  .outline-drawer {
+    bottom: 72px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+    transform-origin: bottom center;
+  }
+}
+

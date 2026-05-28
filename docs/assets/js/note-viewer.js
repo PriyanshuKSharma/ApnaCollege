@@ -76,6 +76,9 @@
     // Keep wide tabular data usable on narrow screens
     setupScrollableTables();
 
+    // Keep note diagrams from blocking initial render
+    setupLazyImages();
+
     // Attach copy clipboard buttons on code segments
     setupCodeBlockCopyButtons();
 
@@ -149,6 +152,15 @@
 
       table.parentNode.insertBefore(wrapper, table);
       wrapper.appendChild(table);
+    });
+  }
+
+  function setupLazyImages() {
+    const images = noteContent.querySelectorAll('img');
+    images.forEach(img => {
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
     });
   }
 

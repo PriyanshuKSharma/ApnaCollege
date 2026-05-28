@@ -11,6 +11,8 @@
   const prevNoteTitle = el('prevNoteTitle');
   const nextNoteBtn = el('nextNoteBtn');
   const nextNoteTitle = el('nextNoteTitle');
+  const noteLayout = document.querySelector('.note-layout');
+  const sidebarToggle = el('sidebarToggle');
 
   // HSL category colors for tags and sidebar highlights
   const categoryColors = {
@@ -71,6 +73,9 @@
     // Inject static html body content
     noteContent.innerHTML = activeNote.content;
 
+    // Keep wide tabular data usable on narrow screens
+    setupScrollableTables();
+
     // Attach copy clipboard buttons on code segments
     setupCodeBlockCopyButtons();
 
@@ -127,6 +132,66 @@
 
       groupDiv.appendChild(linksUl);
       noteSidebar.appendChild(groupDiv);
+    });
+  }
+
+  // Wrap tables so they can scroll horizontally instead of forcing page overflow.
+  function setupScrollableTables() {
+    const tables = noteContent.querySelectorAll('table');
+    tables.forEach(table => {
+      if (table.parentElement?.classList.contains('table-scroll')) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'table-scroll';
+      wrapper.setAttribute('tabindex', '0');
+      wrapper.setAttribute('role', 'region');
+      wrapper.setAttribute('aria-label', 'Scrollable table');
+
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+  }
+
+  function setupSidebarToggle() {
+    if (!noteLayout || !noteSidebar || !sidebarToggle) return;
+
+    const label = sidebarToggle.querySelector('span');
+
+    const setSidebarState = isOpen => {
+      noteLayout.classList.toggle('sidebar-popover-open', isOpen);
+      sidebarToggle.setAttribute('aria-expanded', String(isOpen));
+      noteSidebar.setAttribute('aria-hidden', String(!isOpen));
+      if (label) label.textContent = isOpen ? 'Hide Guides' : 'Show Guides';
+    };
+
+    setSidebarState(false);
+
+    sidebarToggle.addEventListener('click', event => {
+      event.stopPropagation();
+      const isOpen = sidebarToggle.getAttribute('aria-expanded') === 'true';
+      setSidebarState(!isOpen);
+    });
+
+    noteSidebar.addEventListener('click', event => {
+      if (event.target.closest('.sidebar-link')) {
+        setSidebarState(false);
+        return;
+      }
+      event.stopPropagation();
+    });
+
+    document.addEventListener('click', event => {
+      const isOpen = sidebarToggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen && !noteSidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+        setSidebarState(false);
+      }
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        setSidebarState(false);
+        sidebarToggle.focus();
+      }
     });
   }
 
@@ -201,5 +266,6 @@
   // Initialize page components
   renderActiveNote();
   renderSidebar();
+  setupSidebarToggle();
   setupScrollProgressIndicatorFallback();
 })();

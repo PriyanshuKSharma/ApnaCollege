@@ -6,7 +6,8 @@
   <title>Study Guide Reader | Sigma 6.0 Notes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -157,9 +158,9 @@
   <!-- Overlay backdrop for outline drawer -->
   <div class="outline-overlay" id="outlineOverlay" hidden></div>
 
-  <script src="assets/js/notes-data.js"></script>
-  <script src="assets/js/note-viewer.js"></script>
-  <script src="assets/js/nav-toggle.js"></script>
+  <script src="assets/js/notes-data.js" defer></script>
+  <script src="assets/js/note-viewer.js" defer></script>
+  <script src="assets/js/nav-toggle.js" defer></script>
 
 </body>
 </html>

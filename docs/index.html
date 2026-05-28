@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sigma 6.0 | Interactive Full-Stack Study Guide</title>
+  <meta name="description" content="Concise, searchable, premium notes and study sheets for HTML, CSS, JavaScript, NodeJS, SQL, MongoDB, Mongoose, Kubernetes, and CI/CD pipelines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+  <!-- ─── SITE HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Sigma 6.0 Notes home">
+      <svg class="brand-svg" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="50" fill="#4f46e5"/>
+        <path d="M50 15 L78 75 L68 75 L50 35 L36 68 L55 57 L59 66 L28 75 Z" fill="white"/>
+      </svg>
+      <span>Sigma 6.0 Notes</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav">
+      <svg viewBox="0 0 18 18" aria-hidden="true">
+        <line x1="1" y1="4" x2="17" y2="4"/>
+        <line x1="1" y1="9" x2="17" y2="9"/>
+        <line x1="1" y1="14" x2="17" y2="14"/>
+      </svg>
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a class="active" href="index.html">Notes</a>
+      <a href="projects.html">Projects</a>
+      <a href="cheat-sheet.html">Cheat Sheet</a>
+      <a href="https://www.youtube.com/watch?v=HcOc7P5BMi4&pp=ygUEaHRtbA%3D%3D" target="_blank" rel="noreferrer">
+        Video ↗
+      </a>
+      <a href="https://github.com/itspriyanshuks17/ansible_practice" target="_blank" rel="noreferrer">
+        Repo ↗
+      </a>
+    </nav>
+  </header>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Interactive Dev Study Guide</p>
+      <h1>Learn Full-Stack from <span>core web markup</span> to cloud deployments.</h1>
+      <p class="hero-sub">
+        Beautiful dynamic notes covering semantic HTML, CSS layout grid engines, JavaScript prototypes, NodeJS async execution, REST API design, relational SQL pools, NoSQL MongoDB documents, Mongoose models, and multi-node Kubernetes clusters.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="note.html?id=html-basics">Start Reading</a>
+        <a class="btn" href="projects.html">Explore Labs</a>
+      </div>
+      <div class="hero-stats" aria-label="Site statistics">
+        <div>
+          <strong id="statNotes">15</strong>
+          <span>Notes</span>
+        </div>
+        <div>
+          <strong id="statModules">4</strong>
+          <span>Modules</span>
+        </div>
+        <div>
+          <strong id="statLabs">3</strong>
+          <span>Live Labs</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-illustration" aria-hidden="true">
+      <img
+        src="assets/illustration.png"
+        alt="Development illustration showing fullstack server-side scripting and container orchestrator deployment"
+        loading="eager"
+      >
+    </div>
+  </section>
+
+  <!-- ─── SEARCH TOOLBAR ───────────────────────────────────────── -->
+  <section class="toolbar" aria-label="Notes search and filters">
+    <label class="search-box" for="searchInput">
+      <span>Search</span>
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Filter by titles, tags, or concepts (e.g. k8s, mongo)..."
+        autocomplete="off"
+        spellcheck="false"
+      >
+    </label>
+    <div class="visible-count">
+      <strong id="visibleCount">15</strong> visible notes
+    </div>
+  </section>
+
+  <!-- ─── FILTER BAR ───────────────────────────────────────────── -->
+  <div class="filter-bar" id="filterBar" role="group" aria-label="Filter notes by category">
+    <button class="filter-btn active" data-cat="all">All Modules</button>
+    <button class="filter-btn" data-cat="Front-End">Front-End</button>
+    <button class="filter-btn" data-cat="Back-End">Back-End</button>
+    <button class="filter-btn" data-cat="Databases">Databases</button>
+    <button class="filter-btn" data-cat="DevOps">DevOps & CI/CD</button>
+  </div>
+
+  <!-- ─── CATALOG ──────────────────────────────────────────────── -->
+  <main class="catalog" id="notesCatalog" aria-live="polite" aria-label="Notes catalog"></main>
+
+  <!-- ─── EMPTY STATE ──────────────────────────────────────────── -->
+  <div class="no-results" id="noResults" role="status" aria-live="polite" hidden>
+    <div class="empty-mark">0</div>
+    <p>No study notes match "<strong id="noResultsQuery"></strong>".</p>
+  </div>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-credit">
+        💡 Notes based on the core curriculum of <strong>Sigma 6.0 (Apna College)</strong> full-stack development.
+      </span>
+      <span>Created by: <strong>Priyanshu K. Sharma</strong></span>
+      <a class="footer-github" href="https://github.com/itspriyanshuks17/ansible_practice" target="_blank" rel="noopener" aria-label="View source on GitHub">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+            -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+            1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+            1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+            1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        ansible_practice
+      </a>
+    </div>
+  </footer>
+
+  <script src="assets/js/notes-data.js"></script>
+  <script src="assets/js/home.js"></script>
+  <script src="assets/js/nav-toggle.js"></script>
+
+</body>
+</html>

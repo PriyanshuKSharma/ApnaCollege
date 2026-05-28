@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live DevOps Labs & Projects | Sigma 6.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+  <!-- ─── SITE HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Sigma 6.0 Notes home">
+      <svg class="brand-svg" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="50" fill="#4f46e5"/>
+        <path d="M50 15 L78 75 L68 75 L50 35 L36 68 L55 57 L59 66 L28 75 Z" fill="white"/>
+      </svg>
+      <span>Sigma 6.0 Notes</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <svg viewBox="0 0 18 18" aria-hidden="true">
+        <line x1="1" y1="4" x2="17" y2="4"/>
+        <line x1="1" y1="9" x2="17" y2="9"/>
+        <line x1="1" y1="14" x2="17" y2="14"/>
+      </svg>
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a href="index.html">Notes</a>
+      <a class="active" href="projects.html">Projects</a>
+      <a href="cheat-sheet.html">Cheat Sheet</a>
+      <a href="https://www.youtube.com/watch?v=HcOc7P5BMi4&pp=ygUEaHRtbA%3D%3D" target="_blank" rel="noreferrer">
+        Video ↗
+      </a>
+      <a href="https://github.com/itspriyanshuks17/ansible_practice" target="_blank" rel="noreferrer">
+        Repo ↗
+      </a>
+    </nav>
+  </header>
+
+  <!-- ─── PROJECTS CONTENT ────────────────────────────────────── -->
+  <main class="labs-container">
+    <div style="margin-bottom: 40px; text-align: center;">
+      <p class="eyebrow" style="justify-content: center;">Hands-On DevOps & Fullstack Practice</p>
+      <h1 style="font-size: 38px; font-weight: 800; color: #fff;">Live Development & Orchestration Labs</h1>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 10px auto 0;">
+        Practical projects completed under the Sigma 6.0 track. Includes complete multi-tier system designs, manifests, and step-by-step deploy instructions.
+      </p>
+    </div>
+
+    <div class="labs-grid">
+      
+      <!-- LAB 1: FULLSTACK WEB APP -->
+      <article class="lab-card" style="--labs: var(--front);">
+        <div>
+          <div class="lab-badge">
+            <span class="lab-badge-dot"></span>
+            <span>Lab 1 • Full-Stack</span>
+          </div>
+          <h2>Multi-Tier Blogging Platform</h2>
+          <p class="lab-description">
+            A secure full-stack web application employing ExpressJS routing middleware and modular EJS view engine parsing. Implements dynamic JSON data seeding, relational Mongo query CRUD integrations, and custom route checks.
+          </p>
+
+          <div class="lab-features">
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>EJS View Engine partials</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Express CRUD middleware</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Mongoose Schema validation</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Robust query sanitization</span>
+            </div>
+          </div>
+
+          <!-- Interactive accordions for commands and code -->
+          <div class="accordion">
+            <div class="accordion-header">Prerequisites & Init commands</div>
+            <div class="accordion-body">
+              <pre># Initialize node directory
+npm init -y
+# Install core express, ejs and mongoose
+npm install express ejs mongoose
+# Install nodemon development server
+npm install --save-dev nodemon</pre>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">Run Local Environment</div>
+            <div class="accordion-body">
+              <pre># Check if local Mongo shell active
+mongosh --eval "db.runCommand({ ping: 1 })"
+
+# Start Express server with file watching
+npm run dev</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="lab-diagram">
+          <div class="lab-diagram-title">System Architecture</div>
+          <pre>
+  +------------------+
+  |  Browser Client  |
+  +--------+---------+
+           | HTTP requests
+           v
+  +--------+---------+
+  |  Express Server  | &lt;-- [EJS Templates]
+  +--------+---------+
+           | ODM calls
+           v
+  +--------+---------+
+  |  MongoDB Database|
+  +------------------+</pre>
+        </div>
+      </article>
+
+      <!-- LAB 2: KUBERNETES MICROSERVICES -->
+      <article class="lab-card" style="--labs: var(--devops);">
+        <div>
+          <div class="lab-badge" style="background: rgba(245, 158, 11, 0.05); border-color: rgba(245, 158, 11, 0.15); color: var(--warning);">
+            <span class="lab-badge-dot"></span>
+            <span>Lab 2 • Cloud Native</span>
+          </div>
+          <h2>Kubernetes Microservices Mesh</h2>
+          <p class="lab-description">
+            Containerizing our database and deploying a secure, highly available database engine on a local Kubernetes cluster. Implements decoupled Storage systems (PVC), ConfigMaps, cluster secret injection, and Ingress routing rules.
+          </p>
+
+          <div class="lab-features">
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Minikube Cluster state</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Persistent Volume storage</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Base64 encoded Secret maps</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Ingress Hostpath controllers</span>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">Start Cluster & Apply Manifests</div>
+            <div class="accordion-body">
+              <pre># Start local Minikube cluster
+minikube start --addons=ingress
+
+# Apply cluster configuration rules
+kubectl apply -f mongo-secret.yaml
+kubectl apply -f mongo-configmap.yaml
+
+# Provision Database container
+kubectl apply -f mongo-pvc.yaml
+kubectl apply -f mongo.yaml</pre>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">Debugging & Troubleshooting</div>
+            <div class="accordion-body">
+              <pre># Get all deployed pods and services
+kubectl get all
+
+# View streaming database server logs
+kubectl logs -f deployment/mongodb-deployment
+
+# Fetch ingress routing host path IP
+kubectl get ingress</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="lab-diagram">
+          <div class="lab-diagram-title">Kubernetes Topology</div>
+          <pre>
+     [External Ingress Router]
+                | (Host: mongo.local)
+                v
+       [Mongo Express Service]
+                | (ClusterIP: 8081)
+                v
+        [MongoDB Service]
+                | (Port: 27017)
+                |
+     +----------+----------+
+     |                     |
+     v                     v
+[Mongo Secret]      [Mongo PVC Volume]
+ (Base64 Password)    (Decoupled Storage)</pre>
+        </div>
+      </article>
+
+      <!-- LAB 3: AUTOMATED CI/CD PIPELINE -->
+      <article class="lab-card" style="--labs: var(--db);">
+        <div>
+          <div class="lab-badge" style="background: rgba(167, 139, 250, 0.05); border-color: rgba(167, 139, 250, 0.15); color: var(--db);">
+            <span class="lab-badge-dot"></span>
+            <span>Lab 3 • Automation</span>
+          </div>
+          <h2>CI/CD Automation Pipeline</h2>
+          <p class="lab-description">
+            Configuring a continuous delivery flow utilizing GitHub Actions triggers. Automates code checkouts, installs npm packages caching node_modules, validates JavaScript ES6 coding standard linters, runs unit tests, and packages docker builds.
+          </p>
+
+          <div class="lab-features">
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>GitHub Actions triggers</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Node_modules caching caching</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Jest automated unit tests</span>
+            </div>
+            <div class="lab-features-item">
+              <svg><path d="M20 6L9 17l-5-5"></path></svg>
+              <span>Automatic Docker Hub upload</span>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">Actions workflow manifest (.yml)</div>
+            <div class="accordion-body">
+              <pre># Save inside .github/workflows/deploy.yml
+name: Build and Deploy Test Pipeline
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test</pre>
+            </div>
+          </div>
+
+          <div class="accordion">
+            <div class="accordion-header">Local Docker Packaging</div>
+            <div class="accordion-body">
+              <pre># Create container image file
+docker build -t my-app:latest .
+
+# Run and map ports locally
+docker run -p 3000:3000 --env-file=.env my-app:latest</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="lab-diagram">
+          <div class="lab-diagram-title">CI/CD Lifecycle</div>
+          <pre>
+  [Developer commits to branch]
+                |
+                v
+    [GitHub runner triggers]
+                |
+                v
+  [Checkout & Node version cache init]
+                |
+                v
+      [npm install & Jest test]
+                |
+                v
+  [Docker package build & Hub Registry upload]</pre>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-credit">
+        💡 Notes based on the core curriculum of <strong>Sigma 6.0 (Apna College)</strong> full-stack development.
+      </span>
+      <span>Created by: <strong>Priyanshu K. Sharma</strong></span>
+      <a class="footer-github" href="https://github.com/itspriyanshuks17/ansible_practice" target="_blank" rel="noopener" aria-label="View source on GitHub">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+            -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+            1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+            1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+            1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        ansible_practice
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Lightweight script to handle dynamic collapsible accordion logic
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const accordion = header.parentElement;
+        const body = header.nextElementSibling;
+        const isActive = accordion.classList.contains('active');
+
+        // Close all other accordions inside the same container
+        const card = accordion.closest('div');
+        card.querySelectorAll('.accordion').forEach(a => {
+          a.classList.remove('active');
+          a.querySelector('.accordion-body').style.maxHeight = null;
+        });
+
+        // Open selected accordion
+        if (!isActive) {
+          accordion.classList.add('active');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+  <script src="assets/js/nav-toggle.js"></script>
+
+</body>
+</html>

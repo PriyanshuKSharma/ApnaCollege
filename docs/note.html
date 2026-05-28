@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Guide Reader | Sigma 6.0 Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+  <!-- ─── SITE HEADER ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Sigma 6.0 Notes home">
+      <svg class="brand-svg" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="50" fill="#4f46e5"/>
+        <path d="M50 15 L78 75 L68 75 L50 35 L36 68 L55 57 L59 66 L28 75 Z" fill="white"/>
+      </svg>
+      <span>Sigma 6.0 Notes</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <svg viewBox="0 0 18 18" aria-hidden="true">
+        <line x1="1" y1="4" x2="17" y2="4"/>
+        <line x1="1" y1="9" x2="17" y2="9"/>
+        <line x1="1" y1="14" x2="17" y2="14"/>
+      </svg>
+    </button>
+    <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
+      <a class="active" href="index.html">Notes</a>
+      <a href="projects.html">Projects</a>
+      <a href="cheat-sheet.html">Cheat Sheet</a>
+      <a href="https://www.youtube.com/watch?v=HcOc7P5BMi4&pp=ygUEaHRtbA%3D%3D" target="_blank" rel="noreferrer">
+        Video ↗
+      </a>
+      <a href="https://github.com/itspriyanshuks17/ansible_practice" target="_blank" rel="noreferrer">
+        Repo ↗
+      </a>
+    </nav>
+  </header>
+
+  <!-- ─── SPLIT READING PANEL ──────────────────────────────────── -->
+  <main class="note-layout">
+    
+    <!-- Left Sidebar: dynamic navigation tree -->
+    <aside class="note-sidebar" id="noteSidebar" aria-label="Guides navigation sidebar"></aside>
+
+    <!-- Right Container: active reader window -->
+    <section class="note-container" id="noteContainer" aria-label="Study Guide Contents">
+      <!-- Native CSS Scroll Indicator / JavaScript backup -->
+      <div id="progress" aria-hidden="true"></div>
+
+      <!-- Active breadcrumb navigation -->
+      <div class="breadcrumbs" id="breadcrumbs">
+        <a href="index.html">Notes</a> &nbsp;/&nbsp; <span id="breadcrumbCategory">Category</span>
+      </div>
+
+      <!-- Header detailing Title and Tags -->
+      <header class="note-header">
+        <h1 id="noteTitle">Study Guide Title</h1>
+        <div class="note-header-meta" id="noteMeta">
+          <!-- Injected metadata tags -->
+        </div>
+      </header>
+
+      <!-- Main HTML content container -->
+      <article class="note-content" id="noteContent">
+        <!-- Injected semantic content -->
+      </article>
+
+      <!-- ─── FLOATING OUTLINE BUTTON ─────────────────────────── -->
+      <button class="drawer-toggle-btn" id="drawerToggle" aria-label="Toggle notes outline" aria-expanded="false" aria-controls="outlineDrawer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <span>Outline</span>
+      </button>
+
+      <!-- ─── FLOATING OUTLINE POPUP PANEL ────────────────────── -->
+      <div class="outline-drawer" id="outlineDrawer" role="dialog" aria-label="Note outline" hidden>
+        <div class="outline-drawer-header">
+          <span class="outline-drawer-title">On this page</span>
+          <button class="outline-close-btn" id="outlineClose" aria-label="Close outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <nav class="outline-drawer-nav" id="outlineNav" aria-label="Heading outline">
+          <!-- Dynamically injected outline links -->
+        </nav>
+      </div>
+
+      <!-- Previous & Next note action buttons -->
+      <footer class="note-nav-footer" id="noteNavFooter">
+        <a href="#" class="note-nav-btn prev" id="prevNoteBtn">
+          <span>&larr; Previous Guide</span>
+          <strong id="prevNoteTitle">Previous Title</strong>
+        </a>
+        <a href="#" class="note-nav-btn next" id="nextNoteBtn">
+          <span>Next Guide &rarr;</span>
+          <strong id="nextNoteTitle">Next Title</strong>
+        </a>
+      </footer>
+
+    </section>
+  </main>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-credit">
+        💡 Notes based on the core curriculum of <strong>Sigma 6.0 (Apna College)</strong> full-stack development.
+      </span>
+      <span>Created by: <strong>Priyanshu K. Sharma</strong></span>
+      <a class="footer-github" href="https://github.com/itspriyanshuks17/ansible_practice" target="_blank" rel="noopener" aria-label="View source on GitHub">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+            -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
+            1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+            1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
+            1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        ansible_practice
+      </a>
+    </div>
+  </footer>
+
+  <!-- Overlay backdrop for outline drawer -->
+  <div class="outline-overlay" id="outlineOverlay" hidden></div>
+
+  <script src="assets/js/notes-data.js"></script>
+  <script src="assets/js/note-viewer.js"></script>
+  <script src="assets/js/nav-toggle.js"></script>
+
+</body>
+</html>

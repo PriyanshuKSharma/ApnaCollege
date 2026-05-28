@@ -7,7 +7,8 @@
   <meta name="description" content="Concise, searchable, premium notes and study sheets for HTML, CSS, JavaScript, NodeJS, SQL, MongoDB, Mongoose, Kubernetes, and CI/CD pipelines.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -82,11 +83,18 @@
       </div>
     </div>
     <div class="hero-illustration" aria-hidden="true">
-      <img
-        src="assets/illustration.png"
-        alt="Development illustration showing fullstack server-side scripting and container orchestrator deployment"
-        loading="eager"
-      >
+      <picture>
+        <source srcset="assets/illustration.webp" type="image/webp">
+        <img
+          src="assets/illustration.png"
+          width="1024"
+          height="1024"
+          alt="Development illustration showing fullstack server-side scripting and container orchestrator deployment"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+        >
+      </picture>
     </div>
   </section>
 
@@ -148,9 +156,9 @@
     </div>
   </footer>
 
-  <script src="assets/js/notes-data.js"></script>
-  <script src="assets/js/home.js"></script>
-  <script src="assets/js/nav-toggle.js"></script>
+  <script src="assets/js/notes-data.js" defer></script>
+  <script src="assets/js/home.js" defer></script>
+  <script src="assets/js/nav-toggle.js" defer></script>
 
 </body>
 </html>

@@ -1,0 +1,31 @@
+Data types in JS: (to check data type: typeof())
+1. Number
+2. String
+3. Boolean
+4. Undefined
+5. Null
+6. BigInt 
+7. Symbol
+
+
+Variable:
+1. var: variable can be re-declared & updated. A global scope variable
+
+2. let: variable cannot be re-declared but can be updated. A block scope variable
+
+3. const: Variable cannot be re-declared or updated. Ablock scope variable
+
+
+Objects-> collection of values
+
+const Object_name = {
+    key : value
+    key1 : value
+    key2 : value
+    key3 : value
+    key4 : value
+};
+
+to access any key:
+1. Object_name.key
+2. Object_name["key"]

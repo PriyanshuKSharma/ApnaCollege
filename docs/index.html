@@ -17,8 +17,20 @@
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Sigma 6.0 Notes home">
       <svg class="brand-svg" width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="50" cy="50" r="50" fill="#4f46e5"/>
-        <path d="M50 15 L78 75 L68 75 L50 35 L36 68 L55 57 L59 66 L28 75 Z" fill="white"/>
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1e1b4b"/>
+            <stop offset="100%" stop-color="#0f172a"/>
+          </linearGradient>
+          <linearGradient id="br" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#6d28d9"/>
+          </linearGradient>
+        </defs>
+        <rect width="100" height="100" rx="20" fill="url(#bg)"/>
+        <path d="M32 28 L12 50 L32 72" stroke="url(#br)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M68 28 L88 50 L68 72" stroke="url(#br)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="62" y1="25" x2="38" y2="75" stroke="#38bdf8" stroke-width="8" stroke-linecap="round"/>
       </svg>
       <span>Sigma 6.0 Notes</span>
     </a>

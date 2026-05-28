@@ -55,7 +55,9 @@
       return;
     }
     el('noResults').hidden = true;
-    list.forEach(n => catalog.appendChild(createCard(n)));
+    const fragment = document.createDocumentFragment();
+    list.forEach(n => fragment.appendChild(createCard(n)));
+    catalog.appendChild(fragment);
     visibleCount.textContent = String(list.length);
   }
 

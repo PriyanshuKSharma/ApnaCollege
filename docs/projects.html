@@ -6,7 +6,8 @@
   <title>Live DevOps Labs & Projects | Sigma 6.0</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -352,7 +353,7 @@ docker run -p 3000:3000 --env-file=.env my-app:latest</pre>
       });
     });
   </script>
-  <script src="assets/js/nav-toggle.js"></script>
+  <script src="assets/js/nav-toggle.js" defer></script>
 
 </body>
 </html>

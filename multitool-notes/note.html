@@ -28,14 +28,6 @@
         <line x1="1" y1="14" x2="17" y2="14"/>
       </svg>
     </button>
-    <button class="drawer-toggle-btn" id="drawerToggle" aria-label="Toggle notes outline" aria-expanded="false" aria-controls="noteSidebar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-      <span>Outline</span>
-    </button>
     <nav class="site-nav" id="siteNav" aria-label="Primary navigation">
       <a class="active" href="index.html">Notes</a>
       <a href="projects.html">Projects</a>
@@ -78,22 +70,6 @@
         <!-- Injected semantic content -->
       </article>
 
-      <!-- ─── FLOATING OUTLINE POPUP PANEL ────────────────────── -->
-      <div class="outline-drawer" id="outlineDrawer" role="dialog" aria-label="Note outline" hidden>
-        <div class="outline-drawer-header">
-          <span class="outline-drawer-title">On this page</span>
-          <button class="outline-close-btn" id="outlineClose" aria-label="Close outline">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-        <nav class="outline-drawer-nav" id="outlineNav" aria-label="Heading outline">
-          <!-- Dynamically injected outline links -->
-        </nav>
-      </div>
-
       <!-- Previous & Next note action buttons -->
       <footer class="note-nav-footer" id="noteNavFooter">
         <a href="#" class="note-nav-btn prev" id="prevNoteBtn">
@@ -131,9 +107,6 @@
       </a>
     </div>
   </footer>
-
-  <!-- Overlay backdrop for outline drawer -->
-  <div class="outline-overlay" id="outlineOverlay" hidden></div>
 
   <script src="assets/js/notes-data.js"></script>
   <script src="assets/js/note-viewer.js"></script>

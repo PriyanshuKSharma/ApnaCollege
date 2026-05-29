@@ -14,6 +14,7 @@
   --btn-bg: rgba(255, 255, 255, 0.02);
   --btn-hover-bg: rgba(255, 255, 255, 0.06);
   --card-hover-bg: #0b0e14;
+  --footer-bg: rgba(5, 7, 10, 0.7);
   
   /* Luminous DevOps Cyber Accents (Docker/Kubernetes blue-cyan style) */
   --accent: #0284c7;                /* Clean Docker Blue/Teal */
@@ -48,6 +49,7 @@
   --btn-bg: #ffffff;
   --btn-hover-bg: #f1f5f9;
   --card-hover-bg: #ffffff;
+  --footer-bg: rgba(241, 245, 249, 0.8);
 }
 
 * {
@@ -1239,7 +1241,7 @@ body {
 /* ─── SITE FOOTER ─────────────────────────────────────────── */
 .site-footer {
   border-top: 1px solid var(--border-color);
-  background: rgba(3, 4, 8, 0.7);
+  background: var(--footer-bg);
   padding: 32px 24px;
   margin-top: 64px;
   backdrop-filter: blur(8px);
@@ -1256,7 +1258,7 @@ body {
   color: var(--text-muted);
 }
 .footer-credit a {
-  color: #fff;
+  color: var(--text-main);
   text-decoration: none;
   font-weight: 700;
 }
@@ -1273,7 +1275,7 @@ body {
   transition: color 0.2s ease;
 }
 .footer-github:hover {
-  color: #fff;
+  color: var(--accent);
 }
 .footer-github svg {
   width: 18px;

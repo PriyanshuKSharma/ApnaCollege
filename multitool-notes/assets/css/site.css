@@ -1,4 +1,38 @@
 :root {
+  /* Default: DevOps Dark Console Theme */
+  --bg-dark: #05070a;               /* Sleek terminal black background */
+  --bg-surface: #0b0e14;            /* Slate console background */
+  --bg-card: rgba(11, 14, 20, 0.65); /* Sleek translucent CLI cards */
+  --border-color: rgba(255, 255, 255, 0.05); /* Faint slate borders */
+  --border-glow: rgba(2, 132, 199, 0.12);  /* Subtle cyan shadow glow */
+  --text-main: #e2e8f0;             /* Monospace crisp light text */
+  --text-muted: #829ab1;            /* Slate gray description text */
+  --bg-glow-color: #082f49;         /* Subtle blue-sky dark ocean glow */
+  --header-bg: rgba(5, 7, 10, 0.75);
+  --brand-text-start: #ffffff;
+  --hover-bg: rgba(255, 255, 255, 0.04);
+  --btn-bg: rgba(255, 255, 255, 0.02);
+  --btn-hover-bg: rgba(255, 255, 255, 0.06);
+  --card-hover-bg: #0b0e14;
+  
+  /* Luminous DevOps Cyber Accents (Docker/Kubernetes blue-cyan style) */
+  --accent: #0284c7;                /* Clean Docker Blue/Teal */
+  --accent-glow: rgba(2, 132, 199, 0.25);
+  --success: #0d9488;               /* Clean Teal green */
+  --success-glow: rgba(13, 148, 136, 0.1);
+  --warning: #ea580c;               /* Clean DevOps Orange */
+  --warning-glow: rgba(234, 88, 12, 0.1);
+  --max-w: 1240px;
+
+  /* Premium Category Tags */
+  --front: hsl(199, 89%, 48%);     /* Deep Cyan */
+  --back: hsl(217, 91%, 50%);      /* Premium Blue */
+  --db: hsl(162, 72%, 35%);        /* Emerald Green */
+  --devops: hsl(24, 95%, 45%);     /* Rich Coral Orange */
+  --labs: hsl(330, 85%, 50%);      /* Deep Pink */
+}
+
+[data-theme="light"] {
   /* Premium Minimalist Light Gray & White Colors */
   --bg-dark: #f8fafc;               /* Clean Slate-50 background */
   --bg-surface: #ffffff;            /* Pure white surfaces */
@@ -7,22 +41,13 @@
   --border-glow: rgba(2, 132, 199, 0.08);  /* Subtle cyan-blue shadow glow */
   --text-main: #0f172a;             /* Deep slate/charcoal main text */
   --text-muted: #475569;            /* Slate gray description text */
-  
-  /* Luminous DevOps Cyber Accents (Docker/Kubernetes blue-cyan style) */
-  --accent: #0284c7;                /* Clean Docker Blue/Teal */
-  --accent-glow: rgba(2, 132, 199, 0.15);
-  --success: #0d9488;               /* Clean Teal green */
-  --success-glow: rgba(13, 148, 136, 0.1);
-  --warning: #ea580c;               /* Clean DevOps Orange */
-  --warning-glow: rgba(234, 88, 12, 0.1);
-  --max-w: 1240px;
-
-  /* Premium Category Tags for Light Theme */
-  --front: hsl(199, 89%, 48%);     /* Deep Cyan */
-  --back: hsl(217, 91%, 50%);      /* Premium Blue */
-  --db: hsl(162, 72%, 35%);        /* Emerald Green */
-  --devops: hsl(24, 95%, 45%);     /* Rich Coral Orange */
-  --labs: hsl(330, 85%, 50%);      /* Deep Pink */
+  --bg-glow-color: #e0f2fe;         /* Soft light-blue background sky overlay */
+  --header-bg: rgba(255, 255, 255, 0.75);
+  --brand-text-start: #0f172a;
+  --hover-bg: rgba(15, 23, 42, 0.04);
+  --btn-bg: #ffffff;
+  --btn-hover-bg: #f1f5f9;
+  --card-hover-bg: #ffffff;
 }
 
 * {
@@ -33,12 +58,13 @@
 
 body {
   font-family: 'DM Sans', 'Space Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #f8fafc 75%);
+  background: radial-gradient(circle at 50% 0%, var(--bg-glow-color) 0%, var(--bg-dark) 75%);
   color: var(--text-main);
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Custom Scrollbars */
@@ -69,7 +95,7 @@ body {
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--header-bg);
   backdrop-filter: blur(24px);
   z-index: 100;
   transition: border 0.3s ease;
@@ -93,7 +119,7 @@ body {
   filter: drop-shadow(0 0 8px rgba(2, 132, 199, 0.3));
 }
 .brand span {
-  background: linear-gradient(135deg, #0f172a 40%, var(--text-muted));
+  background: linear-gradient(135deg, var(--brand-text-start) 40%, var(--text-muted));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
@@ -116,7 +142,7 @@ body {
 }
 .site-nav a:hover {
   color: var(--text-main);
-  background: rgba(15, 23, 42, 0.04);
+  background: var(--hover-bg);
   border-color: var(--border-color);
 }
 .site-nav a.active {
@@ -214,12 +240,12 @@ body {
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid var(--border-color);
-  background: #ffffff;
+  background: var(--btn-bg);
   color: var(--text-main);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 .btn:hover {
-  background: #f1f5f9;
+  background: var(--btn-hover-bg);
   border-color: rgba(15, 23, 42, 0.15);
   transform: translateY(-2px);
 }
@@ -409,7 +435,7 @@ body {
 /* apple-style dynamic gradient border trick */
 .note-card:hover {
   transform: translateY(-6px);
-  background: linear-gradient(#ffffff, #ffffff) padding-box, 
+  background: linear-gradient(var(--card-hover-bg), var(--card-hover-bg)) padding-box, 
               linear-gradient(135deg, var(--card-color, var(--accent)) 0%, #38bdf8 100%) border-box;
   border: 1px solid transparent;
   box-shadow: 0 20px 40px -15px rgba(2, 132, 199, 0.12), 
@@ -1553,4 +1579,38 @@ body {
     width: auto;
     transform-origin: bottom center;
   }
+}
+
+/* Theme Toggle Button Style Rules */
+.theme-toggle-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.theme-toggle-btn:hover {
+  background: var(--hover-bg);
+  border-color: rgba(2, 132, 199, 0.25);
+  color: var(--accent);
+}
+
+/* Toggle Sun/Moon icon depending on active theme attribute */
+[data-theme="light"] .theme-toggle-btn .sun-icon {
+  display: none;
+}
+[data-theme="light"] .theme-toggle-btn .moon-icon {
+  display: block;
+}
+.theme-toggle-btn .sun-icon {
+  display: block;
+}
+.theme-toggle-btn .moon-icon {
+  display: none;
 }

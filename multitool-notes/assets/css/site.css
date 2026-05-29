@@ -1,28 +1,28 @@
 :root {
-  /* Ambient Obsidian Colors */
-  --bg-dark: #030408;
-  --bg-surface: #08090d;
-  --bg-card: rgba(14, 16, 28, 0.4);
-  --border-color: rgba(255, 255, 255, 0.04);
-  --border-glow: rgba(167, 139, 250, 0.12);
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
+  /* Ambient Dark Console Colors */
+  --bg-dark: #05070a;               /* Sleek terminal slate background */
+  --bg-surface: #0b0e14;            /* Slate console background */
+  --bg-card: rgba(11, 14, 20, 0.65); /* Sleek translucent CLI cards */
+  --border-color: rgba(16, 185, 129, 0.08); /* Faint glowing terminal green borders */
+  --border-glow: rgba(16, 185, 129, 0.15);  /* Subtle CLI glow */
+  --text-main: #e2e8f0;             /* Crisp monospace readable text */
+  --text-muted: #829ab1;            /* Monospace comments color */
   
   /* Luminous Cyber Accents */
-  --accent: #8b5cf6;
-  --accent-glow: rgba(139, 92, 246, 0.25);
+  --accent: #10b981;                /* Linux Terminal Green */
+  --accent-glow: rgba(16, 185, 129, 0.25);
   --success: #10b981;
   --success-glow: rgba(16, 185, 129, 0.15);
-  --warning: #f59e0b;
-  --warning-glow: rgba(245, 158, 11, 0.15);
+  --warning: #f97316;               /* Fire/Ubuntu Orange warning/accent */
+  --warning-glow: rgba(249, 115, 22, 0.15);
   --max-w: 1240px;
 
   /* HSL Neon Category Tags */
-  --front: hsl(195, 100%, 60%);    /* Cyan */
-  --back: hsl(142, 76%, 60%);     /* Green */
-  --db: hsl(265, 90%, 72%);       /* Purple-Violet */
-  --devops: hsl(24, 100%, 60%);    /* Orange-Coral */
-  --labs: hsl(325, 90%, 65%);     /* Hot Pink */
+  --front: hsl(195, 100%, 60%);    /* Cyan - Front End */
+  --back: hsl(200, 95%, 62%);      /* Kubernetes Blue - Back End */
+  --db: hsl(150, 80%, 55%);        /* Green - Databases */
+  --devops: hsl(28, 100%, 60%);    /* Ubuntu/Docker Orange - DevOps */
+  --labs: hsl(330, 90%, 65%);      /* Hot Pink - Labs */
 }
 
 * {
@@ -32,8 +32,8 @@
 }
 
 body {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: radial-gradient(circle at 50% 0%, #0d0f1a 0%, #030408 70%);
+  font-family: 'DM Sans', 'Space Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: radial-gradient(circle at 50% 0%, #061f14 0%, #05070a 75%);
   color: var(--text-main);
   min-height: 100vh;
   line-height: 1.6;
@@ -90,7 +90,7 @@ body {
   transform: scale(1.02);
 }
 .brand-svg {
-  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5));
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
 }
 .brand span {
   background: linear-gradient(135deg, #ffffff 40%, var(--text-muted));
@@ -121,9 +121,9 @@ body {
 }
 .site-nav a.active {
   color: #fff;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.18) 0%, rgba(14, 165, 233, 0.04) 100%);
-  border-color: rgba(139, 92, 246, 0.35);
-  box-shadow: 0 4px 15px -3px rgba(139, 92, 246, 0.25);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(14, 165, 233, 0.04) 100%);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 15px -3px rgba(16, 185, 129, 0.25);
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
@@ -183,7 +183,7 @@ body {
   margin-bottom: 20px;
 }
 .hero h1 span {
-  background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 100%);
+  background: linear-gradient(135deg, #10b981 0%, #38bdf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -223,13 +223,13 @@ body {
   transform: translateY(-2px);
 }
 .btn.primary {
-  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   border-color: transparent;
-  box-shadow: 0 8px 24px -6px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
 }
 .btn.primary:hover {
-  background: linear-gradient(135deg, #9b72f8 0%, #7c3aed 100%);
-  box-shadow: 0 12px 28px -4px rgba(139, 92, 246, 0.5);
+  background: linear-gradient(135deg, #3ade8b 0%, #10b981 100%);
+  box-shadow: 0 12px 28px -4px rgba(16, 185, 129, 0.5);
 }
 
 .hero-stats {
@@ -368,7 +368,7 @@ body {
   transform: translateY(-1px);
 }
 .filter-btn.active {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.02) 100%);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.02) 100%);
   color: #fff;
   border-color: var(--accent);
   box-shadow: 0 4px 12px var(--border-glow);
@@ -403,10 +403,10 @@ body {
 /* apple-style dynamic gradient border trick */
 .note-card:hover {
   transform: translateY(-6px);
-  background: linear-gradient(#08090d, #08090d) padding-box, 
-              linear-gradient(135deg, var(--card-color, #a78bfa) 0%, #38bdf8 100%) border-box;
+  background: linear-gradient(#0b0e14, #0b0e14) padding-box, 
+              linear-gradient(135deg, var(--card-color, #10b981) 0%, #38bdf8 100%) border-box;
   border: 1px solid transparent;
-  box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.25), 
+  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.25), 
               0 0 15px -4px rgba(14, 165, 233, 0.15);
 }
 
@@ -541,8 +541,8 @@ body {
   min-height: 38px;
   padding: 8px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(139, 92, 246, 0.28);
-  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  background: rgba(16, 185, 129, 0.08);
   color: var(--text-main);
   font: inherit;
   font-size: 13px;
@@ -554,8 +554,8 @@ body {
   transition: all 0.2s ease;
 }
 .sidebar-toggle-btn:hover {
-  border-color: rgba(139, 92, 246, 0.48);
-  background: rgba(139, 92, 246, 0.14);
+  border-color: rgba(16, 185, 129, 0.48);
+  background: rgba(16, 185, 129, 0.14);
 }
 .sidebar-toggle-btn svg {
   width: 18px;
@@ -570,7 +570,7 @@ body {
   width: min(390px, calc(100vw - 48px));
   max-height: calc(100vh - 132px);
   background: rgba(10, 11, 18, 0.94);
-  border: 1px solid rgba(139, 92, 246, 0.24);
+  border: 1px solid rgba(16, 185, 129, 0.24);
   border-radius: 20px;
   padding: 24px;
   position: fixed;
@@ -578,7 +578,7 @@ body {
   left: max(24px, calc((100vw - var(--max-w)) / 2 + 32px));
   z-index: 90;
   overflow-y: auto;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.44), 0 0 28px rgba(139, 92, 246, 0.12);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.44), 0 0 28px rgba(16, 185, 129, 0.12);
   backdrop-filter: blur(20px);
   animation: sidebar-pop 0.18s ease-out;
 }
@@ -832,7 +832,7 @@ body {
 .note-content blockquote {
   border-left: 4px solid var(--accent);
   padding: 14px 20px;
-  background: rgba(139, 92, 246, 0.03);
+  background: rgba(16, 185, 129, 0.03);
   margin: 22px 0;
   border-radius: 0 12px 12px 0;
 }
@@ -861,7 +861,7 @@ body {
   color: rgba(241, 245, 249, 0.9);
 }
 .note-alert.important {
-  background: rgba(139, 92, 246, 0.03);
+  background: rgba(16, 185, 129, 0.03);
   border-color: var(--accent);
   color: rgba(241, 245, 249, 0.9);
 }
@@ -1288,7 +1288,7 @@ body {
     position: absolute;
     top: 100%; left: 0;
     width: 100%;
-    background: #08090d;
+    background: var(--bg-surface);
     border-bottom: 1px solid var(--border-color);
     padding: 20px;
     gap: 12px;
@@ -1338,7 +1338,7 @@ body {
   background: rgba(14, 16, 28, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 92, 246, 0.35);
+  border: 1px solid rgba(16, 185, 129, 0.35);
   border-radius: 50px;
   color: var(--text-main);
   font-family: inherit;
@@ -1346,7 +1346,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(139, 92, 246, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.1);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .drawer-toggle-btn svg {
@@ -1357,15 +1357,15 @@ body {
   transition: transform 0.3s ease;
 }
 .drawer-toggle-btn:hover {
-  background: rgba(139, 92, 246, 0.15);
-  border-color: rgba(139, 92, 246, 0.6);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.2);
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2);
   transform: translateY(-2px);
 }
 .drawer-toggle-btn[aria-expanded="true"] {
-  background: rgba(139, 92, 246, 0.2);
+  background: rgba(16, 185, 129, 0.2);
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 .drawer-toggle-btn[aria-expanded="true"] svg {
   transform: rotate(90deg);
@@ -1384,12 +1384,12 @@ body {
   background: rgba(10, 11, 20, 0.92);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(139, 92, 246, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   border-radius: 20px;
   box-shadow:
     0 24px 64px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 0 40px rgba(139, 92, 246, 0.1);
+    0 0 40px rgba(16, 185, 129, 0.1);
   overflow: hidden;
   /* Hidden state for spring animation */
   transform-origin: bottom right;
@@ -1467,7 +1467,7 @@ body {
   background: transparent;
 }
 .outline-drawer-nav::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
+  background: rgba(16, 185, 129, 0.3);
   border-radius: 4px;
 }
 
@@ -1493,8 +1493,8 @@ body {
 }
 .outline-link.is-active {
   color: #fff;
-  background: rgba(139, 92, 246, 0.12);
-  border-color: rgba(139, 92, 246, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
 }
 /* Indent levels */
 .outline-link[data-level="2"] {

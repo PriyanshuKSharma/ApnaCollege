@@ -301,7 +301,7 @@ body::before {
 .hero-stats strong {
   font-size: 32px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-main);
   line-height: 1;
 }
 .hero-stats span {
@@ -881,9 +881,9 @@ body::before {
   vertical-align: top;
 }
 .note-content th {
-  background: rgba(255, 255, 255, 0.02);
+  background: color-mix(in srgb, var(--text-main) 4%, transparent);
   font-weight: 700;
-  color: #fff;
+  color: var(--text-main);
 }
 .note-content tr:nth-child(even) {
   background: rgba(255, 255, 255, 0.005);
@@ -909,21 +909,20 @@ body::before {
   margin: 24px 0;
   font-size: 14.5px;
   border-left: 4px solid;
+  color: var(--text-main);
+  transition: all 0.3s ease;
 }
 .note-alert.tip {
-  background: rgba(2, 132, 199, 0.03);
+  background: color-mix(in srgb, var(--success) 8%, var(--bg-surface));
   border-color: var(--success);
-  color: rgba(241, 245, 249, 0.9);
 }
 .note-alert.warning {
-  background: rgba(245, 158, 11, 0.03);
+  background: color-mix(in srgb, var(--warning) 8%, var(--bg-surface));
   border-color: var(--warning);
-  color: rgba(241, 245, 249, 0.9);
 }
 .note-alert.important {
-  background: rgba(2, 132, 199, 0.03);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-surface));
   border-color: var(--accent);
-  color: rgba(241, 245, 249, 0.9);
 }
 
 /* Copy button for code blocks */
@@ -985,7 +984,7 @@ body::before {
 }
 .note-nav-btn strong {
   font-size: 16px;
-  color: #fff;
+  color: var(--text-main);
   font-weight: 800;
   transition: color 0.25s ease;
 }
@@ -1052,7 +1051,7 @@ body::before {
   font-size: 30px;
   font-weight: 800;
   margin-bottom: 16px;
-  color: #fff;
+  color: var(--text-main);
   letter-spacing: -0.8px;
 }
 .lab-description {
@@ -1116,7 +1115,7 @@ body::before {
 .accordion-header {
   font-size: 14.5px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-main);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1170,16 +1169,16 @@ body::before {
 }
 
 .cheats-card {
-  background: rgba(10, 11, 18, 0.5);
+  background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 28px;
-  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
 }
 .cheats-card h2 {
   font-size: 21px;
   font-weight: 800;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 20px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border-color);
@@ -1441,15 +1440,13 @@ body::before {
   max-height: 70vh;
   display: flex;
   flex-direction: column;
-  background: rgba(10, 11, 20, 0.92);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(2, 132, 199, 0.25);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   box-shadow:
-    0 24px 64px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 0 40px rgba(2, 132, 199, 0.1);
+    0 24px 64px rgba(15, 23, 42, 0.12),
+    0 0 0 1px var(--border-color),
+    0 0 40px var(--border-glow);
   overflow: hidden;
   /* Hidden state for spring animation */
   transform-origin: bottom right;
@@ -1479,7 +1476,7 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
 }
 .outline-drawer-title {
@@ -1493,10 +1490,10 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  width: 28px;
+  height: 28px;
+  background: var(--btn-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   color: var(--text-muted);
   cursor: pointer;
@@ -1507,9 +1504,9 @@ body::before {
   height: 13px;
 }
 .outline-close-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.12);
+  background: var(--btn-hover-bg);
+  color: var(--accent);
+  border-color: var(--border-color);
 }
 
 /* Scrollable outline nav */

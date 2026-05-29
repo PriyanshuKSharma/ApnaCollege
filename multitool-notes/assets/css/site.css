@@ -15,6 +15,10 @@
   --btn-hover-bg: rgba(255, 255, 255, 0.06);
   --card-hover-bg: #0b0e14;
   --footer-bg: rgba(5, 7, 10, 0.7);
+  --grid-color: rgba(2, 132, 199, 0.035);
+  --nav-active-bg: rgba(2, 132, 199, 0.15);
+  --nav-active-border: rgba(2, 132, 199, 0.45);
+  --nav-active-color: #38bdf8;
   
   /* Luminous DevOps Cyber Accents (Docker/Kubernetes blue-cyan style) */
   --accent: #0284c7;                /* Clean Docker Blue/Teal */
@@ -50,6 +54,10 @@
   --btn-hover-bg: #f1f5f9;
   --card-hover-bg: #ffffff;
   --footer-bg: rgba(241, 245, 249, 0.8);
+  --grid-color: rgba(15, 23, 42, 0.03);
+  --nav-active-bg: rgba(2, 132, 199, 0.06);
+  --nav-active-border: rgba(2, 132, 199, 0.25);
+  --nav-active-color: #0284c7;
 }
 
 * {
@@ -59,6 +67,7 @@
 }
 
 body {
+  position: relative;
   font-family: 'DM Sans', 'Space Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: radial-gradient(circle at 50% 0%, var(--bg-glow-color) 0%, var(--bg-dark) 75%);
   color: var(--text-main);
@@ -67,6 +76,22 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   transition: background 0.3s ease, color 0.3s ease;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center top;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 50%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 50%, transparent 90%);
+  pointer-events: none;
+  z-index: -1;
+  transition: background-image 0.3s ease;
 }
 
 /* Custom Scrollbars */
@@ -148,10 +173,10 @@ body {
   border-color: var(--border-color);
 }
 .site-nav a.active {
-  color: #fff;
-  background: linear-gradient(135deg, #0284c7 0%, #0366d6 100%);
-  border-color: rgba(2, 132, 199, 0.35);
-  box-shadow: 0 4px 15px -3px rgba(2, 132, 199, 0.25);
+  color: var(--nav-active-color);
+  background: var(--nav-active-bg);
+  border-color: var(--nav-active-border);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
   text-shadow: none;
 }
 

@@ -535,13 +535,14 @@ body::before {
 }
 .note-tags span {
   font-size: 10px;
-  font-weight: 600;
-  background: rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(15, 23, 42, 0.05);
+  font-weight: 700;
+  background: color-mix(in srgb, var(--card-color, var(--accent)) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-color, var(--accent)) 15%, transparent);
   padding: 3px 8px;
   border-radius: 6px;
-  color: var(--text-muted);
+  color: var(--card-color, var(--accent));
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
 .note-arrow {
@@ -1007,7 +1008,7 @@ body::before {
   gap: 36px;
 }
 .lab-card {
-  background: rgba(10, 11, 18, 0.5);
+  background: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: 24px;
   padding: 48px;
@@ -1016,7 +1017,7 @@ body::before {
   gap: 48px;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
 }
 .lab-card::after {
   content: '';
@@ -1026,9 +1027,9 @@ body::before {
   background: var(--labs);
 }
 .lab-badge {
-  background: rgba(2, 132, 199, 0.08);
-  color: var(--success);
-  border: 1px solid rgba(2, 132, 199, 0.18);
+  background: color-mix(in srgb, var(--labs) 8%, transparent);
+  color: var(--labs);
+  border: 1px solid color-mix(in srgb, var(--labs) 20%, transparent);
   padding: 6px 12px;
   border-radius: 10px;
   font-size: 11px;

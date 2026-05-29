@@ -29,6 +29,11 @@
   --warning-glow: rgba(234, 88, 12, 0.1);
   --max-w: 1240px;
 
+  /* Inline Code Variables */
+  --code-inline-bg: rgba(56, 189, 248, 0.08);
+  --code-inline-color: #38bdf8;
+  --code-inline-border: rgba(56, 189, 248, 0.18);
+
   /* Premium Category Tags */
   --front: hsl(199, 89%, 48%);     /* Deep Cyan */
   --back: hsl(217, 91%, 50%);      /* Premium Blue */
@@ -58,6 +63,11 @@
   --nav-active-bg: rgba(2, 132, 199, 0.06);
   --nav-active-border: rgba(2, 132, 199, 0.25);
   --nav-active-color: #0284c7;
+  
+  /* Inline Code Variables override */
+  --code-inline-bg: rgba(2, 132, 199, 0.05);
+  --code-inline-color: #0284c7;
+  --code-inline-border: rgba(2, 132, 199, 0.15);
 }
 
 * {
@@ -842,17 +852,21 @@ body::before {
 }
 .note-content code {
   font-family: 'Space Mono', monospace;
-  font-size: 13.5px;
-  color: #e5c07b; /* Atom One Light Golden code text */
-}
-.note-content p code, .note-content li code {
-  background: rgba(15, 23, 42, 0.05);
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 13px;
+  background: var(--code-inline-bg);
+  border: 1px solid var(--code-inline-border);
   padding: 3px 6px;
   border-radius: 6px;
-  color: #e11d48; /* Vibrant inline code in light theme */
-  font-size: 13px;
-  font-family: 'Space Mono', monospace;
+  color: var(--code-inline-color);
+  transition: all 0.3s ease;
+}
+.note-content pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  color: #e5c07b; /* Atom One Light Golden code text inside dark pre blocks */
+  font-size: 13.5px;
 }
 
 /* Markdown-like tables inside note view */
@@ -1081,7 +1095,7 @@ body::before {
   fill: none;
 }
 .lab-diagram {
-  background: rgba(3, 4, 8, 0.5);
+  background: #0f172a; /* Solid dark slate for premium contrast in both light and dark themes */
   border: 1px solid var(--border-color);
   border-radius: 16px;
   padding: 28px;
@@ -1144,7 +1158,7 @@ body::before {
   padding-top: 14px;
 }
 .accordion-body pre {
-  background: rgba(3, 4, 8, 0.5);
+  background: #0f172a; /* Keep solid dark slate background for high contrast in both themes */
   border: 1px solid var(--border-color);
   padding: 16px;
   border-radius: 12px;

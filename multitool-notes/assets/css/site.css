@@ -1259,6 +1259,7 @@ body::before {
   padding: 8px 14px;
   border-radius: 8px;
   border: 1px solid var(--cheats-cmd-border);
+  min-width: 0; /* Safeguard against flexbox layout overflow */
 }
 .cheats-cmd {
   font-family: 'Space Mono', monospace;
@@ -1266,6 +1267,8 @@ body::before {
   color: var(--cheats-cmd-color);
   white-space: nowrap;
   overflow-x: auto;
+  min-width: 0; /* Safeguard to allow the code to shrink and scroll */
+  flex: 1; /* Allow the code text to fill available horizontal room */
 }
 .cheats-copy-btn {
   background: transparent;
@@ -1407,6 +1410,16 @@ body::before {
   }
   .note-container {
     padding: 28px;
+  }
+  .cheats-container {
+    padding: 0 16px;
+    margin: 20px auto;
+  }
+  .cheats-card {
+    padding: 20px;
+  }
+  .cheats-item {
+    padding: 12px 14px;
   }
 }
 
